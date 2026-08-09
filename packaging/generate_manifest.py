@@ -681,7 +681,11 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Generate release gates G-1 and G-2 artefacts")
     parser.add_argument("--package", type=Path, default=REPO_ROOT / "dist" / "PreflightQC")
     parser.add_argument("--out", type=Path, default=None)
-    parser.add_argument("--product-version", default="0.1.0-dev")
+    # Defaults to the single authoritative version rather than a hardcoded string, so
+    # the manifest cannot describe a version the product does not report.
+    from preflightqc import __version__ as product_version
+
+    parser.add_argument("--product-version", default=product_version)
     args = parser.parse_args()
 
     if not args.package.is_dir():

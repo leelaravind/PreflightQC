@@ -3,8 +3,8 @@
 | Field | Value |
 | --- | --- |
 | Date issued | 2026-08-09 |
-| Package under test | `PreflightQC 0.1.0-dev`, 268 files, 231.8 MB |
-| Installer | `PreflightQC-0.1.0-dev-setup.exe`, 68.8 MB |
+| Package under test | `PreflightQC 0.1.0-dev`, 268 files, 231.8 MB — the pre-freeze verification build. **The release run-book must be executed against a `PreflightQC 1.0.0` build** (version frozen 2026-08-09) |
+| Installer | `PreflightQC-0.1.0-dev-setup.exe`, 68.8 MB — verification artefact; the release installer will be `PreflightQC-1.0.0-setup.exe` |
 | **Execution status** | **NOT EXECUTED.** Requires clean Windows 10 and Windows 11 x64 machines that do not exist in this environment. |
 | Gate | **GATE-6** — this run-book passing on both operating systems **and** G-12 complete |
 

@@ -10,7 +10,12 @@ Authority: docs/specification/PREFLIGHTQC-V1-SPEC.md
 
 from __future__ import annotations
 
-__version__ = "0.1.0-dev"
+#: The single authoritative product version. Everything customer-facing derives from
+#: this: the window title, About dialog, exported reports, CLI banner, package
+#: metadata (pyproject `dynamic`), and the installer version passed by
+#: packaging/build.py. Frozen at 1.0.0 on 2026-08-09 by Product Owner decision
+#: (release identity: PreflightQC 1.0.0, ITISYOU, Windows x64, Policy U unsigned).
+__version__ = "1.0.0"
 __product_name__ = "PreflightQC"
 __publisher__ = "ITISYOU"
 

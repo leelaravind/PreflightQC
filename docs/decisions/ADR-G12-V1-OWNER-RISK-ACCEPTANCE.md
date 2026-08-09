@@ -120,14 +120,25 @@ any of the following occurs:
 
 ## 8. OWNER ACCEPTANCE STATEMENT (TO BE EXECUTED PER RELEASE)
 
+**Status: OPEN / OWNER ACCEPTANCE REQUIRED.**
+
+The release identity was frozen on 2026-08-09 (Product Owner decision): the next
+acceptance applies to **PreflightQC 1.0.0** — publisher ITISYOU, Windows x64,
+Policy U intentionally unsigned. The identity is pre-filled below so the acceptance is
+release-specific; the date and signature are deliberately absent and only the Product
+Owner may supply them.
+
 > I, the Product Owner of PreflightQC, have read this decision record, the legal-review
 > pack, and the unresolved questions L-1…L-14. I understand that no attorney has
 > reviewed this product, that nothing in the repository is legal advice, and that
 > releasing carries residual legal and licensing risk. I accept that risk for release
-> version: ______ Date: ______ Signature: ______
+> version: **PreflightQC 1.0.0 (Windows x64, Policy U unsigned)**
+> Date: ______ Signature: ______
 
-**This block is intentionally unsigned in this document.** Signing happens per release,
-at release time. Its absence means G-12 is OPEN.
+**This block is intentionally unsigned in this document.** Signing happens at release
+time, by the Product Owner alone. Its absence means G-12 is OPEN. If the release
+identity changes in any way, the pre-filled version line above must be updated and any
+prior acceptance is void.
 
 ## 9. DOCUMENTS SUPERSEDED OR AMENDED
 

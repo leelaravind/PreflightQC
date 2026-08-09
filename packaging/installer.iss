@@ -11,7 +11,10 @@
 ;   ISCC /DMyAppVersion=1.0.0 /DPackageDir=...\dist\PreflightQC /O...\dist\installer installer.iss
 
 #ifndef MyAppVersion
-  #define MyAppVersion "0.0.0-dev"
+  ; Deliberately 0.0.0 — numeric so VersionInfoVersion compiles, and visibly not a
+  ; release. The real version is passed by build.py from preflightqc.__version__,
+  ; the single authoritative source.
+  #define MyAppVersion "0.0.0"
 #endif
 #ifndef PackageDir
   #define PackageDir "..\dist\PreflightQC"
@@ -19,7 +22,7 @@
 
 #define MyAppName "PreflightQC"
 #define MyAppExeName "PreflightQC.exe"
-#define MyAppPublisher "PreflightQC"
+#define MyAppPublisher "ITISYOU"
 
 [Setup]
 AppId={{9F1D5A2C-6B84-4E31-9C77-2A5D4E8B31F0}
@@ -27,7 +30,7 @@ AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisher={#MyAppPublisher}
-VersionInfoVersion=0.1.0
+VersionInfoVersion={#MyAppVersion}
 DefaultDirName={autopf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 DisableProgramGroupPage=yes

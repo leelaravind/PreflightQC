@@ -5,7 +5,7 @@
 | Date | 2026-08-09 |
 | Product | PreflightQC |
 | Publisher | ITISYOU |
-| Version | 0.1.0-dev — **a release version has not been assigned** |
+| Version | **1.0.0** — frozen 2026-08-09 by Product Owner decision (release identity: PreflightQC 1.0.0, ITISYOU, Windows x64, Policy U unsigned) |
 | Intended channel | A Merchant of Record (Lemon Squeezy, Gumroad or equivalent) |
 | **Status** | **PREPARED ONLY. Nothing published, nothing uploaded, no store account created.** |
 
@@ -213,7 +213,7 @@ buyer who trusts the rest of the copy.
 | D-3 | **Corresponding-source page** — LGPL obligation, must serve the archived FFmpeg source for three years | **Not live.** See `docs/licensing/CORRESPONDING-SOURCE-PLAN.md` |
 | D-4 | **Third-party notices** — FFmpeg LGPLv3, MediaInfo BSD-2-Clause, Qt LGPLv3, and the rest | Generated into the package; shown in About |
 | D-5 | **Code-signing certificate** — an unsigned installer will trigger SmartScreen | **Not obtained (G-11 open).** V1 may instead release under **Policy U** (`docs/licensing/UNSIGNED-RELEASE-POLICY-V1.md`): unsigned, with the §7 disclosure mandatory in this listing, `RELEASE-HASHES.txt` published on the product page, and `sign.py verify --expect unsigned` passing. The listing must never imply the download is signed |
-| D-6 | **Release version number** | **Not assigned.** `0.1.0-dev` must not appear in a listing |
+| D-6 | **Release version number** | **RESOLVED 2026-08-09: 1.0.0**, frozen in `preflightqc.__version__` (the single authoritative source). No development version string may appear in the listing |
 | D-7 | **Price** | Not set |
 | **D-8** | **Custom profiles have no in-app editor.** Saved profiles load and validate, but nothing in the interface creates, edits or imports one | **RESOLVED 2026-08-09: V1 ships without an editor.** Custom profiles are described everywhere customer-facing as an advanced, file-based capability — a manually authored or supplied JSON profile file. The feature bullet in §2 and the limitation in §7 carry this wording. The editor remains deferred scope in `docs/FUTURE.md` §3A.3 |
 
@@ -255,7 +255,7 @@ reuse:
 | Support information | **Blocked** — pages do not exist |
 | Refund policy | **Blocked** — not written |
 | EULA | **Blocked** — G-12 owner risk acceptance not yet executed; draft banner still in place |
-| Version number | **Blocked** — not assigned |
+| Version number | **Ready** — 1.0.0, frozen 2026-08-09 |
 | Certificate | **Blocked** — G-11, **or** released unsigned under Policy U with its disclosure and published hashes (U-1 … U-6 all required) |
 
 **Nothing here may be published until every blocked row above is resolved.**
