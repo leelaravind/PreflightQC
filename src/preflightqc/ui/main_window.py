@@ -123,6 +123,11 @@ class MainWindow(QMainWindow):
     def __init__(self) -> None:
         super().__init__()
         self.setWindowTitle(f"{__product_name__} {__version__}")
+        from preflightqc.ui.branding import application_icon
+
+        icon = application_icon()
+        if not icon.isNull():
+            self.setWindowIcon(icon)
         self.resize(d.DEFAULT_WINDOW_WIDTH, d.DEFAULT_WINDOW_HEIGHT)
         # Below this the toolbar clips. Audit finding F-36.
         self.setMinimumSize(d.MIN_WINDOW_WIDTH, d.MIN_WINDOW_HEIGHT)

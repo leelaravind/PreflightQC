@@ -86,6 +86,21 @@ class AboutDialog(QDialog):
         view = self._view()
         view.setAccessibleName("About PreflightQC")
 
+        # The approved logo, as a document resource so the offline promise holds:
+        # nothing here resolves a URL. Degrades to no image if the asset is absent.
+        from PySide6.QtCore import QUrl
+        from PySide6.QtGui import QTextDocument
+
+        from preflightqc.ui.branding import logo_pixmap
+
+        pixmap = logo_pixmap(96)
+        logo_html = ""
+        if not pixmap.isNull():
+            view.document().addResource(
+                QTextDocument.ResourceType.ImageResource, QUrl("preflightqc-logo"), pixmap
+            )
+            logo_html = "<img src='preflightqc-logo' width='96' height='96'>"
+
         inspectors = "".join(
             f"<tr><td style='color:{d.TEXT_SECONDARY};padding-right:16px'>{name}</td>"
             f"<td style='font-family:{d.FONT_MONO};color:{d.TEXT_PRIMARY}'>"
@@ -98,7 +113,8 @@ class AboutDialog(QDialog):
         problems = "".join(f"<li>{problem}</li>" for problem in startup.problems())
 
         view.setHtml(
-            f"<div style='font-size:{d.TYPE_DISPLAY}pt;font-weight:600;"
+            logo_html
+            + f"<div style='font-size:{d.TYPE_DISPLAY}pt;font-weight:600;"
             f"color:{d.TEXT_PRIMARY}'>{__product_name__}</div>"
             f"<div style='font-family:{d.FONT_MONO};color:{d.TEXT_MUTED};margin-top:2px'>"
             f"{__version__}</div>"

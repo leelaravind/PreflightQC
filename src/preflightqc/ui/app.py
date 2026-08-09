@@ -98,6 +98,12 @@ def main() -> int:
     app.setApplicationVersion(__version__)
     app.setOrganizationName(__publisher__)
 
+    from preflightqc.ui.branding import application_icon
+
+    icon = application_icon()
+    if not icon.isNull():
+        app.setWindowIcon(icon)
+
     from preflightqc.ui.theme import apply_theme
 
     apply_theme(app)

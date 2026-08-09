@@ -29,7 +29,17 @@ block_cipher = None
 #
 # Declaring them here as well would ship two copies of the licence folder: two things to
 # keep in step, and an ambiguity about which one the dependency manifest describes.
-datas = []
+#
+# The one declared data file is the application icon: it is package-internal (loaded
+# from inside preflightqc.ui at runtime), not a root-staged folder, so `_internal/` is
+# exactly where it belongs. It is a resize of the Product Owner-approved logo — see
+# assets/logo/PROVENANCE.md.
+datas = [
+    (
+        str(REPO_ROOT / "src" / "preflightqc" / "ui" / "assets" / "preflightqc.png"),
+        "preflightqc/ui/assets",
+    ),
+]
 
 # Qt modules PreflightQC does not use are excluded deliberately. QtNetwork in particular:
 # the product must be provably incapable of a network request (spec 18), and the cleanest
@@ -106,7 +116,9 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=None,
+    # The Product Owner-approved logo, as a multi-size Windows icon
+    # (assets/logo/PROVENANCE.md). Regenerate with tools/generate_icons.py.
+    icon=str(REPO_ROOT / "assets" / "logo" / "preflightqc.ico"),
 )
 
 coll = COLLECT(

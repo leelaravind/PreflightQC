@@ -35,6 +35,9 @@ DefaultDirName={autopf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 DisableProgramGroupPage=yes
 OutputBaseFilename=PreflightQC-{#MyAppVersion}-setup
+; The Product Owner-approved logo as a multi-size .ico (assets/logo/PROVENANCE.md).
+SetupIconFile=..\assets\logo\preflightqc.ico
+UninstallDisplayIcon={app}\{#MyAppExeName}
 Compression=lzma2/max
 SolidCompression=yes
 WizardStyle=modern

@@ -160,9 +160,10 @@ state that does not exist in the build.
 | Open-source components | `https://itisyou.app/products/preflightqc/source` |
 | Product page | `https://itisyou.app/products/preflightqc` |
 
-> **None of these pages exists yet.** They are shown inside the product's About dialog as
-> text, and the last one carries an LGPL obligation — see §8. They must be live before any
-> listing goes up.
+> **None of these pages is live yet**, but publication-ready content now exists for all
+> of them (plus a refunds page) in `docs/marketing/pages/`. They are shown inside the
+> product's About dialog as text, and the source page carries an LGPL obligation — see
+> §8. They must be live, with the support contact connected, before any listing goes up.
 
 **A support commitment must be decided before listing**, including response time, the
 supported-version window, and what happens when a platform changes its specification and a
@@ -209,12 +210,12 @@ buyer who trusts the rest of the copy.
 | # | Item | State |
 | --- | --- | --- |
 | D-1 | **EULA** — must be linked from the listing and shown by the installer | Drafted (`packaging/EULA.txt`); **not attorney reviewed, and none is mandated for V1 under the amended G-12 (ADR-G12). The owner's written residual-risk acceptance for 1.0.0 was executed 2026-08-09; removal of the draft banner remains a final-build step** |
-| D-2 | **Refund policy** — the Merchant of Record will require one | **Not written.** A business decision, not an engineering one |
+| D-2 | **Refund policy** — the Merchant of Record will require one | **RESOLVED 2026-08-10** (Final Binding): 7 calendar days, normally full purchase price, via the MoR/platform, statutory rights precede, no deductions, no prorating. Canonical text: `COMMERCIAL-TERMS-V1.md`; page: `pages/REFUNDS-PAGE.md` |
 | D-3 | **Corresponding-source page** — LGPL obligation, must serve the archived FFmpeg source for three years | **Not live.** See `docs/licensing/CORRESPONDING-SOURCE-PLAN.md` |
 | D-4 | **Third-party notices** — FFmpeg LGPLv3, MediaInfo BSD-2-Clause, Qt LGPLv3, and the rest | Generated into the package; shown in About |
 | D-5 | **Code-signing certificate** — an unsigned installer will trigger SmartScreen | **Not obtained (G-11 open).** V1 may instead release under **Policy U** (`docs/licensing/UNSIGNED-RELEASE-POLICY-V1.md`): unsigned, with the §7 disclosure mandatory in this listing, `RELEASE-HASHES.txt` published on the product page, and `sign.py verify --expect unsigned` passing. The listing must never imply the download is signed |
 | D-6 | **Release version number** | **RESOLVED 2026-08-09: 1.0.0**, frozen in `preflightqc.__version__` (the single authoritative source). No development version string may appear in the listing |
-| D-7 | **Price** | Not set |
+| D-7 | **Price** | **RESOLVED 2026-08-10** (Final Binding): **£19.99 GBP one-time — no subscription, no automatic renewal.** Locked in `COMMERCIAL-TERMS-V1.md` |
 | **D-8** | **Custom profiles have no in-app editor.** Saved profiles load and validate, but nothing in the interface creates, edits or imports one | **RESOLVED 2026-08-09: V1 ships without an editor.** Custom profiles are described everywhere customer-facing as an advanced, file-based capability — a manually authored or supplied JSON profile file. The feature bullet in §2 and the limitation in §7 carry this wording. The editor remains deferred scope in `docs/FUTURE.md` §3A.3 |
 
 ---
@@ -252,8 +253,8 @@ reuse:
 | Privacy / offline statement | **Ready and verifiable** |
 | Screenshot checklist | **Ready**; real renders exist, re-shoot at release version |
 | Limitations | **Ready** |
-| Support information | **Blocked** — pages do not exist |
-| Refund policy | **Blocked** — not written |
+| Support information | **Content ready** (`pages/SUPPORT-PAGE.md` and the other four page specs) — **hosting still required**, and the support contact must be connected before publication |
+| Refund policy | **Ready** — locked 2026-08-10; `pages/REFUNDS-PAGE.md` |
 | EULA | **Nearly ready** — G-12 owner risk acceptance executed for 1.0.0 (2026-08-09); removing the draft banner is a final-build step |
 | Version number | **Ready** — 1.0.0, frozen 2026-08-09 |
 | Certificate | **Blocked** — G-11, **or** released unsigned under Policy U with its disclosure and published hashes (U-1 … U-6 all required) |
