@@ -3,6 +3,11 @@
 Renders entirely offline. This is not incidental: the FFmpeg LGPL checklist requires an
 about-box notice, and a licence notice that only appears when the machine has a network
 connection is not a notice.
+
+The URLs shown here are text. Nothing in this dialog opens a socket, resolves a name or
+checks whether an address exists — `setOpenExternalLinks(False)` is set for that reason
+and the addresses are selectable so a user can copy one into their own browser. Displaying
+a URL must never become the reason a product that promises no network makes a request.
 """
 
 from __future__ import annotations
@@ -18,10 +23,19 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from preflightqc import __product_name__, __version__
+from preflightqc import (
+    LEGAL_URL,
+    PRODUCT_URL,
+    SOURCE_URL,
+    SUPPORT_URL,
+    __product_name__,
+    __publisher__,
+    __version__,
+)
 from preflightqc.platform.binaries import StartupReport
 from preflightqc.platform.paths import application_root
 from preflightqc.reporting import claims
+from preflightqc.ui import design as d
 
 #: The notices the FFmpeg and MediaInfo licences require in an about box. The full texts
 #: ship in the licences folder; these are the sentences that must be visible in-product.
@@ -32,6 +46,7 @@ REQUIRED_NOTICES = (
     "under the GNU Lesser General Public License version 3.",
     "This product uses MediaInfo library, Copyright (c) 2002-2026 MediaArea.net SARL.",
     "ZenLib — (c) MediaArea.net SARL, zlib license.",
+    "This software uses the Qt toolkit via PySide6 under the LGPLv3.",
 )
 
 
@@ -44,58 +59,118 @@ class AboutDialog(QDialog):
     def __init__(self, startup: StartupReport, parent: QWidget | None = None) -> None:
         super().__init__(parent)
         self.setWindowTitle(f"About {__product_name__}")
-        self.resize(680, 520)
+        self.resize(760, 580)
 
         tabs = QTabWidget()
         tabs.addTab(self._about_tab(startup), "About")
         tabs.addTab(self._notices_tab(), "Third-party notices")
+        self._tabs = tabs
 
         buttons = QDialogButtonBox(QDialogButtonBox.StandardButton.Close)
         buttons.rejected.connect(self.reject)
         buttons.accepted.connect(self.accept)
 
         layout = QVBoxLayout(self)
+        layout.setContentsMargins(d.SPACE_XL, d.SPACE_XL, d.SPACE_XL, d.SPACE_XL)
+        layout.setSpacing(d.SPACE_LG)
         layout.addWidget(tabs)
         layout.addWidget(buttons)
 
-    def _about_tab(self, startup: StartupReport) -> QTextBrowser:
+    def _view(self) -> QTextBrowser:
         view = QTextBrowser()
         view.setOpenExternalLinks(False)
-        versions = "".join(
-            f"<li>{name}: {version}</li>" for name, version in sorted(startup.versions().items())
+        view.setOpenLinks(False)
+        return view
+
+    def _about_tab(self, startup: StartupReport) -> QTextBrowser:
+        view = self._view()
+        view.setAccessibleName("About PreflightQC")
+
+        inspectors = "".join(
+            f"<tr><td style='color:{d.TEXT_SECONDARY};padding-right:16px'>{name}</td>"
+            f"<td style='font-family:{d.FONT_MONO};color:{d.TEXT_PRIMARY}'>"
+            f"{info.version or 'unknown'}</td>"
+            f"<td style='color:{d.TEXT_MUTED};padding-left:16px'>{info.licence or ''}</td></tr>"
+            for name, info in sorted(
+                (i.kind.value, i) for i in startup.inspectors if i.available
+            )
         )
         problems = "".join(f"<li>{problem}</li>" for problem in startup.problems())
+
         view.setHtml(
-            f"<h2>{__product_name__} {__version__}</h2>"
-            "<p>Offline technical QA for video exports.</p>"
-            f"<p>{claims.APPROVED_CLAIM}</p>"
-            f"<p>{claims.NON_DESTRUCTIVE_STATEMENT}</p>"
-            f"<p>{claims.ACCURACY_STATEMENT}</p>"
-            "<h3>Inspection tools</h3>"
-            f"<ul>{versions or '<li>none available</li>'}</ul>"
-            + (f"<h3>Problems</h3><ul>{problems}</ul>" if problems else "")
-            + "<h3>Privacy</h3>"
-            "<p>PreflightQC performs no network requests. No file, metadata or result "
-            "leaves this machine.</p>"
+            f"<div style='font-size:{d.TYPE_DISPLAY}pt;font-weight:600;"
+            f"color:{d.TEXT_PRIMARY}'>{__product_name__}</div>"
+            f"<div style='font-family:{d.FONT_MONO};color:{d.TEXT_MUTED};margin-top:2px'>"
+            f"{__version__}</div>"
+            f"<div style='color:{d.TEXT_SECONDARY};margin-top:10px'>"
+            f"Offline technical QA for video deliverables, from {__publisher__}.</div>"
+            f"<p style='color:{d.TEXT_PRIMARY};margin-top:16px'>{claims.APPROVED_CLAIM}</p>"
+            f"<p style='color:{d.TEXT_SECONDARY}'>{claims.NON_DESTRUCTIVE_STATEMENT}</p>"
+            f"<p style='color:{d.TEXT_SECONDARY}'>{claims.ACCURACY_STATEMENT}</p>"
+            f"<div style='color:{d.TEXT_SECONDARY};font-weight:600;margin-top:18px'>"
+            "Inspection tools</div>"
+            f"<table cellpadding='2' style='margin-top:4px'>{inspectors or ''}</table>"
+            + (
+                f"<div style='color:{d.FAIL_TONE.foreground};font-weight:600;margin-top:16px'>"
+                f"Problems</div><ul>{problems}</ul>"
+                if problems
+                else ""
+            )
+            + f"<div style='color:{d.TEXT_SECONDARY};font-weight:600;margin-top:18px'>"
+            "Privacy</div>"
+            f"<p style='color:{d.TEXT_SECONDARY}'>PreflightQC makes no network requests and "
+            "has no account, no telemetry and no update check. No file, no metadata and no "
+            "result leaves this machine. Source files are opened read-only.</p>"
+            f"<div style='color:{d.TEXT_SECONDARY};font-weight:600;margin-top:18px'>"
+            f"{__publisher__}</div>"
+            f"<table cellpadding='2' style='margin-top:4px'>"
+            f"{_link_row('Product', PRODUCT_URL)}"
+            f"{_link_row('Support', SUPPORT_URL)}"
+            f"{_link_row('Licence and legal', LEGAL_URL)}"
+            f"{_link_row('Open-source components', SOURCE_URL)}"
+            f"</table>"
+            f"<p style='color:{d.TEXT_MUTED};font-size:{d.TYPE_CAPTION}pt;margin-top:10px'>"
+            "These addresses are shown for reference. PreflightQC does not open them, and "
+            "nothing in the product requires a connection.</p>"
         )
         return view
 
     def _notices_tab(self) -> QTextBrowser:
-        view = QTextBrowser()
-        view.setOpenExternalLinks(False)
-        notices = "".join(f"<p>{notice}</p>" for notice in REQUIRED_NOTICES)
+        view = self._view()
+        view.setAccessibleName("Third-party notices")
+        notices = "".join(
+            f"<p style='color:{d.TEXT_SECONDARY}'>{notice}</p>" for notice in REQUIRED_NOTICES
+        )
         files = _licence_files()
         listing = (
-            "".join(f"<li>{path.name}</li>" for path in files)
+            "".join(
+                f"<li style='font-family:{d.FONT_MONO};color:{d.TEXT_PRIMARY}'>{path.name}</li>"
+                for path in files
+            )
             if files
-            else "<li>Licence texts are installed with the release package.</li>"
+            else f"<li style='color:{d.TEXT_MUTED}'>Licence texts are installed with the "
+            "release package, in its <code>licenses</code> folder.</li>"
         )
         view.setHtml(
-            "<h3>Third-party notices</h3>"
+            f"<div style='font-size:{d.TYPE_TITLE}pt;font-weight:600;color:{d.TEXT_PRIMARY}'>"
+            "Third-party notices</div>"
             f"{notices}"
-            "<p>Full licence texts, the exact build configuration of the bundled "
-            "FFmpeg, and a link to its corresponding source are included with the "
-            "installed product.</p>"
+            f"<p style='color:{d.TEXT_SECONDARY};margin-top:14px'>The full licence texts, the "
+            "exact build configuration of the bundled FFmpeg, and the complete dependency "
+            "manifest are installed alongside the application.</p>"
+            f"<p style='color:{d.TEXT_SECONDARY}'>The corresponding source code for the "
+            "FFmpeg libraries distributed with this product, together with the build "
+            "configuration used to produce them, is available at:</p>"
+            f"<p style='font-family:{d.FONT_MONO};color:{d.ACCENT}'>{SOURCE_URL}</p>"
+            f"<div style='color:{d.TEXT_SECONDARY};font-weight:600;margin-top:18px'>"
+            "Installed licence texts</div>"
             f"<ul>{listing}</ul>"
         )
         return view
+
+
+def _link_row(label: str, url: str) -> str:
+    return (
+        f"<tr><td style='color:{d.TEXT_SECONDARY};padding-right:16px'>{label}</td>"
+        f"<td style='font-family:{d.FONT_MONO};color:{d.ACCENT}'>{url}</td></tr>"
+    )

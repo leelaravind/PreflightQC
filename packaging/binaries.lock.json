@@ -104,8 +104,8 @@
         "archive_sha256": "39002bfe54d48326b69c36a0b72231125bb5b408fadc29e14481b5ac2583a224",
         "archive_size_bytes": 17014473,
         "archive_command": "git archive --format=tar.gz --prefix=ffmpeg-n8.1.2-34-g9b6c8969e0/ 9b6c8969e05b4f0b29f0f85cd501be6b3e582e6b",
-        "hosting_url": "https://preflightqc.example/source/ffmpeg-n8.1.2-34-g9b6c8969e0.tar.gz",
-        "hosting_status": "PLACEHOLDER — the archive is built and verified, but the release domain does not exist yet. A human must publish it at the same location that serves the installer and replace this URL before any distribution. See docs/licensing/CORRESPONDING-SOURCE-PLAN.md.",
+        "hosting_url": "https://itisyou.app/products/preflightqc/source/ffmpeg-n8.1.2-34-g9b6c8969e0.tar.gz",
+        "hosting_status": "NOT LIVE - the archive is built, verified and reproducible, and the location is now the intended one, but itisyou.app/products/preflightqc/source does not yet serve it. A human must publish both archives there and commit to a three-year offer before any distribution. See docs/licensing/CORRESPONDING-SOURCE-PLAN.md actions H-1 to H-4.",
         "offer_duration_years": 3
       },
       "build_recipe_source": {
@@ -129,8 +129,8 @@
         "archive_sha256": "b23920469c23615c539b4965c0bd18b3758c8dc9416b6bef343a83fcf4f310c7",
         "archive_size_bytes": 103117,
         "archive_command": "git archive --format=tar.gz --prefix=FFmpeg-Builds-2437e7b868da/ 2437e7b868da3c11872367b15f3c613b87c24819",
-        "hosting_url": "https://preflightqc.example/source/ffmpeg-builds-recipe-2437e7b868da.tar.gz",
-        "hosting_status": "PLACEHOLDER — same release-domain prerequisite as corresponding_source."
+        "hosting_url": "https://itisyou.app/products/preflightqc/source/ffmpeg-builds-recipe-2437e7b868da.tar.gz",
+        "hosting_status": "NOT LIVE - same release-domain prerequisite as corresponding_source."
       },
       "files": [
         "ffprobe.exe",

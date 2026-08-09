@@ -325,14 +325,33 @@ class TestTheShippedLockFile:
             assert str(spec["archive_prefix"]) in str(spec["archive_command"])
             assert len(str(spec["archive_sha256"])) == 64
 
-    def test_placeholder_hosting_is_flagged_not_silently_accepted(
+    def test_hosting_that_is_not_yet_live_is_flagged_not_silently_accepted(
         self, ffprobe_entry: dict[str, object]
     ) -> None:
-        """Until a real release domain exists, the lock file must say so out loud."""
-        source = ffprobe_entry["corresponding_source"]
-        assert isinstance(source, dict)
-        if "example" in str(source["hosting_url"]):
-            assert "PLACEHOLDER" in str(source["hosting_status"])
+        """A URL that does not serve the file yet must say so out loud.
+
+        Naming the intended location is progress; it is not the obligation. The status
+        field is what stops a plausible-looking URL from reading as a discharged duty.
+        """
+        for key in ("corresponding_source", "build_recipe_source"):
+            spec = ffprobe_entry[key]
+            assert isinstance(spec, dict)
+            status = str(spec["hosting_status"]).upper()
+            assert "PLACEHOLDER" in status or "NOT LIVE" in status, (
+                f"{key} names a hosting URL with no status saying whether it serves the "
+                "archive yet"
+            )
+
+    def test_the_hosting_location_is_under_the_product_domain(
+        self, ffprobe_entry: dict[str, object]
+    ) -> None:
+        """The LGPL offer and the About dialog must point at the same place."""
+        from preflightqc import SOURCE_URL
+
+        for key in ("corresponding_source", "build_recipe_source"):
+            spec = ffprobe_entry[key]
+            assert isinstance(spec, dict)
+            assert str(spec["hosting_url"]).startswith(SOURCE_URL)
 
 
 def _real_archive() -> Path | None:

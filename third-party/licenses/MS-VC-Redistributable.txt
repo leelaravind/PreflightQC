@@ -1,17 +1,110 @@
-MICROSOFT VISUAL C++ RUNTIME — LICENCE TEXT REQUIRED
-====================================================
+MICROSOFT VISUAL C++ RUNTIME COMPONENTS — DISTRIBUTABLE CODE NOTICE
+===================================================================
 
-THIS FILE IS A PLACEHOLDER. IT IS NOT A LICENCE.
+This product includes Microsoft Visual C++ runtime components, which are
+Microsoft Distributable Code, copyright (c) Microsoft Corporation. Microsoft
+does not ship a standalone licence text alongside these DLLs; the terms that
+authorise their redistribution travel with the upstream distributions that
+supplied them, as described below. This notice identifies every such component
+in the product, its provenance, and the conditions that apply.
 
-This product redistributes Microsoft Visual C++ runtime components
-(VCRUNTIME140.dll, VCRUNTIME140_1.dll, MSVCP140.dll, ucrtbase.dll and the
-api-ms-win-* forwarders), which arrive as part of the frozen CPython runtime.
+1. COMPONENTS AND PROVENANCE
+----------------------------
 
-Microsoft does not ship a licence text alongside these DLLs, so it cannot be
-collected automatically. Before release, a human must replace this file with the
-"Microsoft Software License Terms" for the Microsoft Visual C++ Redistributable
-version actually shipped, obtained from the redistributable package or from
-Microsoft's Visual Studio licence terms page, and confirm the redistribution
-rights cover this product.
+(a) Supplied as part of the official python.org CPython 3.12 Windows binary
+    distribution, and placed in the package by the freeze process:
 
-Tracked as an open action in docs/reports/RELEASE-AUDIT-V1.md.
+      _internal/VCRUNTIME140.dll
+      _internal/VCRUNTIME140_1.dll
+      _internal/ucrtbase.dll
+      _internal/api-ms-win-*.dll        (39 API-set forwarder DLLs)
+
+    Authority: the CPython Windows binary distribution is licensed under the
+    Python Software Foundation License Version 2 together with the
+    "Additional Conditions for this Windows binary build" section of its
+    LICENSE.txt, shipped with this product verbatim as
+    licenses/CPython-LICENSE.txt. That section states, in Microsoft's and the
+    PSF's own words, the conditions under which the Microsoft Distributable
+    Code embedded in and accompanying the CPython build may be further
+    distributed.
+
+(b) Supplied inside the Qt for Python wheels (PySide6 6.8.1.1 and
+    shiboken6 6.8.1.1), exactly as published by The Qt Company on PyPI:
+
+      _internal/PySide6/MSVCP140.dll
+      _internal/PySide6/MSVCP140_1.dll
+      _internal/PySide6/MSVCP140_2.dll
+      _internal/PySide6/VCRUNTIME140.dll
+      _internal/PySide6/VCRUNTIME140_1.dll
+      _internal/shiboken6/MSVCP140.dll
+      _internal/shiboken6/VCRUNTIME140.dll
+      _internal/shiboken6/VCRUNTIME140_1.dll
+
+    These files are the same class of Microsoft Distributable Code (Visual
+    C++ runtime libraries), redistributed by The Qt Company within its
+    published wheels. The wheels do not include a Microsoft-specific licence
+    text. This product ships those files unmodified, in the locations the
+    wheels place them, and applies to them the same protective conditions
+    listed in section 2.
+
+No other Microsoft runtime or redistributable component is included. In
+particular, no MSVCR* (legacy CRT), CONCRT*, VCOMP* (OpenMP), MFC or VCAMP
+file is shipped, and the product does not install or require the standalone
+Microsoft Visual C++ Redistributable package.
+
+2. CONDITIONS OF REDISTRIBUTION
+-------------------------------
+
+The following conditions are reproduced from the "Additional Conditions for
+this Windows binary build" section of licenses/CPython-LICENSE.txt, which is
+the authoritative statement accompanying the distribution that supplied the
+files in 1(a):
+
+    This program is linked with and uses Microsoft Distributable Code,
+    copyrighted by Microsoft Corporation. [...]
+
+    If you further distribute programs that include the Microsoft
+    Distributable Code, you must comply with the restrictions on
+    distribution specified by Microsoft. In particular, you must require
+    distributors and external end users to agree to terms that protect the
+    Microsoft Distributable Code at least as much as Microsoft's own
+    requirements for the Distributable Code. [...]
+
+    Redistribution of the Windows binary build of the Python interpreter
+    complies with this agreement, provided that you do not:
+
+    - alter any copyright, trademark or patent notice in Microsoft's
+    Distributable Code;
+
+    - use Microsoft's trademarks in your programs' names or in a way that
+    suggests your programs come from or are endorsed by Microsoft;
+
+    - distribute Microsoft's Distributable Code to run on a platform other
+    than Microsoft operating systems, run-time technologies or application
+    platforms; or
+
+    - include Microsoft Distributable Code in malicious, deceptive or
+    unlawful programs.
+
+PreflightQC observes each of those conditions: the files are shipped
+unmodified with all notices intact; Microsoft's trademarks appear nowhere in
+the product's name or presentation; the product runs only on Microsoft
+Windows; and the product inspects media files read-only and does nothing
+deceptive or unlawful.
+
+3. END-USER TERMS
+-----------------
+
+As required above, the product's licence agreement (EULA) must bind end users
+to terms that protect the Microsoft Distributable Code at least as much as
+Microsoft's own requirements. Confirming that the EULA wording satisfies this
+pass-through obligation — including for the copies that arrive via the Qt for
+Python wheels rather than via CPython — is part of the attorney review
+recorded as gate G-12 in docs/licensing/LICENSING-GATE-V1.md. That gate
+remains open until a qualified attorney completes it; this notice records the
+factual basis and does not claim legal clearance.
+
+Reference: Microsoft's current documentation for the Visual C++
+redistributable files is published at
+https://learn.microsoft.com/cpp/windows/latest-supported-vc-redist
+(reference pointer only; nothing is fetched by the product).

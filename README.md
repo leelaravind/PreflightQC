@@ -55,8 +55,10 @@ normalises that metadata into a single internal model, evaluates it against a se
 preset's data-driven rule set, and reports PASS / WARN / FAIL / INFO / UNKNOWN findings
 with detected-vs-expected explanations, exportable as CSV and as a human-readable report.
 
-V1 preset families: Instagram/Meta, TikTok, YouTube, LinkedIn, and locally saved
-Custom Client Profiles.
+V1 preset families: Instagram/Meta, TikTok, YouTube, and LinkedIn. Locally saved custom
+profiles are supported as an advanced, file-based capability: a profile is authored or
+supplied as a JSON file placed in the user profiles folder. There is no in-app profile
+editor in V1 (decision D-8; deferred scope in `docs/FUTURE.md` §3A.3).
 
 No telemetry. No cloud upload. No account. No backend required for core operation.
 

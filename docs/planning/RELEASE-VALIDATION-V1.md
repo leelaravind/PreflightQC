@@ -39,12 +39,14 @@ untested claim into a signed one.
 | P-5 | SmartScreen enabled, default settings | Reputation behaviour must be observed, not assumed |
 | P-6 | A firewall rule that can block the machine's outbound traffic | AC-12 / P13-A9 |
 | P-7 | A copy of the golden corpus results from the build machine | P13-A7 compares against them |
-| P-8 | **A signed installer** | P13-A2 is meaningless against an unsigned build |
+| P-8 | **An installer in its declared signing state** | Signed path: a signed installer (G-11). Unsigned path: Policy U declared and verified (`docs/licensing/UNSIGNED-RELEASE-POLICY-V1.md`) |
 
-> **P-8 is not currently met.** No code-signing certificate exists (gate G-11), so
-> `PreflightQC.exe` and the installer are unsigned. Steps A2 and A8 below cannot produce a
-> meaningful result until one is obtained. Do not run the run-book "except for signing"
-> and call it passed.
+> **Which path applies must be decided before the session starts.** No certificate
+> exists (gate G-11 OPEN), so under the signed path A2 and A8 cannot produce a
+> meaningful result — do not run the run-book "except for signing" and call it passed.
+> Under **Policy U** (the formalized V1 unsigned path), run the **A2-U and A8-U
+> variants** below instead: they validate the *declared* unsigned state and the honest
+> disclosure around it, and they do not pretend to be a signing pass.
 
 ---
 
@@ -83,6 +85,22 @@ file*, attach it.
    failure.**
 
 **PASS / FAIL / ACCEPTED-WITH-NOTE:** ☐  **Evidence:**
+
+#### A2-U — Policy U variant (unsigned release path)
+
+1. Download the unsigned installer to the clean machine **by the route real users will
+   use** so it carries Mark-of-the-Web.
+2. Run it. **Expect:** the SmartScreen *"Windows protected your PC"* dialog with an
+   unknown publisher, and **More info → Run anyway** proceeding to a normal install.
+3. Screenshot the dialog. Record the exact wording — the support page's description
+   (`UNSIGNED-RELEASE-POLICY-V1.md` §4) must match what Windows actually shows.
+4. Verify the download hash against the published `RELEASE-HASHES.txt` (Policy U
+   condition U-3) with `Get-FileHash`, and record both values.
+5. **This step passes when the observed behaviour matches the disclosed behaviour.** A
+   blocked install with no proceed path, or behaviour differing from the disclosure, is
+   a FAIL.
+
+**PASS / FAIL:** ☐  **Evidence (screenshots + hashes):**
 
 ---
 
@@ -185,6 +203,23 @@ Repeat it on the clean machine, because PATH handling is environment-sensitive:
    `licenses\DEPENDENCY-MANIFEST.json`.
 
 **PASS / FAIL:** ☐  **Evidence:**
+
+#### A8-U — Policy U variant (unsigned release path)
+
+The criterion becomes: **the artefacts are in exactly the signing state the release
+declares.**
+
+1. `python packaging/sign.py verify --expect unsigned` — **expect exit 0**, every
+   artefact reported `UNSIGNED (as declared by Policy U)`. A *signed* artefact here is a
+   FAIL: the release documentation would be describing a different file than the one
+   shipping.
+2. `python packaging/sign.py verify` (default, signed expectation) — **expect exit 1.**
+   Record this failure in the evidence. Both results together are the honest record:
+   G-11 not passed, declared state verified.
+3. Confirm the third-party binaries in `bin\` are **unmodified** — compare SHA-256
+   against `licenses\DEPENDENCY-MANIFEST.json` (unchanged from A8).
+
+**PASS / FAIL:** ☐  **Evidence (both command outputs):**
 
 ---
 
@@ -289,13 +324,13 @@ Execute A1–A13 independently on each OS. A pass on one is not a pass.
 | Criterion | Pre-verified | Blocking issue before it can be executed |
 | --- | --- | --- |
 | A1 installer without elevation | PARTIAL | — |
-| A2 SmartScreen | NO | **No certificate (G-11)** |
+| A2 SmartScreen | NO | **No certificate (G-11)** — or run **A2-U** under Policy U |
 | A3 launches clean | PARTIAL | — |
 | A4 self-check reports versions | **AUTO** | — |
 | A5 PATH ffprobe never used | **AUTO** | — |
 | A6 drag-and-drop / pickers | NO | — |
 | A7 batch matches golden corpus | PARTIAL | — |
-| A8 Authenticode signatures | NO | **No certificate (G-11)** |
+| A8 Authenticode signatures | NO | **No certificate (G-11)** — or run **A8-U** under Policy U |
 | A9 works offline | **AUTO (structurally)** | — |
 | A10 About renders offline | PARTIAL | **Corresponding-source URL is a placeholder (H-1/H-2)** |
 | A11 custom profiles | PARTIAL | — |
@@ -311,7 +346,13 @@ Phase 13 is complete, and **GATE-6** passes, only when **all** of the following 
 
 1. Every criterion A1–A13 is marked PASS on **Windows 10**.
 2. Every criterion A1–A13 is marked PASS on **Windows 11**.
-3. **G-11** is satisfied — a real certificate, and `signtool verify` passing.
+3. **One** of the following, matching the declared release path:
+   - **Signed path:** G-11 is satisfied — a real certificate, and `signtool verify`
+     passing (A2/A8); **or**
+   - **Unsigned path (Policy U):** every condition U-1 … U-6 of
+     `docs/licensing/UNSIGNED-RELEASE-POLICY-V1.md` holds, A2-U and A8-U are marked
+     PASS, and the release audit records the default `sign.py verify` failure alongside
+     the Policy U pass. **G-11 remains OPEN and is recorded as such.**
 4. **G-12** is complete — attorney review of the licence, EULA and notices.
 5. The corresponding-source URL in the shipped notices resolves to the real archive.
 

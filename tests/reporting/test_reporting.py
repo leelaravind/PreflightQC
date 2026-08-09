@@ -184,6 +184,38 @@ class TestClaimSafety:
     def test_the_detector_catches_each_forbidden_phrase(self, phrase: str) -> None:
         assert claims.contains_forbidden_claim(f"This file is {phrase} by the platform.")
 
+    @pytest.mark.parametrize("phrase", claims.FORBIDDEN_CLAIMS)
+    def test_a_negated_phrase_is_the_disclaimer_not_the_claim(self, phrase: str) -> None:
+        """The required disclaimer contains the forbidden words.
+
+        The EULA has to say the software is *not* certified by any platform. A scanner
+        that cannot tell an assertion from its negation flags that sentence, and the
+        obvious way to make it pass is to delete the disclaimer — which is the opposite
+        of what the specification requires.
+        """
+        assert claims.contains_forbidden_claim(f"This software is not {phrase} any platform.") == ()
+
+    def test_the_real_eula_disclaimer_passes(self) -> None:
+        text = (
+            "A PASS result is not a guarantee of acceptance, and the Software is not\n"
+            "affiliated with, endorsed by, or certified by any platform whose "
+            "specifications\nit validates against."
+        )
+        assert claims.contains_forbidden_claim(text) == ()
+
+    def test_a_negation_in_the_previous_sentence_does_not_launder_a_claim(self) -> None:
+        """Negation only counts inside the same sentence, or the guard is useless."""
+        text = "This tool is not a toy. Your file is guaranteed accepted by the platform."
+        assert claims.contains_forbidden_claim(text) == ("guaranteed accepted",)
+
+    def test_a_distant_negation_does_not_launder_a_claim(self) -> None:
+        text = (
+            "PreflightQC does not do many things, and here is a very long sentence "
+            "written purely to put distance between that word and what follows, which "
+            "is that your upload will be accepted"
+        )
+        assert claims.contains_forbidden_claim(text) == ("will be accepted",)
+
 
 class TestEscaping:
     def test_a_hostile_filename_is_escaped(self, preset) -> None:

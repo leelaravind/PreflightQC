@@ -5,7 +5,8 @@
 | Date | 2026-08-09 |
 | Covers | Gates G-5 (version-matched source archived and hosted) and G-6 (build recipe recorded and shipped) |
 | Engineering status | **DONE** — source identified, obtained, proven to correspond, hashed, reproducible, and mechanically verified on every audit |
-| Remaining | **Publishing.** A release domain must exist and serve two files. That is an operations task, not an engineering one. |
+| Hosting bundle | **STAGED** (2026-08-09) — `packaging/source-release/` holds the complete, verified file set for the public page. Nothing is uploaded. |
+| Remaining | **Publishing.** The release domain must serve the staged bundle at the URL below. That is an operations task, not an engineering one. |
 | Legal status | **No clearance claimed.** G-12 attorney review still applies to this plan. |
 
 ---
@@ -166,6 +167,52 @@ weighted towards proving it says no.
 
 ---
 
+## 5A. THE HOSTING BUNDLE — STAGED, NOT PUBLISHED
+
+The public page is:
+
+```
+https://itisyou.app/products/preflightqc/source
+```
+
+`packaging/source-release/` holds **exactly** the files that page must serve. Staged
+2026-08-09; every hash was re-verified against `binaries.lock.json` at staging time.
+
+| File | SHA-256 | Why it is hosted |
+| --- | --- | --- |
+| `ffmpeg-n8.1.2-34-g9b6c8969e0.tar.gz` | `39002bfe54d48326b69c36a0b72231125bb5b408fadc29e14481b5ac2583a224` | **The obligation.** Corresponding source for the shipped binaries (G-5) |
+| `ffmpeg-builds-recipe-2437e7b868da.tar.gz` | `b23920469c23615c539b4965c0bd18b3758c8dc9416b6bef343a83fcf4f310c7` | Build recipe / scripts used to control compilation (G-6) |
+| `README.txt` | — regenerate hash if edited | Names which source corresponds to which shipped ffprobe, the verification chain, and the three-year offer |
+| `SHA256SUMS` | self-referential — covers the other five | Integrity for a downloader |
+| `COPYING.LGPLv3.txt` | `ea7d049c7705dc13afc202dd18e1827f3484f8212fd3fa7b82fc4a0c363432c9` | The licence the offer is made under |
+| `COPYING.GPLv3.txt` | `0b383d5a63da644f628d99c33976ea6487ed89aaa59f0b3257992deac1171e6b` | Incorporated by LGPLv3 by reference |
+| `ffmpeg-build-configuration.txt` | `ffd89a45ec91861f0841af7728f5a654d280e698acd928b962476cb481866e45` | The verbatim configure line of the shipped build |
+
+**How integrity and version-correspondence are verified**, at three layers:
+
+1. **Staging → lock file.** The two archive hashes above must equal
+   `corresponding_source.archive_sha256` and `build_recipe_source.archive_sha256` in
+   `packaging/binaries.lock.json`. Checked when staged; `packaging/verify_source.py`
+   re-checks the corresponding-source hash on every audit.
+2. **Lock file → binary.** `packaging/verify_source.py` re-derives correspondence from
+   the artefacts themselves (§5): release tag, seven library triplets, commit,
+   commits-ahead — never trusting a filename.
+3. **Public page → recipient.** `SHA256SUMS` lets any downloader verify what they
+   received, and the `git archive` commands in `README.txt` let them reproduce both
+   archives from upstream and confirm we altered nothing.
+
+The two `.tar.gz` files are not committed to Git (same policy as
+`third-party/source/`, recorded in `packaging/source-release/.gitignore`); they are
+reproducible byte-for-byte and their hashes are pinned in three places. If the staged
+copies are ever lost, `tools/fetch_corresponding_source.py` rebuilds them and the hashes
+prove the rebuild is identical.
+
+**Publication step (H-1):** upload the seven files, byte-for-byte, to the URL above.
+Then re-hash each hosted file over HTTPS against `SHA256SUMS` and flip
+`hosting_status` in `binaries.lock.json` (H-2).
+
+---
+
 ## 6. WHAT REMAINS — AND WHO HAS TO DO IT
 
 Everything below needs a human with access to the release infrastructure. **None of it can
@@ -173,8 +220,8 @@ be closed by writing more code.**
 
 | # | Action | Why it cannot be automated here |
 | --- | --- | --- |
-| **H-1** | Stand up the release host and publish both archives beside the installer | No release domain exists yet; `hosting_url` is a documented `PLACEHOLDER` |
-| **H-2** | Replace `hosting_url` in `binaries.lock.json` with the real URLs and re-run the audit | Depends on H-1 |
+| **H-1** | Publish the staged bundle (§5A, seven files) at `itisyou.app/products/preflightqc/source` | The location is named in `binaries.lock.json` and shown in the product's About dialog, and the bundle is staged in `packaging/source-release/` — but the page does not exist and serves nothing |
+| **H-2** | Change `hosting_status` from `NOT LIVE` once the page serves the archives, and re-run the audit | Depends on H-1. A test fails if a URL is named with no status saying whether it works |
 | **H-3** | Commit to serving them for **three years** after the last distribution of the corresponding binary | A business commitment, not a build artefact |
 | **H-4** | Put the written offer into the EULA and `THIRD-PARTY-NOTICES.txt` | Draft text exists; wording is for G-12 |
 | **H-5** | Re-run this whole process on **every** inspector version bump | The lock file's rework trigger; the audit fails closed if source and binary diverge |
@@ -193,5 +240,5 @@ be closed by writing more code.**
 
 | Gate | Engineering | Remaining |
 | --- | --- | --- |
-| **G-5** | **PASS** — correct source identified, obtained, proven to correspond four ways, hashed, reproducible, mechanically verified | H-1, H-2, H-3 (hosting) |
+| **G-5** | **PASS** — correct source identified, obtained, proven to correspond four ways, hashed, reproducible, mechanically verified. Location named as `itisyou.app/products/preflightqc/source` and shown in-product | H-1, H-2, H-3 (the page must exist and serve the files) |
 | **G-6** | **PASS** — configure line captured verbatim and shipped; build recipe archived at the identified commit | H-1, H-2 (hosting); recipe-commit attribution noted in §3.3 |

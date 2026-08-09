@@ -5,10 +5,13 @@ own metadata, CPython's own LICENSE.txt, or the FFmpeg source tree we archived f
 Nothing is downloaded and nothing is retyped, because a licence text that has been
 paraphrased or truncated is not the licence.
 
-The one text that cannot be collected this way is the Microsoft Visual C++ redistributable
-terms, which Microsoft does not ship in a machine-readable form with the runtime DLLs. A
-placeholder is written that states exactly what must replace it; the release audit reports
-it as an open human action rather than quietly passing.
+The one text that cannot be collected this way is the Microsoft Visual C++ runtime
+notice: Microsoft ships no licence text alongside the runtime DLLs, so the notice is an
+authored file (MS-VC-Redistributable.txt) grounded in the "Additional Conditions for this
+Windows binary build" section of CPython's own LICENSE.txt — the authoritative statement
+accompanying the distribution that supplied the DLLs. This script never overwrites it. If
+the file ever goes missing, a fail-visible placeholder is written in its place so the
+release audit reports an open action rather than quietly passing.
 
     python tools/collect_licences.py [--check]
 """
@@ -97,24 +100,26 @@ def plan() -> list[Collected]:
     return [entry for entry in entries if entry is not None]
 
 
+#: Written ONLY if the authored notice has gone missing. Contains the word
+#: PLACEHOLDER, which generate_manifest.py detects and reports as an open action —
+#: a missing notice must never regenerate as something that looks resolved.
 MS_PLACEHOLDER = """\
-MICROSOFT VISUAL C++ RUNTIME — LICENCE TEXT REQUIRED
-====================================================
+MICROSOFT VISUAL C++ RUNTIME — NOTICE MISSING
+=============================================
 
-THIS FILE IS A PLACEHOLDER. IT IS NOT A LICENCE.
+THIS FILE IS A PLACEHOLDER. IT IS NOT A LICENCE AND NOT THE REAL NOTICE.
 
-This product redistributes Microsoft Visual C++ runtime components
-(VCRUNTIME140.dll, VCRUNTIME140_1.dll, MSVCP140.dll, ucrtbase.dll and the
-api-ms-win-* forwarders), which arrive as part of the frozen CPython runtime.
+The authored Microsoft Distributable Code notice for the Visual C++ runtime
+components (VCRUNTIME140*.dll, MSVCP140*.dll, ucrtbase.dll and the
+api-ms-win-* forwarders) normally lives at
+third-party/licenses/MS-VC-Redistributable.txt in the repository, grounded in
+the "Additional Conditions for this Windows binary build" section of
+CPython's LICENSE.txt. It was not found, so this placeholder was written in
+its place to keep the gap visible.
 
-Microsoft does not ship a licence text alongside these DLLs, so it cannot be
-collected automatically. Before release, a human must replace this file with the
-"Microsoft Software License Terms" for the Microsoft Visual C++ Redistributable
-version actually shipped, obtained from the redistributable package or from
-Microsoft's Visual Studio licence terms page, and confirm the redistribution
-rights cover this product.
-
-Tracked as an open action in docs/reports/RELEASE-AUDIT-V1.md.
+Restore the authored notice from version control before release. The release
+audit reports this file as an open action for as long as it remains a
+placeholder.
 """
 
 

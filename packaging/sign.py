@@ -21,6 +21,13 @@ Two commands, because they are needed at different times by different people:
 
 ``verify`` is the one the release audit runs. On an unsigned build it reports UNSIGNED
 and fails, which is the correct state to report before a certificate exists — not a pass.
+
+``verify --expect unsigned`` exists for the V1 unsigned release path (Policy U,
+``docs/licensing/UNSIGNED-RELEASE-POLICY-V1.md``): it passes only when every first-party
+artefact is present and carries **no** signature — the declared release state. It fails
+if an artefact turns out to be signed, because an *unexpected* signature on a release
+that is documented as unsigned is a discrepancy someone must explain, not a bonus.
+Passing this check is **not** G-11: the success message says so explicitly.
 """
 
 from __future__ import annotations
@@ -108,12 +115,62 @@ def sign(paths: list[Path], *, thumbprint: str, timestamp_url: str) -> list[Outc
     return outcomes
 
 
-def verify(paths: list[Path]) -> list[Outcome]:
+#: The three states a signature check can find an artefact in. Classification is kept
+#: separate from judgement so the same observation serves both release policies.
+SIGNED_VALID = "SIGNED_VALID"
+UNSIGNED = "UNSIGNED"
+ERROR = "ERROR"
+
+
+@dataclass(frozen=True, slots=True)
+class SignatureState:
+    path: Path
+    state: str
+    detail: str
+
+
+def classify(output: str, returncode: int) -> str:
+    """What signtool's verdict on one file actually was."""
+    if "No signature found" in output:
+        return UNSIGNED
+    if returncode == 0:
+        return SIGNED_VALID
+    return ERROR
+
+
+def assess(states: list[SignatureState], expect: str) -> list[Outcome]:
+    """Judge observed signature states against the declared release policy.
+
+    ``expect="signed"`` is gate G-11: every artefact must carry a valid signature.
+    ``expect="unsigned"`` is Policy U: every artefact must carry none — a signed
+    artefact under the unsigned policy is a failure, because the release documentation
+    would then be describing a different file than the one shipping.
+    """
+    outcomes: list[Outcome] = []
+    for observed in states:
+        if expect == "signed":
+            ok = observed.state == SIGNED_VALID
+            detail = observed.detail
+        else:
+            ok = observed.state == UNSIGNED
+            if observed.state == UNSIGNED:
+                detail = "UNSIGNED (as declared by Policy U)"
+            elif observed.state == SIGNED_VALID:
+                detail = "SIGNED — unexpected under the declared unsigned release state"
+            else:
+                detail = observed.detail
+        outcomes.append(Outcome(observed.path, ok, detail))
+    return outcomes
+
+
+def inspect_signatures(paths: list[Path]) -> list[SignatureState]:
     signtool = find_signtool()
     if signtool is None:
-        return [Outcome(Path("signtool"), False, "signtool.exe not found; install the Windows SDK")]
+        return [
+            SignatureState(Path("signtool"), ERROR, "signtool.exe not found; install the Windows SDK")
+        ]
 
-    outcomes: list[Outcome] = []
+    states: list[SignatureState] = []
     for path in paths:
         result = subprocess.run(
             [str(signtool), "verify", "/pa", "/v", str(path)],
@@ -122,9 +179,14 @@ def verify(paths: list[Path]) -> list[Outcome]:
             check=False,
         )
         output = (result.stdout + result.stderr).strip()
-        detail = "UNSIGNED" if "No signature found" in output else output.splitlines()[-1:][0] if output else ""
-        outcomes.append(Outcome(path, result.returncode == 0, detail))
-    return outcomes
+        state = classify(output, result.returncode)
+        detail = "UNSIGNED" if state == UNSIGNED else output.splitlines()[-1:][0] if output else ""
+        states.append(SignatureState(path, state, detail))
+    return states
+
+
+def verify(paths: list[Path], *, expect: str = "signed") -> list[Outcome]:
+    return assess(inspect_signatures(paths), expect)
 
 
 def main() -> int:
@@ -137,6 +199,16 @@ def main() -> int:
     )
     parser.add_argument("--timestamp-url", default=DEFAULT_TIMESTAMP_URL)
     parser.add_argument("--include-third-party", action="store_true")
+    parser.add_argument(
+        "--expect",
+        choices=["signed", "unsigned"],
+        default="signed",
+        help=(
+            "verify only: the declared release state to check against. 'signed' is gate "
+            "G-11 (default). 'unsigned' is Policy U — every artefact must be present and "
+            "carry no signature; see docs/licensing/UNSIGNED-RELEASE-POLICY-V1.md."
+        ),
+    )
     args = parser.parse_args()
 
     paths = first_party_artefacts()
@@ -158,13 +230,30 @@ def main() -> int:
             return 2
         outcomes = sign(paths, thumbprint=args.thumbprint, timestamp_url=args.timestamp_url)
     else:
-        outcomes = verify(paths)
+        outcomes = verify(paths, expect=args.expect)
 
     for outcome in outcomes:
         mark = "OK  " if outcome.ok else "FAIL"
         print(f"  [{mark}] {outcome.path.name}: {outcome.detail}")
 
     failed = [o for o in outcomes if not o.ok]
+    if args.action == "verify" and args.expect == "unsigned":
+        if failed:
+            print(
+                f"\nPOLICY U NOT SATISFIED: {len(failed)} artefact(s) do not match the "
+                "declared unsigned release state. A signed or unverifiable artefact under "
+                "an unsigned release declaration must be explained before anything ships.",
+                file=sys.stderr,
+            )
+            return 1
+        print(
+            f"\nPolicy U verified: all {len(outcomes)} artefact(s) present and unsigned, "
+            "as declared. This is NOT a signing pass — gate G-11 remains OPEN, and the "
+            "release must carry the unsigned-installer disclosure "
+            "(docs/licensing/UNSIGNED-RELEASE-POLICY-V1.md §4)."
+        )
+        return 0
+
     if failed:
         print(
             f"\nG-11 NOT SATISFIED: {len(failed)} artefact(s) are unsigned or failed "

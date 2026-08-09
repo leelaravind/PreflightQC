@@ -124,9 +124,11 @@ BUNDLED: tuple[BundledComponent, ...] = (
         version="14.x",
         licence="Microsoft Redistributable",
         notice=(
-            "Microsoft Visual C++ runtime components, redistributed under the "
-            "Microsoft Software License Terms accompanying the Visual Studio "
-            "redistributable package."
+            "Microsoft Visual C++ runtime components (Microsoft Distributable Code, "
+            "copyright Microsoft Corporation), shipped unmodified as supplied by the "
+            "python.org CPython distribution and the Qt for Python wheels. "
+            "Redistribution conditions: licenses/MS-VC-Redistributable.txt and the "
+            "Additional Conditions section of licenses/CPython-LICENSE.txt."
         ),
         patterns=(
             "_internal/VCRUNTIME140*.dll",

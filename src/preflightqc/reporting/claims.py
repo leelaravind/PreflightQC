@@ -47,7 +47,46 @@ FORBIDDEN_CLAIMS: tuple[str, ...] = (
 )
 
 
+#: Words that flip a forbidden phrase into the disclaimer we are required to make.
+#:
+#: The EULA has to say the software is *"not affiliated with, endorsed by, or certified
+#: by any platform"* — the required disclaimer contains the forbidden phrase. A scanner
+#: that cannot tell an assertion from its negation would flag that sentence, and the
+#: obvious way to make it pass would be to delete the disclaimer. So negation is
+#: recognised, narrowly and within the same sentence.
+_NEGATIONS: tuple[str, ...] = ("not", "never", "no", "nor", "cannot", "isn't", "aren't")
+
+#: How far back to look for a negation. Long enough for "is not affiliated with,
+#: endorsed by, or certified by", short enough not to reach the previous clause.
+_NEGATION_WINDOW = 80
+
+
+def _is_negated(lowered: str, position: int) -> bool:
+    sentence_start = max(
+        lowered.rfind(". ", 0, position),
+        lowered.rfind(".\n", 0, position),
+        lowered.rfind("\n\n", 0, position),
+    )
+    start = max(position - _NEGATION_WINDOW, sentence_start + 1, 0)
+    # Whitespace is normalised because these documents are hard-wrapped: "is not\n
+    # affiliated" must read the same as "is not affiliated".
+    window = " ".join(lowered[start:position].split())
+    return any(f" {word} " in f" {window} " for word in _NEGATIONS)
+
+
 def contains_forbidden_claim(text: str) -> tuple[str, ...]:
-    """Return any forbidden phrases found in the text. Empty means clean."""
+    """Return any forbidden phrases asserted in the text. Empty means clean.
+
+    An occurrence that is negated in the same sentence is not a claim — it is the
+    disclaimer the specification requires.
+    """
     lowered = text.lower()
-    return tuple(phrase for phrase in FORBIDDEN_CLAIMS if phrase in lowered)
+    found: list[str] = []
+    for phrase in FORBIDDEN_CLAIMS:
+        position = lowered.find(phrase)
+        while position != -1:
+            if not _is_negated(lowered, position):
+                found.append(phrase)
+                break
+            position = lowered.find(phrase, position + 1)
+    return tuple(found)

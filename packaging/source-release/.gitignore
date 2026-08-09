@@ -1,0 +1,7 @@
+# The two source archives are NOT committed — same policy as third-party/source/:
+# they are ~17 MB of upstream code, reproducible byte-for-byte by
+# tools/fetch_corresponding_source.py (git archive is deterministic), and their
+# expected SHA-256 hashes are recorded in SHA256SUMS and packaging/binaries.lock.json.
+# Everything else in this directory (README, SHA256SUMS, licence texts, configure
+# line) is small, first-party or licence text, and is tracked.
+*.tar.gz

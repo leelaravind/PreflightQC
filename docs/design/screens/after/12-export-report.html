@@ -1,0 +1,974 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PreflightQC report — Instagram Reels</title>
+<style>
+  :root {
+    --fail: #b3261e;
+    --warn: #8a5a00;
+    --pass: #1c6b3c;
+    --info: #40484e;
+    --unknown: #5a4b7c;
+    --line: #d7dbdf;
+    --muted: #5c666e;
+    --bg: #ffffff;
+    --fg: #16191c;
+    --panel: #f6f8f9;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 2rem 1.5rem 4rem;
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.55 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    max-width: 72rem; margin-inline: auto;
+  }
+  h1 { font-size: 1.6rem; margin: 0 0 .25rem; }
+  h2 { font-size: 1.15rem; margin: 2.5rem 0 .75rem; padding-bottom: .3rem; border-bottom: 2px solid var(--line); }
+  h3 { font-size: 1rem; margin: 0; font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; }
+  p { margin: .4rem 0; }
+  .muted { color: var(--muted); font-size: .875rem; }
+  .meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: .35rem 1.5rem; margin: 1rem 0; }
+  .meta div { font-size: .875rem; }
+  .meta dt { color: var(--muted); display: inline; }
+  .meta dd { display: inline; margin: 0; font-weight: 600; }
+  .totals { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0; }
+  .chip { border: 1px solid var(--line); border-radius: 4px; padding: .5rem .85rem; min-width: 6.5rem; background: var(--panel); }
+  .chip b { display: block; font-size: 1.35rem; line-height: 1.2; }
+  .chip span { font-size: .75rem; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+  .banner { border-left: 4px solid var(--warn); background: #fff8e8; padding: .75rem 1rem; margin: 1rem 0; }
+  .banner.note { border-left-color: var(--info); background: var(--panel); }
+  .file { border: 1px solid var(--line); border-radius: 6px; margin: 1rem 0; overflow: hidden; break-inside: avoid; }
+  .file > header { display: flex; align-items: baseline; gap: .75rem; padding: .7rem 1rem; background: var(--panel); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .file > header .path { font-size: .75rem; color: var(--muted); word-break: break-all; flex-basis: 100%; }
+  .badge { font-size: .7rem; font-weight: 700; letter-spacing: .05em; padding: .2rem .5rem; border-radius: 3px; color: #fff; white-space: nowrap; }
+  .badge.FAIL { background: var(--fail); }
+  .badge.WARN { background: var(--warn); }
+  .badge.PASS { background: var(--pass); }
+  .badge.INFO { background: var(--info); }
+  .badge.UNKNOWN { background: var(--unknown); }
+  .badge.NOT_INSPECTED, .badge.NOT_APPLICABLE { background: var(--muted); }
+  table { width: 100%; border-collapse: collapse; font-size: .875rem; }
+  th, td { text-align: left; padding: .5rem .75rem; border-top: 1px solid var(--line); vertical-align: top; }
+  th { font-size: .72rem; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); background: #fbfcfc; }
+  td.sev { white-space: nowrap; width: 1%; }
+  .detected { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; font-size: .8rem; }
+  .src { font-size: .75rem; color: var(--muted); word-break: break-all; }
+  footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--line); font-size: .8rem; color: var(--muted); }
+  ul.caveats { margin: .4rem 0 0; padding-left: 1.1rem; font-size: .85rem; color: var(--muted); }
+  @media print {
+    body { padding: 0; font-size: 11pt; max-width: none; }
+    .file, tr { break-inside: avoid; }
+    h2 { break-after: avoid; }
+  }
+</style>
+
+<h1>PreflightQC report</h1>
+<p class="muted">Instagram Reels — Meta / Instagram</p>
+
+
+<div class="meta">
+  <div><dt>PreflightQC version:</dt> <dd>0.1.0-dev</dd></div>
+  <div><dt>Scan started:</dt> <dd>2026-08-09T18:46:34+01:00</dd></div>
+  <div><dt>Scan finished:</dt> <dd>2026-08-09T18:46:35+01:00</dd></div>
+  <div><dt>Timezone:</dt> <dd>GMT Daylight Time</dd></div>
+  <div><dt>Preset id:</dt> <dd>ig_reels</dd></div>
+  <div><dt>Rule-set version:</dt> <dd>2026-08-09.1</dd></div>
+  <div><dt>Rules last verified:</dt> <dd>2026-08-09</dd></div>
+  <div><dt>ffprobe:</dt> <dd>n8.1.2-34-g9b6c8969e0-20260809</dd></div>
+  <div><dt>mediainfo:</dt> <dd>26.05</dd></div>
+</div>
+
+<div class="totals">
+  <div class="chip"><b>1</b><span>PASS</span></div>
+  <div class="chip"><b>2</b><span>WARN</span></div>
+  <div class="chip"><b>3</b><span>FAIL</span></div>
+  <div class="chip"><b>1</b><span>NOT INSPECTED</span></div>
+</div>
+
+<div class="banner note">
+  <strong>About this preset</strong>
+  <ul class="caveats"><li>These rules are scoped to the API-publishing path. Organic in-app posting and paid placements tolerate more.</li><li>The Reels-tab eligibility window (5-90 s, 9:16) is a discovery condition, not an acceptance requirement, and is reported as a warning only.</li><li>Meta publishes no audio loudness target and no HDR/colour-space input requirement. Both are reported as unknown rather than guessed.</li><li>Closed GOP and edit-list absence are documented API requirements, but verifying them needs packet- and atom-level inspection beyond what PreflightQC V1 measures.</li></ul>
+</div>
+
+<h2>Files</h2>
+<section class="file">
+  <header>
+    <span class="badge WARN">WARN</span>
+    <h3>01_h264_1080x1920_30_aac.mp4</h3>
+    <span class="muted">17 checks passed</span>
+    <span class="path">F:\PreflightQC\spikes\samples\01_h264_1080x1920_30_aac.mp4</span>
+  </header>
+
+  <table>
+    <thead><tr>
+      <th>Severity</th><th>Property</th><th>Detected</th><th>Expected</th><th>Explanation</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td class="sev"><span class="badge WARN">WARN</span></td>
+        <td>Duration<div class="muted">ig_reels.reels_tab_eligibility_duration</div></td>
+        <td class="detected">4.0 s</td>
+        <td class="detected">for eligibility: between 5 and 90 s</td>
+        <td>
+          This affects discovery in the Reels tab only. It is not an upload requirement and does not prevent publishing.
+<div class="muted">Read from ffprobe:format.duration</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence MEDIUM)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Closed GOP<div class="muted">ig_reels.closed_gop</div></td>
+        <td class="detected">could not be determined (closed-GOP verification requires packet-level analysis; not measured by PreflightQC V1)</td>
+        <td class="detected">True</td>
+        <td>
+          The API documents a closed-GOP requirement.
+<div class="muted">Not evaluated: Verifying GOP structure needs packet-level analysis, which is beyond what PreflightQC V1 measures.</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Edit lists present<div class="muted">ig_reels.edit_lists</div></td>
+        <td class="detected">could not be determined (edit-list presence requires atom-level inspection; not determined by PreflightQC V1)</td>
+        <td class="detected">required: False</td>
+        <td>
+          The container must contain no edit lists.
+<div class="muted">Not evaluated: edit-list presence requires atom-level inspection; not determined by PreflightQC V1</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Transfer characteristics<div class="muted">ig_reels.hdr_colour_space</div></td>
+        <td class="detected">could not be determined (the stream carries no colour description)</td>
+        <td class="detected">present</td>
+        <td>
+          Colour transfer characteristics, reported for information.
+<div class="muted">Not evaluated: Meta accepts HDR uploads and tone-maps them server-side, but publishes no creator-facing HDR or colour-space input requirement. PreflightQC therefore reports the value without judging it.</div>          <div class="src">Engineering at Meta, Bringing HDR video to Reels — https://engineering.fb.com/2023/07/17/video-engineering/hdr-video-reels-meta/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Duration<div class="muted">ig_reels.in_app_editor_duration</div></td>
+        <td class="detected">4.0 s</td>
+        <td class="detected">at most 180 s</td>
+        <td>
+          The in-app Reels editor supports creating videos up to 3 minutes.
+<div class="muted">Not evaluated: This is a different surface from the publishing API, whose limit is 15 minutes. Both figures are reported; neither is silently preferred.</div><div class="muted">Read from ffprobe:format.duration</div>          <div class="src">About Instagram, Reels feature page — https://about.instagram.com/features/reels (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</section>
+<section class="file">
+  <header>
+    <span class="badge FAIL">FAIL</span>
+    <h3>03_h264_1920x1080_25.mp4</h3>
+    <span class="muted">14 checks passed</span>
+    <span class="path">F:\PreflightQC\spikes\samples\03_h264_1920x1080_25.mp4</span>
+  </header>
+
+  <table>
+    <thead><tr>
+      <th>Severity</th><th>Property</th><th>Detected</th><th>Expected</th><th>Explanation</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td class="sev"><span class="badge FAIL">FAIL</span></td>
+        <td>Fast start (moov at front)<div class="muted">ig_reels.faststart</div></td>
+        <td class="detected">False</td>
+        <td class="detected">required: True</td>
+        <td>
+          The moov atom must be at the front of the file (fast start).
+<div class="muted">Read from mediainfo:General.IsStreamable</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge WARN">WARN</span></td>
+        <td>Display aspect ratio<div class="muted">ig_reels.aspect_ratio_recommended</div></td>
+        <td class="detected">16/9</td>
+        <td class="detected">recommended: 0.5625</td>
+        <td>
+          This is a recommendation, not an upload requirement. A Reel with a different aspect ratio can still be published.
+<div class="muted">Read from computed:video.display_aspect_ratio (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge WARN">WARN</span></td>
+        <td>Duration<div class="muted">ig_reels.reels_tab_eligibility_duration</div></td>
+        <td class="detected">3.0 s</td>
+        <td class="detected">for eligibility: between 5 and 90 s</td>
+        <td>
+          This affects discovery in the Reels tab only. It is not an upload requirement and does not prevent publishing.
+<div class="muted">Read from ffprobe:format.duration</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence MEDIUM)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge WARN">WARN</span></td>
+        <td>Display aspect ratio<div class="muted">ig_reels.reels_tab_eligibility_ratio</div></td>
+        <td class="detected">16/9</td>
+        <td class="detected">for eligibility: 0.5625</td>
+        <td>
+          This affects discovery in the Reels tab only. It is not an upload requirement and does not prevent publishing.
+<div class="muted">Read from computed:video.display_aspect_ratio (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence MEDIUM)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Closed GOP<div class="muted">ig_reels.closed_gop</div></td>
+        <td class="detected">could not be determined (closed-GOP verification requires packet-level analysis; not measured by PreflightQC V1)</td>
+        <td class="detected">True</td>
+        <td>
+          The API documents a closed-GOP requirement.
+<div class="muted">Not evaluated: Verifying GOP structure needs packet-level analysis, which is beyond what PreflightQC V1 measures.</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Edit lists present<div class="muted">ig_reels.edit_lists</div></td>
+        <td class="detected">could not be determined (edit-list presence requires atom-level inspection; not determined by PreflightQC V1)</td>
+        <td class="detected">required: False</td>
+        <td>
+          The container must contain no edit lists.
+<div class="muted">Not evaluated: edit-list presence requires atom-level inspection; not determined by PreflightQC V1</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Transfer characteristics<div class="muted">ig_reels.hdr_colour_space</div></td>
+        <td class="detected">could not be determined (the stream carries no colour description)</td>
+        <td class="detected">present</td>
+        <td>
+          Colour transfer characteristics, reported for information.
+<div class="muted">Not evaluated: Meta accepts HDR uploads and tone-maps them server-side, but publishes no creator-facing HDR or colour-space input requirement. PreflightQC therefore reports the value without judging it.</div>          <div class="src">Engineering at Meta, Bringing HDR video to Reels — https://engineering.fb.com/2023/07/17/video-engineering/hdr-video-reels-meta/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Duration<div class="muted">ig_reels.in_app_editor_duration</div></td>
+        <td class="detected">3.0 s</td>
+        <td class="detected">at most 180 s</td>
+        <td>
+          The in-app Reels editor supports creating videos up to 3 minutes.
+<div class="muted">Not evaluated: This is a different surface from the publishing API, whose limit is 15 minutes. Both figures are reported; neither is silently preferred.</div><div class="muted">Read from ffprobe:format.duration</div>          <div class="src">About Instagram, Reels feature page — https://about.instagram.com/features/reels (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</section>
+<section class="file">
+  <header>
+    <span class="badge WARN">WARN</span>
+    <h3>02_h264_no_audio.mp4</h3>
+    <span class="muted">13 checks passed</span>
+    <span class="path">F:\PreflightQC\spikes\samples\02_h264_no_audio.mp4</span>
+  </header>
+
+  <table>
+    <thead><tr>
+      <th>Severity</th><th>Property</th><th>Detected</th><th>Expected</th><th>Explanation</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td class="sev"><span class="badge WARN">WARN</span></td>
+        <td>Duration<div class="muted">ig_reels.reels_tab_eligibility_duration</div></td>
+        <td class="detected">3.0 s</td>
+        <td class="detected">for eligibility: between 5 and 90 s</td>
+        <td>
+          This affects discovery in the Reels tab only. It is not an upload requirement and does not prevent publishing.
+<div class="muted">Read from ffprobe:format.duration</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence MEDIUM)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Audio bitrate<div class="muted">ig_reels.audio_bitrate</div></td>
+        <td class="detected">could not be determined (the file has no audio stream)</td>
+        <td class="detected">recommended: at least 128000 bit/s</td>
+        <td>
+          An audio bitrate of 128 kbps is recommended.
+<div class="muted">Not evaluated: the file has no audio stream</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Audio channels<div class="muted">ig_reels.audio_channels</div></td>
+        <td class="detected">could not be determined (the file has no audio stream)</td>
+        <td class="detected">required: between 1 and 2</td>
+        <td>
+          Audio must be mono or stereo (1 or 2 channels).
+<div class="muted">Not evaluated: the file has no audio stream</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Audio codec<div class="muted">ig_reels.audio_codec</div></td>
+        <td class="detected">could not be determined (the file has no audio stream)</td>
+        <td class="detected">required: aac</td>
+        <td>
+          Where an audio track is present it must be AAC.
+<div class="muted">Not evaluated: the file has no audio stream</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Audio sample rate<div class="muted">ig_reels.audio_sample_rate</div></td>
+        <td class="detected">could not be determined (the file has no audio stream)</td>
+        <td class="detected">required: at most 48000 Hz</td>
+        <td>
+          Audio sample rate must not exceed 48 kHz.
+<div class="muted">Not evaluated: the file has no audio stream</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Closed GOP<div class="muted">ig_reels.closed_gop</div></td>
+        <td class="detected">could not be determined (closed-GOP verification requires packet-level analysis; not measured by PreflightQC V1)</td>
+        <td class="detected">True</td>
+        <td>
+          The API documents a closed-GOP requirement.
+<div class="muted">Not evaluated: Verifying GOP structure needs packet-level analysis, which is beyond what PreflightQC V1 measures.</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Edit lists present<div class="muted">ig_reels.edit_lists</div></td>
+        <td class="detected">could not be determined (edit-list presence requires atom-level inspection; not determined by PreflightQC V1)</td>
+        <td class="detected">required: False</td>
+        <td>
+          The container must contain no edit lists.
+<div class="muted">Not evaluated: edit-list presence requires atom-level inspection; not determined by PreflightQC V1</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Transfer characteristics<div class="muted">ig_reels.hdr_colour_space</div></td>
+        <td class="detected">could not be determined (the stream carries no colour description)</td>
+        <td class="detected">present</td>
+        <td>
+          Colour transfer characteristics, reported for information.
+<div class="muted">Not evaluated: Meta accepts HDR uploads and tone-maps them server-side, but publishes no creator-facing HDR or colour-space input requirement. PreflightQC therefore reports the value without judging it.</div>          <div class="src">Engineering at Meta, Bringing HDR video to Reels — https://engineering.fb.com/2023/07/17/video-engineering/hdr-video-reels-meta/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Duration<div class="muted">ig_reels.in_app_editor_duration</div></td>
+        <td class="detected">3.0 s</td>
+        <td class="detected">at most 180 s</td>
+        <td>
+          The in-app Reels editor supports creating videos up to 3 minutes.
+<div class="muted">Not evaluated: This is a different surface from the publishing API, whose limit is 15 minutes. Both figures are reported; neither is silently preferred.</div><div class="muted">Read from ffprobe:format.duration</div>          <div class="src">About Instagram, Reels feature page — https://about.instagram.com/features/reels (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</section>
+<section class="file">
+  <header>
+    <span class="badge FAIL">FAIL</span>
+    <h3>04_anamorphic_sar43.mp4</h3>
+    <span class="muted">10 checks passed</span>
+    <span class="path">F:\PreflightQC\spikes\samples\04_anamorphic_sar43.mp4</span>
+  </header>
+
+  <table>
+    <thead><tr>
+      <th>Severity</th><th>Property</th><th>Detected</th><th>Expected</th><th>Explanation</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td class="sev"><span class="badge FAIL">FAIL</span></td>
+        <td>Fast start (moov at front)<div class="muted">ig_reels.faststart</div></td>
+        <td class="detected">False</td>
+        <td class="detected">required: True</td>
+        <td>
+          The moov atom must be at the front of the file (fast start).
+<div class="muted">Read from mediainfo:General.IsStreamable</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge WARN">WARN</span></td>
+        <td>Display aspect ratio<div class="muted">ig_reels.aspect_ratio_recommended</div></td>
+        <td class="detected">16/9</td>
+        <td class="detected">recommended: 0.5625</td>
+        <td>
+          This is a recommendation, not an upload requirement. A Reel with a different aspect ratio can still be published.
+<div class="muted">Read from computed:video.display_aspect_ratio (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge WARN">WARN</span></td>
+        <td>Duration<div class="muted">ig_reels.reels_tab_eligibility_duration</div></td>
+        <td class="detected">3.0 s</td>
+        <td class="detected">for eligibility: between 5 and 90 s</td>
+        <td>
+          This affects discovery in the Reels tab only. It is not an upload requirement and does not prevent publishing.
+<div class="muted">Read from ffprobe:format.duration</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence MEDIUM)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge WARN">WARN</span></td>
+        <td>Display aspect ratio<div class="muted">ig_reels.reels_tab_eligibility_ratio</div></td>
+        <td class="detected">16/9</td>
+        <td class="detected">for eligibility: 0.5625</td>
+        <td>
+          This affects discovery in the Reels tab only. It is not an upload requirement and does not prevent publishing.
+<div class="muted">Read from computed:video.display_aspect_ratio (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence MEDIUM)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Audio bitrate<div class="muted">ig_reels.audio_bitrate</div></td>
+        <td class="detected">could not be determined (the file has no audio stream)</td>
+        <td class="detected">recommended: at least 128000 bit/s</td>
+        <td>
+          An audio bitrate of 128 kbps is recommended.
+<div class="muted">Not evaluated: the file has no audio stream</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Audio channels<div class="muted">ig_reels.audio_channels</div></td>
+        <td class="detected">could not be determined (the file has no audio stream)</td>
+        <td class="detected">required: between 1 and 2</td>
+        <td>
+          Audio must be mono or stereo (1 or 2 channels).
+<div class="muted">Not evaluated: the file has no audio stream</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Audio codec<div class="muted">ig_reels.audio_codec</div></td>
+        <td class="detected">could not be determined (the file has no audio stream)</td>
+        <td class="detected">required: aac</td>
+        <td>
+          Where an audio track is present it must be AAC.
+<div class="muted">Not evaluated: the file has no audio stream</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Audio sample rate<div class="muted">ig_reels.audio_sample_rate</div></td>
+        <td class="detected">could not be determined (the file has no audio stream)</td>
+        <td class="detected">required: at most 48000 Hz</td>
+        <td>
+          Audio sample rate must not exceed 48 kHz.
+<div class="muted">Not evaluated: the file has no audio stream</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Closed GOP<div class="muted">ig_reels.closed_gop</div></td>
+        <td class="detected">could not be determined (closed-GOP verification requires packet-level analysis; not measured by PreflightQC V1)</td>
+        <td class="detected">True</td>
+        <td>
+          The API documents a closed-GOP requirement.
+<div class="muted">Not evaluated: Verifying GOP structure needs packet-level analysis, which is beyond what PreflightQC V1 measures.</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Edit lists present<div class="muted">ig_reels.edit_lists</div></td>
+        <td class="detected">could not be determined (edit-list presence requires atom-level inspection; not determined by PreflightQC V1)</td>
+        <td class="detected">required: False</td>
+        <td>
+          The container must contain no edit lists.
+<div class="muted">Not evaluated: edit-list presence requires atom-level inspection; not determined by PreflightQC V1</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Transfer characteristics<div class="muted">ig_reels.hdr_colour_space</div></td>
+        <td class="detected">could not be determined (the stream carries no colour description)</td>
+        <td class="detected">present</td>
+        <td>
+          Colour transfer characteristics, reported for information.
+<div class="muted">Not evaluated: Meta accepts HDR uploads and tone-maps them server-side, but publishes no creator-facing HDR or colour-space input requirement. PreflightQC therefore reports the value without judging it.</div>          <div class="src">Engineering at Meta, Bringing HDR video to Reels — https://engineering.fb.com/2023/07/17/video-engineering/hdr-video-reels-meta/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Duration<div class="muted">ig_reels.in_app_editor_duration</div></td>
+        <td class="detected">3.0 s</td>
+        <td class="detected">at most 180 s</td>
+        <td>
+          The in-app Reels editor supports creating videos up to 3 minutes.
+<div class="muted">Not evaluated: This is a different surface from the publishing API, whose limit is 15 minutes. Both figures are reported; neither is silently preferred.</div><div class="muted">Read from ffprobe:format.duration</div>          <div class="src">About Instagram, Reels feature page — https://about.instagram.com/features/reels (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</section>
+<section class="file">
+  <header>
+    <span class="badge FAIL">FAIL</span>
+    <h3>94_corrupt_moov.mp4</h3>
+    <span class="muted">1 checks passed</span>
+    <span class="path">F:\PreflightQC\spikes\samples\94_corrupt_moov.mp4</span>
+  </header>
+
+  <table>
+    <thead><tr>
+      <th>Severity</th><th>Property</th><th>Detected</th><th>Expected</th><th>Explanation</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td class="sev"><span class="badge FAIL">FAIL</span></td>
+        <td>Fast start (moov at front)<div class="muted">ig_reels.faststart</div></td>
+        <td class="detected">False</td>
+        <td class="detected">required: True</td>
+        <td>
+          The moov atom must be at the front of the file (fast start).
+<div class="muted">Read from mediainfo:General.IsStreamable</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Display aspect ratio<div class="muted">ig_reels.aspect_ratio_range</div></td>
+        <td class="detected">could not be determined (the file has no video stream)</td>
+        <td class="detected">required: between 0.01 and 10</td>
+        <td>
+          Aspect ratio must be between 0.01:1 and 10:1.
+<div class="muted">Not evaluated: the file has no video stream</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Display aspect ratio<div class="muted">ig_reels.aspect_ratio_recommended</div></td>
+        <td class="detected">could not be determined (the file has no video stream)</td>
+        <td class="detected">recommended: 0.5625</td>
+        <td>
+          A 9:16 aspect ratio is recommended for Reels.
+<div class="muted">Not evaluated: the file has no video stream</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Audio bitrate<div class="muted">ig_reels.audio_bitrate</div></td>
+        <td class="detected">could not be determined (the file has no audio stream)</td>
+        <td class="detected">recommended: at least 128000 bit/s</td>
+        <td>
+          An audio bitrate of 128 kbps is recommended.
+<div class="muted">Not evaluated: the file has no audio stream</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Audio channels<div class="muted">ig_reels.audio_channels</div></td>
+        <td class="detected">could not be determined (the file has no audio stream)</td>
+        <td class="detected">required: between 1 and 2</td>
+        <td>
+          Audio must be mono or stereo (1 or 2 channels).
+<div class="muted">Not evaluated: the file has no audio stream</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Audio codec<div class="muted">ig_reels.audio_codec</div></td>
+        <td class="detected">could not be determined (the file has no audio stream)</td>
+        <td class="detected">required: aac</td>
+        <td>
+          Where an audio track is present it must be AAC.
+<div class="muted">Not evaluated: the file has no audio stream</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Audio sample rate<div class="muted">ig_reels.audio_sample_rate</div></td>
+        <td class="detected">could not be determined (the file has no audio stream)</td>
+        <td class="detected">required: at most 48000 Hz</td>
+        <td>
+          Audio sample rate must not exceed 48 kHz.
+<div class="muted">Not evaluated: the file has no audio stream</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Chroma subsampling<div class="muted">ig_reels.chroma_subsampling</div></td>
+        <td class="detected">could not be determined (the file has no video stream)</td>
+        <td class="detected">required: 4:2:0</td>
+        <td>
+          Chroma subsampling must be 4:2:0.
+<div class="muted">Not evaluated: the file has no video stream</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Closed GOP<div class="muted">ig_reels.closed_gop</div></td>
+        <td class="detected">could not be determined (the file has no video stream)</td>
+        <td class="detected">True</td>
+        <td>
+          The API documents a closed-GOP requirement.
+<div class="muted">Not evaluated: Verifying GOP structure needs packet-level analysis, which is beyond what PreflightQC V1 measures.</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Container<div class="muted">ig_reels.container</div></td>
+        <td class="detected">could not be determined (no inspector reported this property)</td>
+        <td class="detected">required: mov or mp4</td>
+        <td>
+          The Content Publishing API accepts MOV or MP4 (MPEG-4 Part 14) containers only.
+<div class="muted">Not evaluated: no inspector reported this property</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Duration<div class="muted">ig_reels.duration</div></td>
+        <td class="detected">could not be determined (no inspector reported this property)</td>
+        <td class="detected">required: between 3 and 900 s</td>
+        <td>
+          Duration must be at least 3 seconds and at most 15 minutes.
+<div class="muted">Not evaluated: no inspector reported this property</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Edit lists present<div class="muted">ig_reels.edit_lists</div></td>
+        <td class="detected">could not be determined (edit-list presence requires atom-level inspection; not determined by PreflightQC V1)</td>
+        <td class="detected">required: False</td>
+        <td>
+          The container must contain no edit lists.
+<div class="muted">Not evaluated: edit-list presence requires atom-level inspection; not determined by PreflightQC V1</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Frame rate<div class="muted">ig_reels.frame_rate</div></td>
+        <td class="detected">could not be determined (the file has no video stream)</td>
+        <td class="detected">required: between 23 and 60 fps</td>
+        <td>
+          Frame rate must be between 23 and 60 FPS.
+<div class="muted">Not evaluated: the file has no video stream</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Transfer characteristics<div class="muted">ig_reels.hdr_colour_space</div></td>
+        <td class="detected">could not be determined (the file has no video stream)</td>
+        <td class="detected">present</td>
+        <td>
+          Colour transfer characteristics, reported for information.
+<div class="muted">Not evaluated: Meta accepts HDR uploads and tone-maps them server-side, but publishes no creator-facing HDR or colour-space input requirement. PreflightQC therefore reports the value without judging it.</div>          <div class="src">Engineering at Meta, Bringing HDR video to Reels — https://engineering.fb.com/2023/07/17/video-engineering/hdr-video-reels-meta/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Duration<div class="muted">ig_reels.in_app_editor_duration</div></td>
+        <td class="detected">could not be determined (no inspector reported this property)</td>
+        <td class="detected">at most 180 s</td>
+        <td>
+          The in-app Reels editor supports creating videos up to 3 minutes.
+<div class="muted">Not evaluated: This is a different surface from the publishing API, whose limit is 15 minutes. Both figures are reported; neither is silently preferred.</div>          <div class="src">About Instagram, Reels feature page — https://about.instagram.com/features/reels (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Displayed width<div class="muted">ig_reels.max_width</div></td>
+        <td class="detected">could not be determined (the file has no video stream)</td>
+        <td class="detected">required: at most 1920 px</td>
+        <td>
+          Maximum 1920 horizontal pixels.
+<div class="muted">Not evaluated: the file has no video stream</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Duration<div class="muted">ig_reels.reels_tab_eligibility_duration</div></td>
+        <td class="detected">could not be determined (no inspector reported this property)</td>
+        <td class="detected">for eligibility: between 5 and 90 s</td>
+        <td>
+          Only Reels between 5 and 90 seconds are eligible to appear in the Reels tab.
+<div class="muted">Not evaluated: no inspector reported this property</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence MEDIUM)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Display aspect ratio<div class="muted">ig_reels.reels_tab_eligibility_ratio</div></td>
+        <td class="detected">could not be determined (the file has no video stream)</td>
+        <td class="detected">for eligibility: 0.5625</td>
+        <td>
+          Only Reels with a 9:16 aspect ratio are eligible to appear in the Reels tab.
+<div class="muted">Not evaluated: the file has no video stream</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence MEDIUM)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Scan type<div class="muted">ig_reels.scan_type</div></td>
+        <td class="detected">could not be determined (the file has no video stream)</td>
+        <td class="detected">required: progressive</td>
+        <td>
+          The video must be progressive. Interlaced content is not accepted.
+<div class="muted">Not evaluated: the file has no video stream</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Video bitrate<div class="muted">ig_reels.video_bitrate</div></td>
+        <td class="detected">could not be determined (the file has no video stream)</td>
+        <td class="detected">required: at most 25000000 bit/s</td>
+        <td>
+          Video bitrate must not exceed 25 Mbps (VBR).
+<div class="muted">Not evaluated: the file has no video stream</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Video codec<div class="muted">ig_reels.video_codec</div></td>
+        <td class="detected">could not be determined (the file has no video stream)</td>
+        <td class="detected">required: h264 or hevc</td>
+        <td>
+          The video track must be encoded with HEVC or H.264.
+<div class="muted">Not evaluated: the file has no video stream</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</section>
+<section class="file">
+  <header>
+    <span class="badge PASS">PASS</span>
+    <h3>92_not_media.mp4</h3>
+    <span class="muted">1 checks passed</span>
+    <span class="path">F:\PreflightQC\spikes\samples\92_not_media.mp4</span>
+  </header>
+
+  <table>
+    <thead><tr>
+      <th>Severity</th><th>Property</th><th>Detected</th><th>Expected</th><th>Explanation</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Display aspect ratio<div class="muted">ig_reels.aspect_ratio_range</div></td>
+        <td class="detected">could not be determined (the file has no video stream)</td>
+        <td class="detected">required: between 0.01 and 10</td>
+        <td>
+          Aspect ratio must be between 0.01:1 and 10:1.
+<div class="muted">Not evaluated: the file has no video stream</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Display aspect ratio<div class="muted">ig_reels.aspect_ratio_recommended</div></td>
+        <td class="detected">could not be determined (the file has no video stream)</td>
+        <td class="detected">recommended: 0.5625</td>
+        <td>
+          A 9:16 aspect ratio is recommended for Reels.
+<div class="muted">Not evaluated: the file has no video stream</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Audio bitrate<div class="muted">ig_reels.audio_bitrate</div></td>
+        <td class="detected">could not be determined (the file has no audio stream)</td>
+        <td class="detected">recommended: at least 128000 bit/s</td>
+        <td>
+          An audio bitrate of 128 kbps is recommended.
+<div class="muted">Not evaluated: the file has no audio stream</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Audio channels<div class="muted">ig_reels.audio_channels</div></td>
+        <td class="detected">could not be determined (the file has no audio stream)</td>
+        <td class="detected">required: between 1 and 2</td>
+        <td>
+          Audio must be mono or stereo (1 or 2 channels).
+<div class="muted">Not evaluated: the file has no audio stream</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Audio codec<div class="muted">ig_reels.audio_codec</div></td>
+        <td class="detected">could not be determined (the file has no audio stream)</td>
+        <td class="detected">required: aac</td>
+        <td>
+          Where an audio track is present it must be AAC.
+<div class="muted">Not evaluated: the file has no audio stream</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Audio sample rate<div class="muted">ig_reels.audio_sample_rate</div></td>
+        <td class="detected">could not be determined (the file has no audio stream)</td>
+        <td class="detected">required: at most 48000 Hz</td>
+        <td>
+          Audio sample rate must not exceed 48 kHz.
+<div class="muted">Not evaluated: the file has no audio stream</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Chroma subsampling<div class="muted">ig_reels.chroma_subsampling</div></td>
+        <td class="detected">could not be determined (the file has no video stream)</td>
+        <td class="detected">required: 4:2:0</td>
+        <td>
+          Chroma subsampling must be 4:2:0.
+<div class="muted">Not evaluated: the file has no video stream</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Closed GOP<div class="muted">ig_reels.closed_gop</div></td>
+        <td class="detected">could not be determined (the file has no video stream)</td>
+        <td class="detected">True</td>
+        <td>
+          The API documents a closed-GOP requirement.
+<div class="muted">Not evaluated: Verifying GOP structure needs packet-level analysis, which is beyond what PreflightQC V1 measures.</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Container<div class="muted">ig_reels.container</div></td>
+        <td class="detected">could not be determined (no inspector reported this property)</td>
+        <td class="detected">required: mov or mp4</td>
+        <td>
+          The Content Publishing API accepts MOV or MP4 (MPEG-4 Part 14) containers only.
+<div class="muted">Not evaluated: no inspector reported this property</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Duration<div class="muted">ig_reels.duration</div></td>
+        <td class="detected">could not be determined (no inspector reported this property)</td>
+        <td class="detected">required: between 3 and 900 s</td>
+        <td>
+          Duration must be at least 3 seconds and at most 15 minutes.
+<div class="muted">Not evaluated: no inspector reported this property</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Edit lists present<div class="muted">ig_reels.edit_lists</div></td>
+        <td class="detected">could not be determined (edit-list presence requires atom-level inspection; not determined by PreflightQC V1)</td>
+        <td class="detected">required: False</td>
+        <td>
+          The container must contain no edit lists.
+<div class="muted">Not evaluated: edit-list presence requires atom-level inspection; not determined by PreflightQC V1</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Fast start (moov at front)<div class="muted">ig_reels.faststart</div></td>
+        <td class="detected">could not be determined (fast-start position requires atom-level inspection; not determined by PreflightQC V1)</td>
+        <td class="detected">required: True</td>
+        <td>
+          The moov atom must be at the front of the file (fast start).
+<div class="muted">Not evaluated: fast-start position requires atom-level inspection; not determined by PreflightQC V1</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Frame rate<div class="muted">ig_reels.frame_rate</div></td>
+        <td class="detected">could not be determined (the file has no video stream)</td>
+        <td class="detected">required: between 23 and 60 fps</td>
+        <td>
+          Frame rate must be between 23 and 60 FPS.
+<div class="muted">Not evaluated: the file has no video stream</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Transfer characteristics<div class="muted">ig_reels.hdr_colour_space</div></td>
+        <td class="detected">could not be determined (the file has no video stream)</td>
+        <td class="detected">present</td>
+        <td>
+          Colour transfer characteristics, reported for information.
+<div class="muted">Not evaluated: Meta accepts HDR uploads and tone-maps them server-side, but publishes no creator-facing HDR or colour-space input requirement. PreflightQC therefore reports the value without judging it.</div>          <div class="src">Engineering at Meta, Bringing HDR video to Reels — https://engineering.fb.com/2023/07/17/video-engineering/hdr-video-reels-meta/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Duration<div class="muted">ig_reels.in_app_editor_duration</div></td>
+        <td class="detected">could not be determined (no inspector reported this property)</td>
+        <td class="detected">at most 180 s</td>
+        <td>
+          The in-app Reels editor supports creating videos up to 3 minutes.
+<div class="muted">Not evaluated: This is a different surface from the publishing API, whose limit is 15 minutes. Both figures are reported; neither is silently preferred.</div>          <div class="src">About Instagram, Reels feature page — https://about.instagram.com/features/reels (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Displayed width<div class="muted">ig_reels.max_width</div></td>
+        <td class="detected">could not be determined (the file has no video stream)</td>
+        <td class="detected">required: at most 1920 px</td>
+        <td>
+          Maximum 1920 horizontal pixels.
+<div class="muted">Not evaluated: the file has no video stream</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Duration<div class="muted">ig_reels.reels_tab_eligibility_duration</div></td>
+        <td class="detected">could not be determined (no inspector reported this property)</td>
+        <td class="detected">for eligibility: between 5 and 90 s</td>
+        <td>
+          Only Reels between 5 and 90 seconds are eligible to appear in the Reels tab.
+<div class="muted">Not evaluated: no inspector reported this property</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence MEDIUM)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Display aspect ratio<div class="muted">ig_reels.reels_tab_eligibility_ratio</div></td>
+        <td class="detected">could not be determined (the file has no video stream)</td>
+        <td class="detected">for eligibility: 0.5625</td>
+        <td>
+          Only Reels with a 9:16 aspect ratio are eligible to appear in the Reels tab.
+<div class="muted">Not evaluated: the file has no video stream</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence MEDIUM)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Scan type<div class="muted">ig_reels.scan_type</div></td>
+        <td class="detected">could not be determined (the file has no video stream)</td>
+        <td class="detected">required: progressive</td>
+        <td>
+          The video must be progressive. Interlaced content is not accepted.
+<div class="muted">Not evaluated: the file has no video stream</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Video bitrate<div class="muted">ig_reels.video_bitrate</div></td>
+        <td class="detected">could not be determined (the file has no video stream)</td>
+        <td class="detected">required: at most 25000000 bit/s</td>
+        <td>
+          Video bitrate must not exceed 25 Mbps (VBR).
+<div class="muted">Not evaluated: the file has no video stream</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="sev"><span class="badge UNKNOWN">UNKNOWN</span></td>
+        <td>Video codec<div class="muted">ig_reels.video_codec</div></td>
+        <td class="detected">could not be determined (the file has no video stream)</td>
+        <td class="detected">required: h264 or hevc</td>
+        <td>
+          The video track must be encoded with HEVC or H.264.
+<div class="muted">Not evaluated: the file has no video stream</div>          <div class="src">IG User Media reference (Reel Specifications), Meta for Developers — https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-user/media/ (accessed 2026-08-09, confidence HIGH)</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</section>
+<section class="file">
+  <header>
+    <span class="badge NOT_INSPECTED">NOT INSPECTED</span>
+    <h3>99_removed_before_check.mp4</h3>
+    <span class="path">F:\PreflightQC\spikes\samples\99_removed_before_check.mp4</span>
+  </header>
+
+  <table><tr><td>
+    <strong>Not inspected — FILE_UNREADABLE.</strong> the file is no longer available
+<div class="muted">The file may have been moved, renamed or deleted since the batch started.</div>    <div class="muted">PreflightQC did not validate this file, so it has no verdict about it.</div>
+  </td></tr></table>
+
+</section>
+
+
+<footer>
+  <p><strong>Validated against the technical rules contained in the selected PreflightQC preset.</strong></p>
+  <p>PreflightQC inspects files only. No source video file was opened for writing, modified, moved or renamed.</p>
+  <p>PreflightQC reads file metadata; it does not watch the video. Platform specifications change without notice, so every rule carries the date its source was last verified. Where a platform documents nothing, PreflightQC reports UNKNOWN rather than guessing.</p>
+<p>Decimal bytes (1 MB = 1,000,000). Meta does not state binary or decimal; the decimal reading is the conservative one for a ceiling, so PreflightQC never passes a file Instagram would reject.</p></footer>

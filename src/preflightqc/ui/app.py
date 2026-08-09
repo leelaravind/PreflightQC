@@ -17,7 +17,7 @@ import sys
 
 from PySide6.QtWidgets import QApplication
 
-from preflightqc import __product_name__, __version__
+from preflightqc import __product_name__, __publisher__, __version__
 from preflightqc.platform.paths import ensure_user_dirs
 
 
@@ -96,7 +96,11 @@ def main() -> int:
     app = QApplication(sys.argv)
     app.setApplicationName(__product_name__)
     app.setApplicationVersion(__version__)
-    app.setOrganizationName(__product_name__)
+    app.setOrganizationName(__publisher__)
+
+    from preflightqc.ui.theme import apply_theme
+
+    apply_theme(app)
 
     # Imported here rather than at module scope so that `ensure_user_dirs` runs before
     # anything tries to read configuration or profiles.

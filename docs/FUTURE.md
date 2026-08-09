@@ -177,6 +177,50 @@ disagreement on a gating property is worth more visual weight than a generic `IN
 disagreed about something that mattered". A presentation change, not a severity change:
 promoting it to `WARN` would violate §7.1.
 
+### 3A.3 A custom-profile editor and import action
+
+**What.** V1 has a profile model, a store, a compiler, export and import — all tested —
+and **no user interface for any of it**. During the final pre-build UI work it emerged
+that `compile_profile` had never been called by the application at all, so a saved profile
+could not even be selected. That part is now fixed: profiles in the user profiles folder
+are compiled and appear in the selector, grouped under a separator.
+
+What remains missing is the way a user would *create* one. There is no editor, no "New
+profile", no "Import profile…" action. A custom profile has to be authored as a JSON file
+and placed in `%LOCALAPPDATA%\PreflightQC\profiles` by hand.
+
+**Why deferred.** A profile editor is a genuinely new surface — a property list, six
+requirement kinds, validation feedback, naming and deletion. Building it during a
+refinement phase whose remit is "polish what exists" would be the wrong trade, and the
+plan is explicit that a newly discovered feature is recorded rather than implemented.
+
+**Why it matters commercially.** "Custom client profiles" is a listed V1 capability and a
+natural marketplace bullet. Until an editor exists, that bullet cannot be written honestly.
+Flagged as D-8 in `docs/marketing/MARKETPLACE-LISTING-V1.md`.
+
+**Decision (2026-08-09) — D-8 RESOLVED.** V1 ships without an editor. Every
+customer-facing surface describes custom profiles as an advanced, file-based capability:
+a manually authored or supplied JSON profile file placed in the user profiles folder.
+The JSON profile functionality itself stays as built and tested. The editor, an
+"Import profile…" action and an "Export profile…" action remain deferred scope in this
+entry, subject to §7 to move out.
+
+**What it would need.** A profile editor dialog, an import action wired to the existing
+`store.import_from`, and an export action wired to `store.export_to`. The engine work is
+already done and tested; this is entirely presentation.
+
+### 3A.4 A light theme
+
+**What.** The interface is dark, matched to the editing suites and NLEs it sits beside.
+Some users work in bright rooms and will want a light option.
+
+**Why deferred.** Two themes is two sets of contrast ratios to keep correct, and the token
+system already makes it a contained change when it is worth doing. Recorded rather than
+built so the first version has one look that is right rather than two that are nearly right.
+
+**What it would need.** A second token set in `design.py`, a theme switch in settings, and
+the contrast test parameterised over both palettes.
+
 ---
 
 ## 4. PRODUCT AND WORKFLOW IDEAS

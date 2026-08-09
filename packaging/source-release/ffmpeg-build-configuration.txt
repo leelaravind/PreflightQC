@@ -1,0 +1,27 @@
+FFmpeg build configuration for the libraries bundled with PreflightQC
+========================================================================
+
+Required by the FFmpeg LGPL compliance checklist: the exact configure line
+of the build shipped with this product.
+
+Version    : n8.1.2-34-g9b6c8969e0-20260809
+Build      : BtbN win64-lgpl-shared, gcc 15.2.0 (crosstool-NG 1.28.0.23_185f348)
+Licence    : LGPL-3.0-or-later (--enable-version3; bundled LICENSE.txt is LGPLv3)
+Obtained   : https://github.com/BtbN/FFmpeg-Builds/releases/download/autobuild-2026-08-09-13-03/ffmpeg-n8.1.2-34-g9b6c8969e0-win64-lgpl-shared-8.1.zip
+
+Configure line
+------------------------------------------------------------------------
+--prefix=/ffbuild/prefix --pkg-config-flags=--static --pkg-config=pkg-config --cross-prefix=x86_64-w64-mingw32- --arch=x86_64 --target-os=mingw32 --enable-version3 --disable-debug --enable-shared --disable-static --disable-w32threads --enable-pthreads --enable-iconv --enable-zlib --enable-libxml2 --enable-libvmaf --enable-fontconfig --enable-libharfbuzz --enable-libfreetype --enable-libfribidi --enable-vulkan --enable-libshaderc --enable-libvorbis --disable-libxcb --disable-xlib --disable-libpulse --enable-gmp --enable-lzma --enable-liblcevc-dec --enable-opencl --enable-amf --enable-libaom --enable-libaribb24 --disable-avisynth --enable-chromaprint --enable-libdav1d --disable-libdavs2 --disable-libdvdread --disable-libdvdnav --disable-libfdk-aac --enable-ffnvcodec --enable-cuda-llvm --disable-frei0r --enable-libgme --enable-libkvazaar --enable-libaribcaption --enable-libass --enable-libbluray --enable-libjxl --enable-libmp3lame --enable-libopus --enable-libplacebo --enable-librist --enable-libssh --enable-libtheora --enable-libvpx --enable-libwebp --enable-libzmq --enable-lv2 --enable-libvpl --enable-openal --enable-liboapv --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenh264 --enable-libopenjpeg --enable-libopenmpt --enable-librav1e --disable-librubberband --enable-schannel --enable-sdl2 --enable-libsnappy --enable-libsoxr --enable-libsrt --enable-libsvtav1 --enable-libtwolame --enable-libuavs3d --disable-libdrm --enable-vaapi --disable-libvidstab --enable-libvvenc --disable-whisper --disable-libx264 --disable-libx265 --disable-libxavs2 --disable-libxvid --enable-libzimg --enable-libzvbi --extra-cflags=-DLIBTWOLAME_STATIC --extra-cxxflags= --extra-libs=-lgomp --extra-ldflags=-pthread --extra-ldexeflags= --cc=x86_64-w64-mingw32-gcc --cxx=x86_64-w64-mingw32-g++ --ar=x86_64-w64-mingw32-gcc-ar --ranlib=x86_64-w64-mingw32-gcc-ranlib --nm=x86_64-w64-mingw32-gcc-nm --extra-version=20260809
+
+Corresponding source
+------------------------------------------------------------------------
+Upstream   : https://github.com/FFmpeg/FFmpeg.git
+Commit     : 9b6c8969e05b4f0b29f0f85cd501be6b3e582e6b
+Release tag: n8.1.2 (+34 commits)
+Archive    : ffmpeg-n8.1.2-34-g9b6c8969e0.tar.gz
+SHA-256    : 39002bfe54d48326b69c36a0b72231125bb5b408fadc29e14481b5ac2583a224
+Available  : https://itisyou.app/products/preflightqc/source/ffmpeg-n8.1.2-34-g9b6c8969e0.tar.gz
+
+The build recipe that produced this binary is archived alongside the source:
+  https://github.com/BtbN/FFmpeg-Builds.git
+  commit 2437e7b868da3c11872367b15f3c613b87c24819
