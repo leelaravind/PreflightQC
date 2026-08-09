@@ -535,7 +535,14 @@ def build_manifest(package: Path, product_version: str) -> Manifest:
             if ffprobe is not None and ffprobe.corresponding_source
             else "FAIL — version-matched FFmpeg source location not recorded"
         ),
-        "G-12_attorney_review": "NOT COMPLETE — human gate, cannot be satisfied by tooling",
+        # Amended 2026-08-09 (SPEC LOCK v1.1.0, ADR-G12): owner risk acceptance, not
+        # attorney review. Still a human gate; tooling can only report it. No attorney
+        # review occurred and none is claimed.
+        "G-12_owner_risk_acceptance": (
+            "NOT COMPLETE — requires the Product Owner's written residual-risk "
+            "acceptance for the specific release (ADR-G12 §8); no attorney review "
+            "occurred, no legal clearance is claimed"
+        ),
     }
     return manifest
 
@@ -710,7 +717,7 @@ def main() -> int:
 
     failed = [g for g, s in manifest.gate_status.items() if not s.startswith("PASS")]
     # G-12 is a human gate and is reported, not enforced, here.
-    failed = [g for g in failed if g != "G-12_attorney_review"]
+    failed = [g for g in failed if g != "G-12_owner_risk_acceptance"]
     return 1 if failed else 0
 
 

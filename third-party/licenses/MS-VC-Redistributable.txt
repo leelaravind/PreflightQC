@@ -97,12 +97,14 @@ deceptive or unlawful.
 
 As required above, the product's licence agreement (EULA) must bind end users
 to terms that protect the Microsoft Distributable Code at least as much as
-Microsoft's own requirements. Confirming that the EULA wording satisfies this
+Microsoft's own requirements. Whether the EULA wording satisfies this
 pass-through obligation — including for the copies that arrive via the Qt for
-Python wheels rather than via CPython — is part of the attorney review
-recorded as gate G-12 in docs/licensing/LICENSING-GATE-V1.md. That gate
-remains open until a qualified attorney completes it; this notice records the
-factual basis and does not claim legal clearance.
+Python wheels rather than via CPython — is a documented open legal question
+(L-11) carried under gate G-12, which was amended on 2026-08-09 from mandatory
+attorney review to Product Owner risk acceptance (see
+docs/decisions/ADR-G12-V1-OWNER-RISK-ACCEPTANCE.md). This question has not
+been examined by any attorney; this notice records the factual basis and
+does not claim legal clearance.
 
 Reference: Microsoft's current documentation for the Visual C++
 redistributable files is published at

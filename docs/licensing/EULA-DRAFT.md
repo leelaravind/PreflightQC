@@ -5,7 +5,7 @@
 | Date | 2026-08-09 |
 | Operative text | **`packaging/EULA.txt`** — that file is the single source, shipped verbatim as `licenses/EULA.txt` and shown on the installer's licence page |
 | Status | **DRAFT. Not reviewed. Not cleared.** |
-| Blocking gate | **G-12 — attorney review. Not started.** |
+| Blocking gate | **G-12 — amended 2026-08-09 to owner risk acceptance (ADR-G12).** Attorney review was never started and is no longer mandatory for V1; it remains recommended. The owner's written risk acceptance is still required before release. |
 
 This file is not a second copy of the agreement. Keeping the operative text in one place
 means the shipped licence and the reviewed licence cannot drift apart, which is the whole
@@ -65,7 +65,7 @@ on — and it will not be caught by any test we can write.
 | No governing law or jurisdiction | Depends on where the publishing entity is established and where it sells. Guessing produces a clause that looks finished and is wrong. |
 | No pricing, subscription or refund terms | Not a licensing question; commercial terms are a separate decision. |
 | No claim that the product guarantees platform acceptance | §2 states the opposite, deliberately. Platforms change requirements without notice, and a PASS is a statement about the file, not a promise about a third party. |
-| No assertion that any gate is legally cleared | Nothing in this repository claims that, and this file must not become the first place it appears. |
+| No assertion of legal clearance for any gate | Nothing in this repository claims that, and this file must not become the first place it appears. |
 
 ---
 
@@ -94,4 +94,4 @@ Carried in §9 of the draft so they travel with the document:
 | Translation requirement recorded | **Yes** — §8 |
 | Shipped in the package | **Yes** — `licenses/EULA.txt`, and shown by the installer |
 | Verified by test | **Yes** — `tests/packaging/test_release_artefacts.py` asserts each required clause is present |
-| **Attorney reviewed** | **NO — G-12 open. This is a hard release gate.** |
+| **Attorney reviewed** | **NO — and under the amended G-12 (ADR-G12) no attorney review is mandated for V1. The text ships unreviewed if the owner signs the residual-risk acceptance; that acceptance is the remaining hard release condition.** |

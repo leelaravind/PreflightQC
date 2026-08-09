@@ -20,8 +20,9 @@ It never modifies the source video files.
 - **No binaries are bundled**, so the product has never inspected a real video file.
   `ffprobe` and MediaInfo must be supplied before it can run — see GATE-1 below.
 - No package, installer or release artefact has been produced.
-- Licensing gates are open, including attorney review. **This build must not be
-  distributed.**
+- Licensing gates are open, including G-12 owner risk acceptance (amended from
+  attorney review 2026-08-09 — `docs/decisions/ADR-G12-V1-OWNER-RISK-ACCEPTANCE.md`).
+  **This build must not be distributed.**
 
 Full detail: `docs/reports/IMPLEMENTATION-COMPLETION-V1.md`.
 
@@ -94,5 +95,10 @@ surfaced rather than silently resolved.
 ## Legal
 
 Dependency licensing analysis in `docs/licensing/LICENSING-GATE-V1.md` is engineering
-research, **not legal advice**. Commercial licence, EULA, and third-party notice review by
-a qualified software-IP attorney is a hard release prerequisite.
+research, **not legal advice**. No attorney has reviewed this product and no legal
+clearance is claimed. The original hard requirement for attorney review (gate G-12) was
+superseded on 2026-08-09 by an explicit Product Owner risk-acceptance decision under the
+SPEC LOCK procedure — see `docs/decisions/ADR-G12-V1-OWNER-RISK-ACCEPTANCE.md`, which
+records the reasons, the unresolved legal questions (L-1…L-14), and the conditions that
+reopen professional-review consideration. Release still requires the owner's written
+residual-risk acceptance. Professional review remains recommended.

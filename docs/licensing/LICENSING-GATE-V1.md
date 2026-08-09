@@ -15,12 +15,18 @@
 > advice**, and nothing in this repository constitutes legal clearance for commercial
 > distribution.
 >
-> **Final commercial licence, EULA, and third-party notice review by a qualified
-> software-IP attorney is a hard release prerequisite (gate G-12).** It cannot be
-> satisfied by any engineering artefact, test, or automated scan in this repository.
+> **AMENDED 2026-08-09 (SPEC LOCK v1.1.0).** Gate G-12 originally required review by a
+> qualified software-IP attorney as a hard release prerequisite. On the Product Owner's
+> explicit written instruction, G-12 is now **OWNER LICENSING & COMPLIANCE RISK
+> ACCEPTANCE** — still blocking, still human, closed only by the owner's written
+> acceptance of the documented residual risk. **No attorney review occurred.** Decision
+> record: `docs/decisions/ADR-G12-V1-OWNER-RISK-ACCEPTANCE.md`. Professional review
+> remains recommended and its reopening conditions are listed there.
 >
 > Both dependency reviews in the source pack reach the verdict **"APPROVED WITH
-> CONDITIONS"**, and one of those conditions is, in both cases, attorney review.
+> CONDITIONS"**, and one of those conditions is, in both cases, attorney review — a
+> condition the owner has now expressly superseded for V1 and accepted as residual risk
+> (ADR §6). The reviews themselves are preserved unchanged.
 
 ---
 
@@ -73,9 +79,11 @@ list, and `libsmbclient`. The verified build disables all of them.
 
 **What this costs.** LGPL v3 carries terms v2.1 does not: installation information for
 "User Products", and explicit patent provisions. Their effect on a commercial desktop
-product is squarely an attorney question and is folded into **G-12**. It is the *same*
-licence family as the PySide6/Qt question already open as **Q-1 / G-13**, so it is one
-legal conversation rather than two.
+product is squarely a question for professional legal judgment — documented as **L-3 /
+L-4** in the legal-review pack and, under the amended G-12, carried as owner-accepted
+residual risk (ADR-G12 §6). It is the *same* licence family as the PySide6/Qt question
+(**Q-1 / G-13 / L-1**), so if professional review is later performed it is one legal
+conversation rather than two.
 
 ### 2.1 The posture
 
@@ -280,14 +288,15 @@ shipping an inspector as a child process.
 | Aspect | Decision |
 | --- | --- |
 | Gate | **G-13**, automated part (layout, notices, replaceability) in Phase 12 |
-| Legal gate | **G-12** (attorney), engagement started at **GATE-3** — *before* Phase 6, not at Phase 12 |
+| Legal gate | **G-12** — originally attorney review with engagement at **GATE-3**; amended 2026-08-09 to owner risk acceptance (ADR-G12). The question is documented as **L-1**, unresolved |
 | Checkpoint | **GATE-3** precedes the UI phase, so a reversal costs one layer, not a rebuild |
 | Fallback | .NET 8 + Avalonia UI (MIT), per ADR-001 §7 |
 | Enabler | The "no Qt below L6" import-boundary test, enforced from Phase 2 onward |
 
 Also open: **Q-2 — whether the PyInstaller bootloader exception (GPL with a linking
 exception permitting closed-source distribution of frozen applications) covers the
-bootloader as shipped here.** Attorney review item.
+bootloader as shipped here.** A question for professional legal judgment; documented as
+**L-2** and carried as owner-accepted residual risk under the amended G-12.
 
 ---
 
@@ -464,7 +473,7 @@ All gates are **blocking**. No release proceeds with any gate open.
 | **G-9** | MediaInfo BSD + ZenLib zlib notices present; notice list matches the shipped binary's **actual** compiled feature set | Partly |
 | **G-10** | Third-party binaries from official channels, published checksums verified | Yes |
 | **G-11** | Application, first-party binaries and installer Authenticode-signed | Yes |
-| **G-12** | **Attorney review of licence, EULA, notices and build manifest complete** | **No — blocking, human** |
+| **G-12** | **Owner licensing & compliance risk acceptance complete** *(amended 2026-08-09; was: attorney review — see ADR-G12)*: manifest complete, notices present, source obligations prepared/published as applicable, EULA present, unresolved legal questions documented, owner's written residual-risk acceptance for the specific release, no attorney/legal-clearance claim anywhere; material dependency/licensing changes reopen the gate | **Partly — the acceptance itself is blocking, human, owner-only** |
 | **G-13** | GUI-framework licence posture documented and satisfied (shared-library mechanism demonstrated; LGPL-3.0 text and notices shipped) | Partly |
 
 ### 8.1 Gate ordering
@@ -478,9 +487,12 @@ Phase 12 ─► GATE-5   G-1…G-11, G-13 pass; G-12 initiated
 Phase 13 ─► GATE-6   clean-machine validation passes AND G-12 complete
 ```
 
-**Attorney engagement starts at GATE-3, not at Phase 12.** G-12's turnaround is the most
-likely schedule risk in the whole plan, and it is the one that cannot be accelerated by
-engineering effort.
+*Amendment note (2026-08-09):* the ordering above is preserved as written. Under the
+amended G-12, "initiated" means the unresolved-questions documentation exists (it does —
+`LEGAL-REVIEW-PACK-V1.md`), and "complete" means the owner's written risk acceptance for
+the specific release (ADR-G12 §8). The GATE-3 attorney-engagement step was defined for
+the original gate and did not occur; that fact is recorded, not erased, in
+`docs/reports/G12-AUDIT-V1.md`.
 
 ---
 
@@ -513,5 +525,8 @@ Stated plainly so no reader mistakes this checklist for certainty:
 | R-8 | **Trademark**: "PreflightQC" is a working name with no clearance claimed. Third-party marks (Instagram, Meta, TikTok, YouTube, LinkedIn, MediaInfo, FFmpeg) are used descriptively only; no endorsement may be implied. |
 | R-9 | **MediaInfo Windows runtime**: MediaArea's build is statically linked to the multithreaded C++ runtime and so generally needs no separate MSVC redistributable — **verify against the pinned build** rather than assuming. |
 
-**None of these risks is closed by this document. G-12 exists precisely because they are
-not.**
+**None of these risks is closed by this document, and none has been closed by
+professional review.** Under the amended G-12 (ADR-G12, 2026-08-09) the Product Owner
+accepts them, documented and unresolved, as residual risk — a decision that records the
+risks rather than resolving them. The ADR's §7 lists the events that must reopen
+professional-review consideration.

@@ -6,7 +6,7 @@
 | Gate | **G-13** — "the GUI-framework licence posture is documented and satisfied: if LGPLv3 Qt ships, the shared-library mechanism is demonstrated (Qt libraries present as separate, unobfuscated, replaceable files) and LGPL-3.0 text plus notices ship" |
 | Framework | Qt 6.8.1 via PySide6 6.8.1.1, **LGPL-3.0-only** |
 | Engineering status | **SATISFIED and verified against the built package** |
-| Legal status | **G-12 attorney review still open.** Nothing here claims legal clearance. |
+| Legal status | **No professional review has occurred.** G-12 was amended 2026-08-09 to owner risk acceptance (ADR-G12); the legal questions here are documented as L-1/L-3 and remain unresolved. Nothing here claims legal clearance. |
 
 ---
 
@@ -137,8 +137,8 @@ the manifest incomplete and fails G-1.
 | Shared-library mechanism demonstrated | **Done** — §2 |
 | LGPL-3.0 text and notices ship | **Done** — §2.5 |
 | EULA does not restrict LGPL rights | **Drafted** — `EULA.txt` §3, §3.2, §3.3 |
-| Qt commercial-vs-LGPL decision confirmed by counsel | **OPEN — G-12** |
-| LGPLv3 "Installation Information" question | **OPEN — G-12.** A v3-specific obligation with no v2.1 equivalent. |
+| Qt commercial-vs-LGPL decision confirmed by counsel | **UNRESOLVED — L-1.** Under the amended G-12 (ADR-G12, 2026-08-09) counsel confirmation is no longer mandated for V1; the question is documented and carried as owner-accepted residual risk. |
+| LGPLv3 "Installation Information" question | **UNRESOLVED — L-3.** A v3-specific obligation with no v2.1 equivalent; same disposition. |
 
 **One genuine simplification came out of the SPEC LOCK amendment.** Qt and FFmpeg are now
 under the *same* licence version, LGPLv3. Before, the product would have had to satisfy

@@ -7,7 +7,7 @@
 | Cost | **£0** — that is the point of it |
 | Gate G-11 | **REMAINS OPEN.** This policy does not close, waive, or redefine it. G-11 is the upgrade path out of this policy. |
 | Verification | `python packaging/sign.py verify --expect unsigned` — passes only when the artefacts match the declared unsigned state |
-| Legal | This policy is release engineering, not legal advice. G-12 attorney review still applies to everything customer-facing. |
+| Legal | This policy is release engineering, not legal advice. G-12 (amended 2026-08-09 to owner risk acceptance — ADR-G12) still applies to everything customer-facing; no attorney has reviewed any of it. |
 
 ## 1. THE DECISION, PRECISELY
 
@@ -100,7 +100,7 @@ not check it. That is what Authenticode is for, and why §7 exists.
 | U-5 | The default `sign.py verify` failure is recorded in the release audit alongside the Policy U pass — the audit must show both | Mechanical + audit |
 | U-6 | No customer-facing text anywhere claims or implies the product is signed | Claim discipline, §4; spot-checked by test |
 
-`FINAL BUILD APPROVED` authorisation, G-12 attorney review, and every other open gate
+`FINAL BUILD APPROVED` authorisation, G-12 owner risk acceptance, and every other open gate
 are unchanged by this policy.
 
 ## 7. EXIT TRIGGERS — WHEN £0 STOPS BEING THE RIGHT PRICE

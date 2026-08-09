@@ -1045,13 +1045,16 @@ docs/licensing/EULA-DRAFT.md         with the required carve-outs
 
 | Gate | Criterion |
 | --- | --- |
-| **G-12** | **Final commercial licence and EULA review by a qualified software-IP attorney.** No document in this repository claims legal clearance. This gate cannot be satisfied by any engineering artefact. |
+| **G-12** | **Owner licensing & compliance risk acceptance** *(amended 2026-08-09 by SPEC LOCK v1.1.0; was: attorney review — `docs/decisions/ADR-G12-V1-OWNER-RISK-ACCEPTANCE.md`)*. Manifest complete, notices present, source obligations prepared, EULA present, unresolved legal questions documented, and the Product Owner's written residual-risk acceptance for the specific release. No document in this repository claims legal clearance, and no attorney review occurred. The acceptance itself cannot be satisfied by any engineering artefact. |
 
 **Risks.**
 - *Manifest drift.* → Eliminated by generating it from the package.
 - *A transitive Python dependency with an unexpected licence.* → The generator enumerates
   the frozen environment, not `requirements.in`.
-- *G-12 turnaround time.* → Start attorney engagement at GATE-3, not at Phase 12.
+- *G-12 turnaround time.* → Originally: start attorney engagement at GATE-3, not at
+  Phase 12. Superseded 2026-08-09: the amended G-12 (owner risk acceptance, ADR-G12)
+  has no external turnaround; the schedule risk it addressed no longer applies, and the
+  engagement it called for did not occur.
 
 **Rework trigger.** Any dependency, version, or build-variant change.
 
@@ -1178,8 +1181,8 @@ continue past the gate until it is resolved by an explicit decision.
 | **GATE-2** | P3 | The severity guard rejects every (RECOMMENDATION\|BEST_PRACTICE\|ELIGIBILITY × FAIL) combination, and the overall-status truth table is exhaustively correct. | **STOP.** The severity invariant is the product. Do not proceed to preset data with a permissive engine. |
 | **GATE-3** | Before P6 | ADR-001 Q-1 resolved: bundling the chosen GUI framework in a closed-source commercial product is acceptable, or the fallback stack is adopted. | **STOP.** Do not build a UI on a framework that may have to be replaced after packaging. |
 | **GATE-4** | P10 | Every spec §23 row and every automatable spec §25 criterion passes. | **STOP.** Do not package a product with unproven failure handling. |
-| **GATE-5** | P12 | All of G-1…G-11 and G-13 pass automatically. **G-12 (attorney review) is initiated.** | **STOP.** Do not proceed to release validation. |
-| **GATE-6** | P13 | The full clean-machine run-book passes on both Windows 10 and Windows 11, **and G-12 is complete.** | **STOP.** Not releasable. |
+| **GATE-5** | P12 | All of G-1…G-11 and G-13 pass automatically. **G-12 is initiated** — under the amended gate (ADR-G12), the unresolved-questions documentation exists. | **STOP.** Do not proceed to release validation. |
+| **GATE-6** | P13 | The full clean-machine run-book passes on both Windows 10 and Windows 11, **and G-12 is complete** — under the amended gate, the owner's written risk acceptance for this release exists. | **STOP.** Not releasable. |
 
 ### 16.2 Standing stop conditions
 

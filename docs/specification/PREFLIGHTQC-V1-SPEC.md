@@ -4,10 +4,17 @@
 | --- | --- |
 | Document | `PREFLIGHTQC-V1-SPEC.md` |
 | Status | **LOCKED BASELINE** |
-| Version | 1.0.0 |
+| Version | 1.1.0 |
 | Date | 2026-08-09 |
 | Scope | PreflightQC V1, Windows 10/11 x64 |
 | Authority | This document is the single authoritative product baseline for V1. |
+
+### Changelog
+
+| Version | Date | Change | Procedure |
+| --- | --- | --- | --- |
+| 1.0.0 | 2026-08-09 | Locked baseline. Same-day SPEC LOCK amendment: FFmpeg licence requirement widened from LGPL v2.1-only to LGPL v2.1-or-v3 (`--enable-version3` permitted); recorded inline at §21 and §26, detail in `docs/licensing/LICENSING-GATE-V1.md` §2.0 | §29.2 |
+| 1.1.0 | 2026-08-09 | §26.1 gate **G-12 amended**: mandatory attorney review superseded by **OWNER LICENSING & COMPLIANCE RISK ACCEPTANCE**, on the Product Owner's explicit written instruction. Decision record, reasons, accepted risks and reopening conditions: `docs/decisions/ADR-G12-V1-OWNER-RISK-ACCEPTANCE.md`. **No attorney review occurred; no legal clearance is claimed.** | §29.2 |
 
 This specification is **implementation-neutral**. It defines *what* PreflightQC V1 must
 be and must do. It does not select a language, framework, or library. Those decisions
@@ -957,10 +964,14 @@ A V1 release package consists of:
 | G-9 | MediaInfo BSD-2-Clause attribution present; ZenLib zlib notice present; the third-party notice list matches the actual compiled feature set of the shipped MediaInfo binary. |
 | G-10 | Third-party binaries were obtained from official channels and their published checksums verified. |
 | G-11 | Application and installer are Authenticode code-signed. |
-| G-12 | **Final commercial licence and EULA review by a qualified software-IP attorney is complete.** |
+| G-12 | **Owner licensing & compliance risk acceptance is complete** *(amended 2026-08-09 by SPEC LOCK, v1.1.0 — previously: attorney review; see `docs/decisions/ADR-G12-V1-OWNER-RISK-ACCEPTANCE.md`)*: the dependency manifest is complete; all required licence texts and notices are present; corresponding-source obligations are prepared and published as applicable; the EULA is present with its required carve-outs; every known unresolved legal question is documented (currently L-1…L-14 in `docs/licensing/LEGAL-REVIEW-PACK-V1.md`); the **Product Owner has explicitly accepted the residual legal/licensing risk in writing for the specific release**; no claim of attorney review or legal clearance appears anywhere; and any material change to dependencies, licences, distribution, jurisdictions or functionality reopens the gate. |
 
 **No legal clearance is claimed by this specification or by any document in this
-repository.** G-12 is a hard release prerequisite.
+repository. No attorney has reviewed this product.** G-12 in its amended form is a hard
+release prerequisite: release without the owner's written risk acceptance remains
+prohibited. Professional legal review is superseded as a *mandatory* V1 requirement, not
+as a recommendation — it remains recommended, and the conditions that must reopen its
+consideration are listed in the decision record.
 
 ---
 

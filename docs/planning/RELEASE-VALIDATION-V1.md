@@ -353,7 +353,11 @@ Phase 13 is complete, and **GATE-6** passes, only when **all** of the following 
      `docs/licensing/UNSIGNED-RELEASE-POLICY-V1.md` holds, A2-U and A8-U are marked
      PASS, and the release audit records the default `sign.py verify` failure alongside
      the Policy U pass. **G-11 remains OPEN and is recorded as such.**
-4. **G-12** is complete — attorney review of the licence, EULA and notices.
+4. **G-12** is complete — under the amended gate (SPEC LOCK v1.1.0,
+   `docs/decisions/ADR-G12-V1-OWNER-RISK-ACCEPTANCE.md`): manifest, notices, EULA and
+   source obligations in place, unresolved legal questions documented, and the
+   **Product Owner's written residual-risk acceptance for this specific release**
+   executed (ADR-G12 §8). No attorney review occurred and none is claimed.
 5. The corresponding-source URL in the shipped notices resolves to the real archive.
 
 | Role | Name | Date | Signature |

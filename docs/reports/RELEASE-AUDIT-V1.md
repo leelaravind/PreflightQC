@@ -1,5 +1,12 @@
 # PREFLIGHTQC — COMPLETE RELEASE AUDIT (V1)
 
+> **AMENDMENT NOTE (2026-08-09, added after this report was written).** Gate G-12 was
+> amended by SPEC LOCK v1.1.0 from mandatory attorney review to **owner licensing &
+> compliance risk acceptance** — see `docs/decisions/ADR-G12-V1-OWNER-RISK-ACCEPTANCE.md`.
+> Statements below describing attorney review as an absolute release prerequisite record
+> the gate as it stood when this report was written and are preserved unchanged.
+> **No attorney review has occurred, and no legal clearance is claimed.**
+
 | Field | Value |
 | --- | --- |
 | Date | 2026-08-09 |

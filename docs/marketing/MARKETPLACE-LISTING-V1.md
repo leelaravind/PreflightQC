@@ -208,7 +208,7 @@ buyer who trusts the rest of the copy.
 
 | # | Item | State |
 | --- | --- | --- |
-| D-1 | **EULA** — must be linked from the listing and shown by the installer | Drafted (`packaging/EULA.txt`); **not attorney reviewed (G-12 open)** |
+| D-1 | **EULA** — must be linked from the listing and shown by the installer | Drafted (`packaging/EULA.txt`); **not attorney reviewed, and none is mandated for V1 under the amended G-12 (ADR-G12). Ships only after the owner's written residual-risk acceptance and removal of the draft banner** |
 | D-2 | **Refund policy** — the Merchant of Record will require one | **Not written.** A business decision, not an engineering one |
 | D-3 | **Corresponding-source page** — LGPL obligation, must serve the archived FFmpeg source for three years | **Not live.** See `docs/licensing/CORRESPONDING-SOURCE-PLAN.md` |
 | D-4 | **Third-party notices** — FFmpeg LGPLv3, MediaInfo BSD-2-Clause, Qt LGPLv3, and the rest | Generated into the package; shown in About |
@@ -254,7 +254,7 @@ reuse:
 | Limitations | **Ready** |
 | Support information | **Blocked** — pages do not exist |
 | Refund policy | **Blocked** — not written |
-| EULA | **Blocked** — G-12 |
+| EULA | **Blocked** — G-12 owner risk acceptance not yet executed; draft banner still in place |
 | Version number | **Blocked** — not assigned |
 | Certificate | **Blocked** — G-11, **or** released unsigned under Policy U with its disclosure and published hashes (U-1 … U-6 all required) |
 

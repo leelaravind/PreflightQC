@@ -1,11 +1,17 @@
 PREFLIGHTQC — END USER LICENCE AGREEMENT (DRAFT)
 ================================================================================
 
-DRAFT — NOT LEGAL ADVICE, NOT CLEARED FOR RELEASE.
+DRAFT — NOT LEGAL ADVICE, NOT REVIEWED.
 
-This document has not been reviewed by a qualified software-IP attorney. Review
-is a release prerequisite (gate G-12) and has not been performed. Do not
-distribute PreflightQC commercially with this text in its current state.
+This document has not been reviewed by a qualified software-IP attorney, and no
+legal clearance is claimed for it. Under gate G-12 as amended 2026-08-09
+(owner licensing & compliance risk acceptance — see
+docs/decisions/ADR-G12-V1-OWNER-RISK-ACCEPTANCE.md), commercial distribution
+of this text requires the Product Owner's written acceptance of the residual
+risk of using it without professional review, and this draft banner must be
+removed as part of that release decision. Professional review remains
+recommended. Do not distribute PreflightQC commercially with this banner in
+place.
 
 --------------------------------------------------------------------------------
 1. LICENCE GRANT
@@ -134,11 +140,13 @@ its reader actually relies on, which is exactly the failure the carve-out exists
 to prevent.
 
 --------------------------------------------------------------------------------
-9. OPEN QUESTIONS FOR ATTORNEY REVIEW (G-12)
+9. OPEN LEGAL QUESTIONS (DOCUMENTED UNDER GATE G-12)
 --------------------------------------------------------------------------------
 
 Recorded here so they are not lost, and so no one mistakes this draft for a
-cleared document:
+cleared document. These questions have not been answered by any attorney; under
+the amended G-12 they are carried as documented, owner-accepted residual risk,
+and they remain the agenda for professional review if it is later performed:
 
   1. LGPLv3 "Installation Information" for User Products (LGPLv3 section 4 /
      GPLv3 section 6) — the effect, if any, on a desktop application delivered

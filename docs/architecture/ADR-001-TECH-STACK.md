@@ -165,8 +165,9 @@ Three things make it acceptable:
    Qt imports. Swapping the UI framework touches one layer.
 
 **This risk is formally assigned to release gate G-13** (see
-`docs/licensing/LICENSING-GATE-V1.md`) and to attorney review G-12. It is an **OPEN
-QUESTION**, not a resolved one.
+`docs/licensing/LICENSING-GATE-V1.md`) and to G-12 — which was amended 2026-08-09 from
+attorney review to owner risk acceptance (ADR-G12); the question is documented as L-1.
+It is an **OPEN QUESTION**, not a resolved one, and no attorney has examined it.
 
 ---
 
@@ -236,8 +237,9 @@ human-readable format and this is recorded, not silently dropped.
 
 ## 7. FALLBACK
 
-If attorney review (G-12) or the dependency gate (G-13) rejects bundling LGPLv3 Qt in a
-closed-source commercial product, the fallback is:
+If a licensing determination — professional review if later performed, or the dependency
+gate (G-13) — rejects bundling LGPLv3 Qt in a closed-source commercial product, the
+fallback is:
 
 **.NET 8 + Avalonia UI (MIT) + `dotnet publish` self-contained + WiX/Inno installer.**
 
@@ -255,8 +257,8 @@ of Phase 1 (see `docs/planning/IMPLEMENTATION-PLAN-V1.md`, gate GATE-1).
 
 | # | Question | Owner | Blocks |
 | --- | --- | --- | --- |
-| Q-1 | Does bundling LGPLv3 PySide6/Qt via PyInstaller one-dir satisfy LGPLv3 §4 for a closed-source commercial product? | Attorney (G-12) + early check at GATE-1 | Phase 6 start |
-| Q-2 | Does the PyInstaller bootloader exception cover the shipped bootloader as used here? | Attorney (G-12) | Release |
+| Q-1 | Does bundling LGPLv3 PySide6/Qt via PyInstaller one-dir satisfy LGPLv3 §4 for a closed-source commercial product? | Was: attorney (G-12). Since the 2026-08-09 amendment (ADR-G12): documented as L-1, owner-accepted residual risk, unresolved | Phase 6 start |
+| Q-2 | Does the PyInstaller bootloader exception cover the shipped bootloader as used here? | Was: attorney (G-12). Now documented as L-2, owner-accepted residual risk, unresolved | Release |
 | Q-3 | MediaInfo CLI or library? | Engineering, Phase 1 spike | Phase 1 exit |
 | Q-4 | Is a native PDF path available that survives the dependency gate? | Engineering, Phase 8 | Phase 8 scope only |
 | Q-5 | Python 3.12 vs 3.13 — is PySide6 + PyInstaller support for 3.13 mature on the target date? | Engineering, Phase 0 | Phase 0 exit |

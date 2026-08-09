@@ -8,6 +8,7 @@
 | Publisher | ITISYOU |
 | Status of this pack | Assembled by engineering. **Nothing in it is legal advice, and no clearance is claimed by it.** |
 | G-12 | **OPEN.** This pack is the input to the review, not evidence it happened. |
+| Amendment note (2026-08-09) | Gate G-12 was amended by SPEC LOCK v1.1.0 from mandatory attorney review to **owner licensing & compliance risk acceptance** (`docs/decisions/ADR-G12-V1-OWNER-RISK-ACCEPTANCE.md`). **This pack has not been reviewed by counsel and is preserved unchanged**: it is now (a) the documented evidence base for the owner's informed risk acceptance, and (b) the ready-to-hand input if professional review is later performed — which the ADR's §7 conditions may require. Questions L-1…L-14 below remain unanswered. |
 
 How to read this pack: §2 lists facts that are mechanically established and continuously
 re-verified — you may rely on them as *facts about the artefact* without re-deriving

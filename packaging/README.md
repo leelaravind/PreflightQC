@@ -41,7 +41,9 @@ asserts it.
 ## Gates
 
 Phase 11 exits into Phase 12, which runs release gates **G-1 … G-11 and G-13**
-automatically. **G-12 — attorney review — is human and blocking.**
+automatically. **G-12 — owner licensing & compliance risk acceptance (amended
+2026-08-09 from attorney review; ADR-G12) — is human and blocking: the owner's
+written residual-risk acceptance cannot come from tooling.**
 
 Full detail: `docs/licensing/LICENSING-GATE-V1.md`.
 

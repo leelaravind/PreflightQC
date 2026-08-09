@@ -7,7 +7,7 @@
 | Engineering status | **DONE** — source identified, obtained, proven to correspond, hashed, reproducible, and mechanically verified on every audit |
 | Hosting bundle | **STAGED** (2026-08-09) — `packaging/source-release/` holds the complete, verified file set for the public page. Nothing is uploaded. |
 | Remaining | **Publishing.** The release domain must serve the staged bundle at the URL below. That is an operations task, not an engineering one. |
-| Legal status | **No clearance claimed.** G-12 attorney review still applies to this plan. |
+| Legal status | **No clearance claimed.** G-12 was amended 2026-08-09 to owner risk acceptance (ADR-G12); this plan's wording questions are documented as L-6 and remain professionally unreviewed. |
 
 ---
 
@@ -223,9 +223,9 @@ be closed by writing more code.**
 | **H-1** | Publish the staged bundle (§5A, seven files) at `itisyou.app/products/preflightqc/source` | The location is named in `binaries.lock.json` and shown in the product's About dialog, and the bundle is staged in `packaging/source-release/` — but the page does not exist and serves nothing |
 | **H-2** | Change `hosting_status` from `NOT LIVE` once the page serves the archives, and re-run the audit | Depends on H-1. A test fails if a URL is named with no status saying whether it works |
 | **H-3** | Commit to serving them for **three years** after the last distribution of the corresponding binary | A business commitment, not a build artefact |
-| **H-4** | Put the written offer into the EULA and `THIRD-PARTY-NOTICES.txt` | Draft text exists; wording is for G-12 |
+| **H-4** | Put the written offer into the EULA and `THIRD-PARTY-NOTICES.txt` | Draft text exists and ships; its sufficiency is documented question L-6, professionally unreviewed, carried under the amended G-12 |
 | **H-5** | Re-run this whole process on **every** inspector version bump | The lock file's rework trigger; the audit fails closed if source and binary diverge |
-| **H-6** | Attorney review (G-12) | Explicitly non-automatable |
+| **H-6** | G-12 owner risk acceptance *(amended 2026-08-09; was attorney review, which did not occur — ADR-G12)* | The owner's written acceptance is explicitly non-automatable |
 
 ### 6.1 Standing rule
 
