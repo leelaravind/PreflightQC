@@ -1,0 +1,84 @@
+# ---------------------------------------------------------------------------
+# PreflightQC .gitignore
+# ---------------------------------------------------------------------------
+
+# --- Third-party binaries -------------------------------------------------
+# ffprobe, the libav* shared libraries and MediaInfo are NEVER committed to
+# this repository. They are fetched at packaging time from their pinned,
+# checksum-verified official sources and recorded in the dependency manifest.
+# See docs/licensing/LICENSING-GATE-V1.md.
+third-party/bin/
+third-party/**/*.exe
+third-party/**/*.dll
+third-party/**/*.dylib
+third-party/**/*.so
+third-party/**/*.zip
+third-party/**/*.7z
+third-party/**/*.tar.xz
+third-party/**/*.tar.gz
+
+# --- Generated / synthetic test media -------------------------------------
+# The golden corpus is GENERATED from a committed manifest, never committed.
+test-assets/generated/
+test-assets/**/*.mp4
+test-assets/**/*.mov
+test-assets/**/*.mkv
+test-assets/**/*.webm
+test-assets/**/*.avi
+test-assets/**/*.wmv
+test-assets/**/*.m4v
+test-assets/**/*.3gp
+
+# --- Build / packaging output ---------------------------------------------
+build/
+dist/
+out/
+*.spec.bak
+packaging/output/
+packaging/staging/
+
+# --- Python ---------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.eggs/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+# --- Node (only if a reporting toolchain requires it) ---------------------
+node_modules/
+
+# --- Editors / OS ---------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+*~
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+
+# --- Local runtime state --------------------------------------------------
+# Local custom client profiles and app config are user data, never committed.
+*.local.json
+local-profiles/
+logs/
+*.log
+
+# --- Secrets --------------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.pfx
+*.p12
+*.snk
