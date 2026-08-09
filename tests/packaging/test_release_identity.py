@@ -83,17 +83,28 @@ class TestCustomerFacingSurfaces:
         assert "not digitally signed" in text
 
 
-class TestG12RemainsOpenAndReleaseSpecific:
+class TestG12AcceptanceIsExecutedAndReleaseSpecific:
     def test_the_acceptance_names_the_frozen_release(self) -> None:
         text = ADR.read_text(encoding="utf-8")
         assert "PreflightQC 1.0.0 (Windows x64, Policy U unsigned)" in text
 
-    def test_the_acceptance_is_still_unsigned_and_open(self) -> None:
-        text = ADR.read_text(encoding="utf-8")
-        assert "OPEN / OWNER ACCEPTANCE REQUIRED" in text
-        assert "intentionally unsigned in this document" in text
-        assert "Date: ______ Signature: ______" in text
-
-    def test_an_identity_change_voids_a_prior_acceptance(self) -> None:
+    def test_the_acceptance_is_executed_with_a_date_and_a_verbatim_record(self) -> None:
         text = " ".join(ADR.read_text(encoding="utf-8").split())
-        assert "any prior acceptance is void" in text
+        assert "COMPLETE for PreflightQC 1.0.0" in text
+        assert "executed 2026-08-09" in text
+        assert "G12-OWNER-ACCEPTANCE-V1.md" in text
+
+    def test_the_acceptance_record_preserves_the_owner_instruction(self) -> None:
+        record = (
+            REPO_ROOT / "docs" / "reports" / "G12-OWNER-ACCEPTANCE-V1.md"
+        ).read_text(encoding="utf-8")
+        flattened = " ".join(record.split())
+        assert "I explicitly accept the documented residual licensing/compliance risks" in flattened
+        assert "PreflightQC 1.0.0" in flattened
+        assert "no attorney has reviewed the product" in flattened
+        assert "L-1 through L-14 remain unresolved" in flattened
+        assert "FINAL BUILD APPROVED` has not been issued" in flattened
+
+    def test_an_identity_change_voids_the_acceptance(self) -> None:
+        text = " ".join(ADR.read_text(encoding="utf-8").split())
+        assert "voids this acceptance and reopens G-12" in text

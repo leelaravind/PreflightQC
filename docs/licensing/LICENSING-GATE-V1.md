@@ -23,6 +23,10 @@
 > record: `docs/decisions/ADR-G12-V1-OWNER-RISK-ACCEPTANCE.md`. Professional review
 > remains recommended and its reopening conditions are listed there.
 >
+> **EXECUTED 2026-08-09 for PreflightQC 1.0.0 only**
+> (`docs/reports/G12-OWNER-ACCEPTANCE-V1.md`). The acceptance covers that frozen
+> identity and nothing else; any material change voids it and reopens the gate.
+>
 > Both dependency reviews in the source pack reach the verdict **"APPROVED WITH
 > CONDITIONS"**, and one of those conditions is, in both cases, attorney review — a
 > condition the owner has now expressly superseded for V1 and accepted as residual risk

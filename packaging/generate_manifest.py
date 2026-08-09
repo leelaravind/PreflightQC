@@ -27,6 +27,10 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 LOCK_FILE = REPO_ROOT / "packaging" / "binaries.lock.json"
 
+#: The only product version covered by the G-12 owner risk acceptance on record
+#: (ADR-G12 §8, executed 2026-08-09). Any other version reports the gate open.
+G12_ACCEPTED_VERSION = "1.0.0"
+
 #: Notices that must appear verbatim. These are contractual, not editorial.
 FFMPEG_NOTICE = "This software uses libraries from the FFmpeg project under the LGPLv3."
 FFMPEG_DISCLAIMER = (
@@ -536,12 +540,24 @@ def build_manifest(package: Path, product_version: str) -> Manifest:
             else "FAIL — version-matched FFmpeg source location not recorded"
         ),
         # Amended 2026-08-09 (SPEC LOCK v1.1.0, ADR-G12): owner risk acceptance, not
-        # attorney review. Still a human gate; tooling can only report it. No attorney
-        # review occurred and none is claimed.
+        # attorney review. The acceptance on record (ADR-G12 §8, executed 2026-08-09,
+        # docs/reports/G12-OWNER-ACCEPTANCE-V1.md) applies ONLY to PreflightQC 1.0.0 —
+        # a manifest for any other version reports the gate open, which is the O-8
+        # reopening rule made mechanical. No attorney review occurred, none is claimed.
         "G-12_owner_risk_acceptance": (
-            "NOT COMPLETE — requires the Product Owner's written residual-risk "
-            "acceptance for the specific release (ADR-G12 §8); no attorney review "
-            "occurred, no legal clearance is claimed"
+            (
+                "PASS — Product Owner risk acceptance recorded 2026-08-09 for "
+                "PreflightQC 1.0.0 (ADR-G12 §8); L-1…L-14 and R-1…R-9 remain "
+                "unresolved and accepted; no attorney review occurred, no legal "
+                "clearance is claimed; voided by any material change"
+            )
+            if manifest.product_version == G12_ACCEPTED_VERSION
+            else (
+                f"NOT COMPLETE — the acceptance on record applies to "
+                f"{G12_ACCEPTED_VERSION} only; this manifest describes "
+                f"{manifest.product_version}, which requires a new written owner "
+                "acceptance (ADR-G12 §8)"
+            )
         ),
     }
     return manifest

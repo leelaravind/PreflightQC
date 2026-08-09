@@ -20,8 +20,11 @@ It never modifies the source video files.
 - **No binaries are bundled**, so the product has never inspected a real video file.
   `ffprobe` and MediaInfo must be supplied before it can run — see GATE-1 below.
 - No package, installer or release artefact has been produced.
-- Licensing gates are open, including G-12 owner risk acceptance (amended from
-  attorney review 2026-08-09 — `docs/decisions/ADR-G12-V1-OWNER-RISK-ACCEPTANCE.md`).
+- **G-12 owner risk acceptance is executed for PreflightQC 1.0.0** (2026-08-09,
+  `docs/reports/G12-OWNER-ACCEPTANCE-V1.md`; gate amended from attorney review by
+  `docs/decisions/ADR-G12-V1-OWNER-RISK-ACCEPTANCE.md` — no attorney review occurred).
+  Remaining release gates are open: `FINAL BUILD APPROVED`, Policy U conditions,
+  corresponding-source publication, clean-machine validation.
   **This build must not be distributed.**
 
 Full detail: `docs/reports/IMPLEMENTATION-COMPLETION-V1.md`.

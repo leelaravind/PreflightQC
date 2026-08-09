@@ -208,7 +208,7 @@ buyer who trusts the rest of the copy.
 
 | # | Item | State |
 | --- | --- | --- |
-| D-1 | **EULA** — must be linked from the listing and shown by the installer | Drafted (`packaging/EULA.txt`); **not attorney reviewed, and none is mandated for V1 under the amended G-12 (ADR-G12). Ships only after the owner's written residual-risk acceptance and removal of the draft banner** |
+| D-1 | **EULA** — must be linked from the listing and shown by the installer | Drafted (`packaging/EULA.txt`); **not attorney reviewed, and none is mandated for V1 under the amended G-12 (ADR-G12). The owner's written residual-risk acceptance for 1.0.0 was executed 2026-08-09; removal of the draft banner remains a final-build step** |
 | D-2 | **Refund policy** — the Merchant of Record will require one | **Not written.** A business decision, not an engineering one |
 | D-3 | **Corresponding-source page** — LGPL obligation, must serve the archived FFmpeg source for three years | **Not live.** See `docs/licensing/CORRESPONDING-SOURCE-PLAN.md` |
 | D-4 | **Third-party notices** — FFmpeg LGPLv3, MediaInfo BSD-2-Clause, Qt LGPLv3, and the rest | Generated into the package; shown in About |
@@ -254,7 +254,7 @@ reuse:
 | Limitations | **Ready** |
 | Support information | **Blocked** — pages do not exist |
 | Refund policy | **Blocked** — not written |
-| EULA | **Blocked** — G-12 owner risk acceptance not yet executed; draft banner still in place |
+| EULA | **Nearly ready** — G-12 owner risk acceptance executed for 1.0.0 (2026-08-09); removing the draft banner is a final-build step |
 | Version number | **Ready** — 1.0.0, frozen 2026-08-09 |
 | Certificate | **Blocked** — G-11, **or** released unsigned under Policy U with its disclosure and published hashes (U-1 … U-6 all required) |
 

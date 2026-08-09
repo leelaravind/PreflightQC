@@ -69,10 +69,17 @@ class TestTheDecisionRecord:
         assert "No legal clearance is claimed" in text
         assert "No attorney has reviewed anything" in text
 
-    def test_the_acceptance_block_is_deliberately_unsigned(self, text: str) -> None:
-        """The ADR records the decision; acceptance is executed per release. A
-        pre-signed block would collapse that distinction."""
-        assert "intentionally unsigned in this document" in text
+    def test_the_acceptance_is_executed_scoped_and_reopenable(self, text: str) -> None:
+        """The acceptance was executed 2026-08-09 for exactly one release identity.
+        What must never drift: the scope (1.0.0 only), the date, the pointer to the
+        verbatim instruction, and the reopening rule."""
+        flattened = " ".join(text.split())
+        assert "COMPLETE for PreflightQC 1.0.0" in flattened
+        assert "Date: **2026-08-09**" in flattened
+        assert "G12-OWNER-ACCEPTANCE-V1.md" in flattened
+        assert "voids this acceptance and reopens G-12" in flattened
+        # Executing the acceptance answered nothing:
+        assert "remains unresolved" in flattened
 
 
 class TestTheAmendedSpecification:
@@ -100,14 +107,23 @@ class TestTheAmendedSpecification:
 
 
 class TestTheMachinery:
-    def test_the_manifest_reports_the_renamed_gate_as_not_complete(self) -> None:
+    def test_the_manifest_scopes_the_acceptance_to_the_accepted_version(self) -> None:
+        """The recorded acceptance covers 1.0.0 and nothing else. The generator must
+        report the gate complete for that version and open for any other — the O-8
+        reopening rule, made mechanical."""
         if not PACKAGE.is_dir():
             pytest.skip("no built package; run packaging/build.py")
-        manifest = generate_manifest.build_manifest(PACKAGE, "test")
-        assert "G-12_attorney_review" not in manifest.gate_status
-        status = manifest.gate_status["G-12_owner_risk_acceptance"]
-        assert status.startswith("NOT COMPLETE")
+        assert generate_manifest.G12_ACCEPTED_VERSION == "1.0.0"
+
+        accepted = generate_manifest.build_manifest(PACKAGE, "1.0.0")
+        assert "G-12_attorney_review" not in accepted.gate_status
+        status = accepted.gate_status["G-12_owner_risk_acceptance"]
+        assert status.startswith("PASS")
         assert "no attorney review occurred" in status
+        assert "no legal clearance is claimed" in status
+
+        other = generate_manifest.build_manifest(PACKAGE, "1.0.1")
+        assert other.gate_status["G-12_owner_risk_acceptance"].startswith("NOT COMPLETE")
 
     def test_the_eula_open_questions_survived_the_retitle(self) -> None:
         text = (REPO_ROOT / "packaging" / "EULA.txt").read_text(encoding="utf-8")

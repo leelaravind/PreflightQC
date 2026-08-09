@@ -6,6 +6,7 @@
 | Date | 2026-08-09 |
 | Decided by | **Product Owner** — explicit written instruction, per SPEC LOCK §29.2(1) |
 | Status | **ADOPTED.** Amends spec §26.1 via the SPEC LOCK procedure (spec v1.0.0 → v1.1.0) |
+| §8 acceptance | **EXECUTED 2026-08-09 for PreflightQC 1.0.0 only** (`docs/reports/G12-OWNER-ACCEPTANCE-V1.md`). Voided by any material change; any other release requires a new acceptance |
 | Supersedes | The mandatory-attorney-review form of gate G-12 (below), and every statement in this repository that attorney review is an absolute V1 release prerequisite |
 | **What this is not** | **No attorney has reviewed anything. No legal advice has been received. No legal clearance exists or is claimed, here or anywhere in this repository.** |
 
@@ -118,27 +119,30 @@ any of the following occurs:
    **urgent**, not optional.
 6. Any acquisition, investment, or due-diligence event.
 
-## 8. OWNER ACCEPTANCE STATEMENT (TO BE EXECUTED PER RELEASE)
+## 8. OWNER ACCEPTANCE STATEMENT — EXECUTED FOR PREFLIGHTQC 1.0.0
 
-**Status: OPEN / OWNER ACCEPTANCE REQUIRED.**
+**Status: COMPLETE for PreflightQC 1.0.0 — executed 2026-08-09 by the Product Owner.**
 
-The release identity was frozen on 2026-08-09 (Product Owner decision): the next
-acceptance applies to **PreflightQC 1.0.0** — publisher ITISYOU, Windows x64,
-Policy U intentionally unsigned. The identity is pre-filled below so the acceptance is
-release-specific; the date and signature are deliberately absent and only the Product
-Owner may supply them.
+The release identity was frozen on 2026-08-09 (Product Owner decision): PreflightQC
+1.0.0 — publisher ITISYOU, Windows x64, Policy U intentionally unsigned. On the same
+date the Product Owner executed this acceptance by explicit written instruction,
+recorded verbatim in `docs/reports/G12-OWNER-ACCEPTANCE-V1.md`.
 
 > I, the Product Owner of PreflightQC, have read this decision record, the legal-review
 > pack, and the unresolved questions L-1…L-14. I understand that no attorney has
 > reviewed this product, that nothing in the repository is legal advice, and that
 > releasing carries residual legal and licensing risk. I accept that risk for release
 > version: **PreflightQC 1.0.0 (Windows x64, Policy U unsigned)**
-> Date: ______ Signature: ______
+> Date: **2026-08-09**
+> Accepted by: **the Product Owner (leelaaravind), by explicit written instruction —
+> the full instruction text is preserved in `docs/reports/G12-OWNER-ACCEPTANCE-V1.md`**
 
-**This block is intentionally unsigned in this document.** Signing happens at release
-time, by the Product Owner alone. Its absence means G-12 is OPEN. If the release
-identity changes in any way, the pre-filled version line above must be updated and any
-prior acceptance is void.
+**Scope and reopening — unchanged and binding.** This acceptance applies **only** to
+the frozen identity named above. Every question L-1…L-14 and every risk R-1…R-9
+remains unresolved and documented; accepting them did not answer them. Any material
+change to dependencies, licences, distribution model, jurisdictions, or functionality
+voids this acceptance and reopens G-12 (§5 O-8, §7). No attorney has reviewed this
+product; nothing here is legal advice; no legal clearance is claimed.
 
 ## 9. DOCUMENTS SUPERSEDED OR AMENDED
 

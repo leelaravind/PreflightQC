@@ -48,9 +48,9 @@ source, now annotated as such in the file. Everything derives from it:
 | `dist/PreflightQC` verification build | Built as 0.1.0-dev, untracked, superseded — the 1.0.0 build regenerates everything from the frozen source |
 | `Temp/` phase instructions | Historical inputs |
 
-Repository-wide sweeps for `development build`, `attorney approved` and `legal
-clearance` are clean: the only hits are the guard tests' own detector lists and honest
-negations (enforced continuously by `test_g12_amendment.py`).
+Repository-wide sweeps for development-build wording and for affirmative
+review/clearance claims are clean: the only hits are the guard tests' own detector
+lists and honest negations (enforced continuously by `test_g12_amendment.py`).
 
 ## 4. POLICY U AND G-12 STATUS
 

@@ -358,6 +358,9 @@ Phase 13 is complete, and **GATE-6** passes, only when **all** of the following 
    source obligations in place, unresolved legal questions documented, and the
    **Product Owner's written residual-risk acceptance for this specific release**
    executed (ADR-G12 §8). No attorney review occurred and none is claimed.
+   **Status: executed 2026-08-09 for PreflightQC 1.0.0**
+   (`docs/reports/G12-OWNER-ACCEPTANCE-V1.md`) — valid only while the release under
+   validation is exactly that identity.
 5. The corresponding-source URL in the shipped notices resolves to the real archive.
 
 | Role | Name | Date | Signature |

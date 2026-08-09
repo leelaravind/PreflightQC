@@ -43,7 +43,9 @@ asserts it.
 Phase 11 exits into Phase 12, which runs release gates **G-1 … G-11 and G-13**
 automatically. **G-12 — owner licensing & compliance risk acceptance (amended
 2026-08-09 from attorney review; ADR-G12) — is human and blocking: the owner's
-written residual-risk acceptance cannot come from tooling.**
+written residual-risk acceptance cannot come from tooling.** It was executed
+2026-08-09 **for PreflightQC 1.0.0 only** (`docs/reports/G12-OWNER-ACCEPTANCE-V1.md`);
+`generate_manifest.py` reports it open for any other version.
 
 Full detail: `docs/licensing/LICENSING-GATE-V1.md`.
 
