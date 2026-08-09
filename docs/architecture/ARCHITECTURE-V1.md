@@ -468,7 +468,7 @@ CSV and HTML **cannot disagree**. It is also the snapshot-test target.
         ┌────────────────────┐   ┌────────────────────┐
         │ ffprobe.exe        │   │ MediaInfo          │
         │ + libav*.dll       │   │ (BSD-2-Clause)     │
-        │ (LGPL 2.1 shared)  │   │                    │
+        │ (LGPL 3.0 shared)  │   │                    │
         └────────────────────┘   └────────────────────┘
 ```
 
@@ -637,7 +637,7 @@ inspector versions current is the mitigation, and it is a release-gate item.
     └──────────────────────────────────────────┘
                  bundled, unmodified, third party
     ┌──────────────────────────────────────────┐
-    │ bin/ffprobe.exe + libav*.dll  (LGPL 2.1) │
+    │ bin/ffprobe.exe + libav*.dll  (LGPL 3.0) │
     │ bin/MediaInfo                 (BSD-2)    │
     └──────────────────────────────────────────┘
                  obligations

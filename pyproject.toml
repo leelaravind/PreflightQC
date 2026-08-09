@@ -1,0 +1,104 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "preflightqc"
+description = "Offline Windows desktop technical QA for video exports"
+requires-python = ">=3.12,<3.13"
+dynamic = ["version"]
+dependencies = [
+    "PySide6==6.8.1.1",
+    "Jinja2==3.1.4",
+    "jsonschema==4.23.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==8.3.4",
+    "pytest-qt==4.4.0",
+    "pytest-cov==6.0.0",
+    "ruff==0.8.4",
+    "mypy==1.13.0",
+]
+
+[tool.setuptools.dynamic]
+version = { attr = "preflightqc.__version__" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-q --strict-markers"
+markers = [
+    "requires_inspectors: needs real ffprobe/MediaInfo binaries (GATE-1)",
+    "requires_encoder: needs the development-only FFmpeg encoder (Phase 9 media)",
+    "ui: needs a Qt display",
+]
+filterwarnings = ["error::DeprecationWarning:preflightqc.*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["src", "tests", "tools"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "A", "C4", "PT", "SIM", "RUF", "TID", "S"]
+ignore = [
+    "E501",   # line length is handled by the formatter
+    "PT018",  # compound asserts read better than split ones for paired invariants
+    "SIM105", # contextlib.suppress is not clearer than try/except/pass in cleanup paths
+    "SIM108", # ternaries are not always clearer than an if/else block
+    "S101",   # asserts are how tests assert
+    "S404",   # subprocess is the whole point of the inspector boundary
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["N802", "N806", "S105", "S106", "S311"]
+# The process runner and the gate scanners intentionally spawn processes. They pass
+# argv as a list with shell=False and an absolute path, which is exactly what S603
+# exists to encourage; flagging them adds noise without adding safety.
+"src/preflightqc/platform/process.py" = ["S603"]
+"packaging/*" = ["S603"]
+"spikes/*" = ["S603"]
+# The corresponding-source tool shells out to `git` from PATH on purpose: it is a release
+# tool run by a human who has git installed, and hard-coding an absolute path would make
+# it less portable without making it safer.
+"tools/fetch_corresponding_source.py" = ["S603", "S607"]
+
+[tool.ruff.lint.flake8-tidy-imports]
+ban-relative-imports = "all"
+
+[tool.mypy]
+python_version = "3.12"
+mypy_path = "src"
+packages = ["preflightqc"]
+strict = true
+warn_unreachable = true
+disallow_any_explicit = false
+
+[[tool.mypy.overrides]]
+# The UI and CLI layers are exempted from strict typing: Qt's stubs are incomplete
+# (Slot decorators, QMessageBox overloads) and chasing them adds noise without
+# improving correctness. Everything below the UI stays strict, which is where the
+# correctness that matters actually lives.
+module = ["preflightqc.ui.*", "preflightqc.cli.*"]
+disallow_untyped_defs = false
+disallow_untyped_calls = false
+disallow_untyped_decorators = false
+warn_return_any = false
+warn_unreachable = false
+disable_error_code = ["arg-type", "call-arg", "no-untyped-def", "no-untyped-call", "misc"]
+
+[[tool.mypy.overrides]]
+module = ["jsonschema.*", "jinja2.*"]
+ignore_missing_imports = true
+
+[tool.coverage.run]
+source = ["src/preflightqc"]
+omit = ["*/ui/*", "*/cli/*"]
+
+[tool.coverage.report]
+exclude_lines = ["pragma: no cover", "if TYPE_CHECKING:", "raise AssertionError", "@abstractmethod"]

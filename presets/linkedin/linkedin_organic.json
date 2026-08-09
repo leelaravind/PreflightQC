@@ -1,0 +1,206 @@
+{
+  "preset_id": "linkedin_organic",
+  "platform": "LinkedIn",
+  "display_name": "LinkedIn — Organic (Pages / native video)",
+  "description": "Native video posted organically to a LinkedIn Page. A wide envelope with an unusual container list: AVI, QuickTime and MOV are explicitly no longer supported.",
+  "origin": "shipped",
+  "ruleset_version": "2026-08-09.1",
+  "last_verified_date": "2026-08-09",
+  "byte_convention": "Decimal bytes (500 MB = 500,000,000; 5 GB = 5,000,000,000; the 75 KB floor is treated as 76,800 bytes). LinkedIn does not state binary or decimal, so PreflightQC uses the conservative reading and never passes a file LinkedIn would reject.",
+  "caveats": [
+    "LinkedIn explicitly no longer supports AVI, QuickTime or MOV for organic native video. A MOV master must be re-wrapped before posting.",
+    "LinkedIn's own pages disagree about maximum duration: the specification page says 10 minutes, the troubleshooting page says 15 minutes from desktop and 10 from mobile. PreflightQC warns between 10 and 15 minutes and only fails above 15.",
+    "LinkedIn documents nothing about audio requirements, colour, HDR, interlacing or variable frame rate for organic video. Those are reported, never judged.",
+    "Organic and advertising specifications are different products and must never be merged."
+  ],
+  "sources": [
+    {
+      "source_ref": "L-S1",
+      "title": "Video specifications for your LinkedIn Pages and Career Pages",
+      "url": "https://www.linkedin.com/help/linkedin/answer/a1311816",
+      "access_date": "2026-08-09",
+      "confidence": "HIGH"
+    },
+    {
+      "source_ref": "L-S2",
+      "title": "Video sharing troubleshooting, LinkedIn Help",
+      "url": "https://www.linkedin.com/help/linkedin/answer/a548372",
+      "access_date": "2026-08-09",
+      "confidence": "MEDIUM"
+    }
+  ],
+  "rules": [
+    {
+      "rule_id": "linkedin_organic.container",
+      "property": "container.format",
+      "operator": "in",
+      "expected": ["asf", "flv", "mp3", "mp4", "mpeg1", "mpeg2", "mpeg", "mkv", "webm", "wmv"],
+      "classification": "HARD_REQUIREMENT",
+      "severity": "FAIL",
+      "explanation": "The container must be one of the supported formats. AVI, QuickTime and MOV are explicitly no longer supported.",
+      "source_ref": "L-S1",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "linkedin_organic.max_file_size",
+      "property": "file.size_bytes",
+      "operator": "lte",
+      "expected": 5000000000,
+      "classification": "HARD_REQUIREMENT",
+      "severity": "FAIL",
+      "explanation": "Maximum file size is 5 GB.",
+      "source_ref": "L-S1",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "linkedin_organic.min_file_size",
+      "property": "file.size_bytes",
+      "operator": "gte",
+      "expected": 76800,
+      "classification": "HARD_REQUIREMENT",
+      "severity": "FAIL",
+      "explanation": "Minimum file size is 75 KB.",
+      "source_ref": "L-S1",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "linkedin_organic.min_duration",
+      "property": "file.duration_seconds",
+      "operator": "gte",
+      "expected": 3,
+      "classification": "HARD_REQUIREMENT",
+      "severity": "FAIL",
+      "explanation": "Minimum video duration is 3 seconds.",
+      "source_ref": "L-S1",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "linkedin_organic.max_duration_hard",
+      "property": "file.duration_seconds",
+      "operator": "lte",
+      "expected": 900,
+      "classification": "HARD_REQUIREMENT",
+      "severity": "FAIL",
+      "explanation": "The longest duration documented anywhere by LinkedIn for organic native video is 15 minutes (desktop).",
+      "note": "LinkedIn's specification page states 10 minutes while its troubleshooting page states 15 from desktop. Above 15 minutes BOTH documented figures are exceeded, so this rejection does not depend on resolving the conflict; between 10 and 15 minutes the file is only warned about.",
+      "source_ref": "L-S2",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "linkedin_organic.max_duration_documented",
+      "property": "file.duration_seconds",
+      "operator": "lte",
+      "expected": 600,
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "LinkedIn's video specification page states a 10-minute maximum duration.",
+      "message_fail": "LinkedIn's own pages disagree: 10 minutes on the specification page, 15 minutes from desktop on the troubleshooting page. Both are reported rather than one being silently chosen.",
+      "source_ref": "L-S1",
+      "confidence": "MEDIUM",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "linkedin_organic.min_width",
+      "property": "video.display_width",
+      "operator": "gte",
+      "expected": 256,
+      "classification": "HARD_REQUIREMENT",
+      "severity": "FAIL",
+      "explanation": "Resolution must be within 256x144 to 4096x2304.",
+      "source_ref": "L-S1",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "linkedin_organic.max_width",
+      "property": "video.display_width",
+      "operator": "lte",
+      "expected": 4096,
+      "classification": "HARD_REQUIREMENT",
+      "severity": "FAIL",
+      "explanation": "Resolution must be within 256x144 to 4096x2304.",
+      "source_ref": "L-S1",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "linkedin_organic.min_height",
+      "property": "video.display_height",
+      "operator": "gte",
+      "expected": 144,
+      "classification": "HARD_REQUIREMENT",
+      "severity": "FAIL",
+      "explanation": "Resolution must be within 256x144 to 4096x2304.",
+      "source_ref": "L-S1",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "linkedin_organic.max_height",
+      "property": "video.display_height",
+      "operator": "lte",
+      "expected": 2304,
+      "classification": "HARD_REQUIREMENT",
+      "severity": "FAIL",
+      "explanation": "Resolution must be within 256x144 to 4096x2304.",
+      "source_ref": "L-S1",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "linkedin_organic.aspect_ratio",
+      "property": "video.display_aspect_ratio",
+      "operator": "range",
+      "expected": { "min": 0.417, "max": 2.4 },
+      "classification": "HARD_REQUIREMENT",
+      "severity": "FAIL",
+      "explanation": "Aspect ratio must be between 1:2.4 and 2.4:1.",
+      "source_ref": "L-S1",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "linkedin_organic.frame_rate",
+      "property": "video.frame_rate",
+      "operator": "range",
+      "expected": { "min": 10, "max": 60 },
+      "tolerance": 0.01,
+      "classification": "HARD_REQUIREMENT",
+      "severity": "FAIL",
+      "explanation": "Frame rate must be between 10 and 60 FPS.",
+      "source_ref": "L-S1",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "linkedin_organic.bitrate",
+      "property": "video.bitrate",
+      "operator": "range",
+      "expected": { "min": 192000, "max": 30000000 },
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "LinkedIn states a bit-rate guideline of 192 kbps to 30 Mbps.",
+      "message_fail": "This is stated as a guideline rather than a rejection threshold.",
+      "source_ref": "L-S1",
+      "confidence": "MEDIUM",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "linkedin_organic.audio_documented",
+      "property": "audio.present",
+      "operator": "present",
+      "classification": "UNKNOWN",
+      "severity": "INFO",
+      "explanation": "Audio track presence, reported for information.",
+      "note": "LinkedIn documents no audio requirement for organic video, so PreflightQC does not gate on a missing audio track.",
+      "source_ref": "L-S1",
+      "confidence": "LOW",
+      "last_verified_date": "2026-08-09"
+    }
+  ]
+}

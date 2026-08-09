@@ -660,7 +660,7 @@ Full detail is in `docs/licensing/LICENSING-GATE-V1.md`. Summary of source findi
 
 | Finding | Source |
 | --- | --- |
-| FFmpeg's default licence is **LGPL v2.1-or-later**. GPL parts are off by default and require `--enable-gpl`. | `github.com/FFmpeg/FFmpeg/blob/master/LICENSE.md` |
+| FFmpeg's default licence is **LGPL v2.1-or-later**. GPL parts are off by default and require `--enable-gpl`. **Correction 2026-08-09:** the *default* is v2.1, but the mainstream BtbN `win64-lgpl-shared` binary is built with `--enable-version3` and is therefore **LGPL v3**. Verified against the real binary; see `docs/reports/LGPLV3-SPEC-LOCK-REPORT.md`. | `github.com/FFmpeg/FFmpeg/blob/master/LICENSE.md` |
 | `--enable-nonfree` produces a binary that is **"unredistributable"** (verbatim). | LICENSE.md |
 | GPL is triggered by `--enable-gpl` or any GPL external library: libx264, libx265, libxvid, libxavs/libxavs2, libdavs2, frei0r, libcdio, librubberband, libvidstab, avisynth. `libsmbclient` forces GPL-v3. | LICENSE.md |
 | Nonfree: Fraunhofer FDK AAC (`libfdk-aac`), OpenSSL in incompatible combinations, CUDA SDK components (`libnpp`, `cuda-nvcc`). | LICENSE.md + `configure` |

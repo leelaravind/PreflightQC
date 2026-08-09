@@ -1,0 +1,132 @@
+{
+  "preset_id": "tiktok_studio_web",
+  "platform": "TikTok",
+  "display_name": "TikTok — Studio / web upload",
+  "description": "Organic upload through TikTok Studio on the web. A different envelope from the Content Posting API: fewer containers, a resolution floor, and a much larger size and duration ceiling.",
+  "origin": "shipped",
+  "ruleset_version": "2026-08-09.1",
+  "last_verified_date": "2026-08-09",
+  "byte_convention": "Decimal bytes (1 GB = 1,000,000,000).",
+  "caveats": [
+    "TikTok publishes four different maximum durations across overlapping upload paths. This preset validates the Studio web path only.",
+    "MOV is accepted by the Content Posting API but is not listed among the Studio web formats. Pick the preset that matches your delivery route.",
+    "TikTok publishes nothing about codec profile/level, HDR, colour, chroma, fast start, GOP or loudness."
+  ],
+  "sources": [
+    {
+      "source_ref": "T-S1",
+      "title": "Tools for creators (TikTok Studio), TikTok Help Center",
+      "url": "https://support.tiktok.com/en/using-tiktok/creating-videos/creator-tools-on-tiktok",
+      "access_date": "2026-08-09",
+      "confidence": "HIGH"
+    },
+    {
+      "source_ref": "T-S2",
+      "title": "Camera tools, TikTok Help Center",
+      "url": "https://support.tiktok.com/en/using-tiktok/creating-videos/camera-tools",
+      "access_date": "2026-08-09",
+      "confidence": "HIGH"
+    }
+  ],
+  "rules": [
+    {
+      "rule_id": "tiktok_studio.container",
+      "property": "container.format",
+      "operator": "in",
+      "expected": ["mp4", "webm"],
+      "classification": "DOCUMENTED_LIMIT",
+      "severity": "FAIL",
+      "explanation": "Uploaded videos must be in MP4 or WebM file format.",
+      "source_ref": "T-S1",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_studio.min_width",
+      "property": "video.display_width",
+      "operator": "gte",
+      "expected": 720,
+      "classification": "DOCUMENTED_LIMIT",
+      "severity": "FAIL",
+      "explanation": "Uploaded videos must be 720x1280 resolution or higher.",
+      "source_ref": "T-S1",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_studio.min_height",
+      "property": "video.display_height",
+      "operator": "gte",
+      "expected": 1280,
+      "classification": "DOCUMENTED_LIMIT",
+      "severity": "FAIL",
+      "explanation": "Uploaded videos must be 720x1280 resolution or higher.",
+      "source_ref": "T-S1",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_studio.duration",
+      "property": "file.duration_seconds",
+      "operator": "lte",
+      "expected": 1800,
+      "classification": "DOCUMENTED_LIMIT",
+      "severity": "FAIL",
+      "explanation": "Uploaded videos must be up to 30 minutes in length.",
+      "source_ref": "T-S1",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_studio.file_size",
+      "property": "file.size_bytes",
+      "operator": "lt",
+      "expected": 10000000000,
+      "classification": "DOCUMENTED_LIMIT",
+      "severity": "FAIL",
+      "explanation": "Uploaded videos must be less than 10 GB.",
+      "source_ref": "T-S1",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_studio.aspect_ratio",
+      "property": "video.display_aspect_ratio",
+      "operator": "eq",
+      "expected": 0.5625,
+      "tolerance": 0.01,
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "9:16 is the native and recommended aspect ratio.",
+      "message_fail": "1:1 and 16:9 are also accepted and are letterboxed on playback.",
+      "source_ref": "T-S1",
+      "confidence": "MEDIUM",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_studio.recommended_resolution",
+      "property": "video.display_height",
+      "operator": "gte",
+      "expected": 1920,
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "1080x1920 is the recommended delivery resolution.",
+      "source_ref": "T-S1",
+      "confidence": "MEDIUM",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_studio.duration_ambiguity",
+      "property": "file.duration_seconds",
+      "operator": "lte",
+      "expected": 3600,
+      "classification": "UNKNOWN",
+      "severity": "INFO",
+      "explanation": "In-app upload documents a 60-minute maximum, twice the Studio figure.",
+      "note": "Reported so TikTok's own documented contradiction is visible rather than silently resolved.",
+      "source_ref": "T-S2",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    }
+  ]
+}

@@ -121,6 +121,64 @@ when a first-party source publishes the requirement. Never from a third-party so
 
 ---
 
+## 3A. DISCOVERED DURING V1 IMPLEMENTATION
+
+Recorded rather than implemented, per spec §29.3.
+
+### 3A.1 Cross-property rules
+
+**What.** The engine compares one property against a constant. It cannot express "audio
+duration must equal video duration", which LinkedIn CTV actually specifies.
+
+**Why deferred.** Adding a second operand class touches the rule schema, the loader, the
+operator set and the boundary-derivation harness — a real engine change, not preset data,
+and therefore outside what Phase 4 was allowed to do.
+
+**Current behaviour.** `linkedin_ctv.audio_duration_match` ships as a `RECOMMENDATION`
+that reports the audio duration for the operator to compare by eye. Honest, but weaker
+than the source supports.
+
+**What it would need.** An `expected` form that names another property path, plus
+boundary derivation for two-operand rules.
+
+### 3A.1b A heavily corrupt file can still produce a confident FAIL
+
+**What.** `94_corrupt_moov.mp4` (a real file with its `moov` atom destroyed) fails
+`ig_reels.faststart`. ffprobe cannot read the file at all; MediaInfo reads it partially
+and *positively* reports `IsStreamable = No`, so the engine validates what is known and
+fails that rule.
+
+**Why this is currently correct.** Spec §23 requires "validate what is known and emit
+UNKNOWN for the rest", and forbids failing **for corruption alone** — not failing on a
+property that was genuinely read. The engine did not invent evidence, and a test now
+enforces that every FAIL rests on a `KNOWN` property.
+
+**Why it is still worth revisiting.** The user sees *"FAIL: fast start"* for a file whose
+actual problem is that it is broken. The finding is true but unhelpful, and the fact that
+one of the two inspectors failed outright is visible only in the diagnostics.
+
+**What it would need.** A degraded-inspection signal on the file result — something like
+"inspected with one inspector only" — surfaced next to the status, so a confident-looking
+verdict on a barely-readable file carries its caveat. A presentation change, not a
+severity change.
+
+### 3A.2 Surfacing inspector disagreement more prominently
+
+**What.** When ffprobe and MediaInfo disagree about a property, the engine evaluates
+against the more permissive reading and caps severity at `WARN` (spec §10.4). A file
+whose permissive reading passes therefore shows as a clean `PASS` with the disagreement
+recorded only as an `INFO` finding.
+
+**Why it matters.** That is correct — we are genuinely not confident enough to reject —
+but a user scanning a status column sees `PASS` and may never open the detail pane. A
+disagreement on a gating property is worth more visual weight than a generic `INFO`.
+
+**What it would need.** A distinct file-level indicator for "passed, but the inspectors
+disagreed about something that mattered". A presentation change, not a severity change:
+promoting it to `WARN` would violate §7.1.
+
+---
+
 ## 4. PRODUCT AND WORKFLOW IDEAS
 
 Not blocked by anything except V1 scope discipline.

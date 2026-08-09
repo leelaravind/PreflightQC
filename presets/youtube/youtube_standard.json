@@ -1,0 +1,334 @@
+{
+  "preset_id": "youtube_standard",
+  "platform": "YouTube",
+  "display_name": "YouTube — Standard upload",
+  "description": "Standard YouTube upload. YouTube publishes almost every encoding parameter as a recommendation rather than a requirement, so this preset is dominated by warnings by design.",
+  "origin": "shipped",
+  "ruleset_version": "2026-08-09.1",
+  "last_verified_date": "2026-08-09",
+  "byte_convention": "Decimal bytes (1 GB = 1,000,000,000).",
+  "caveats": [
+    "YouTube publishes its container, codec, profile, GOP, chroma, audio and bitrate guidance as RECOMMENDED ENCODING, not as hard requirements. Only two file-measurable conditions justify a failure: an unsupported container, and exceeding the 256 GB ceiling.",
+    "Duration above 15 minutes requires a phone-verified account, so it is a warning rather than a failure: whether it applies depends on the account, not the file.",
+    "HDR rules are evaluated only when the file signals HDR intent through a PQ or HLG transfer function.",
+    "Live-streaming encoder settings (CBR, 2-second keyframes, RTMP) are a different specification entirely and are not applied to uploads.",
+    "YouTube's title, description and tag limits constrain text you enter at upload time, not the video file, and are out of scope for V1."
+  ],
+  "sources": [
+    {
+      "source_ref": "Y-S1",
+      "title": "YouTube recommended upload encoding settings",
+      "url": "https://support.google.com/youtube/answer/1722171?hl=en",
+      "access_date": "2026-08-09",
+      "confidence": "HIGH"
+    },
+    {
+      "source_ref": "Y-S2",
+      "title": "Supported YouTube file formats",
+      "url": "https://support.google.com/youtube/troubleshooter/2888402?hl=en",
+      "access_date": "2026-08-09",
+      "confidence": "HIGH"
+    },
+    {
+      "source_ref": "Y-S3",
+      "title": "Video resolution and aspect ratios, YouTube Help",
+      "url": "https://support.google.com/youtube/answer/6375112?hl=en",
+      "access_date": "2026-08-09",
+      "confidence": "HIGH"
+    },
+    {
+      "source_ref": "Y-S4",
+      "title": "Upload High Dynamic Range (HDR) videos, YouTube Help",
+      "url": "https://support.google.com/youtube/answer/7126552?hl=en",
+      "access_date": "2026-08-09",
+      "confidence": "HIGH"
+    },
+    {
+      "source_ref": "Y-S5",
+      "title": "Upload videos longer than 15 minutes, YouTube Help",
+      "url": "https://support.google.com/youtube/answer/71673?hl=en",
+      "access_date": "2026-08-09",
+      "confidence": "HIGH"
+    }
+  ],
+  "rules": [
+    {
+      "rule_id": "youtube.container_supported",
+      "property": "container.format",
+      "operator": "in",
+      "expected": [
+        "mov", "mpeg", "mpeg1", "mpeg2", "mp4", "avi", "wmv", "mpegps", "flv",
+        "3gp", "webm", "mkv", "dnxhr", "prores", "cineform"
+      ],
+      "classification": "HARD_REQUIREMENT",
+      "severity": "FAIL",
+      "explanation": "The file type must be on YouTube's supported-formats list, otherwise the upload is rejected as an invalid file format.",
+      "source_ref": "Y-S2",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "youtube.max_file_size",
+      "property": "file.size_bytes",
+      "operator": "lte",
+      "expected": 256000000000,
+      "classification": "DOCUMENTED_LIMIT",
+      "severity": "FAIL",
+      "explanation": "The maximum file size you can upload is 256 GB.",
+      "note": "Some third-party guides claim a 512 GB ceiling for verified accounts. That figure contradicts YouTube's own documentation and is not used.",
+      "source_ref": "Y-S5",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "youtube.max_duration_verified",
+      "property": "file.duration_seconds",
+      "operator": "lte",
+      "expected": 43200,
+      "classification": "DOCUMENTED_LIMIT",
+      "severity": "WARN",
+      "explanation": "The maximum upload duration is 12 hours.",
+      "source_ref": "Y-S5",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "youtube.duration_requires_verification",
+      "property": "file.duration_seconds",
+      "operator": "lte",
+      "expected": 900,
+      "classification": "DOCUMENTED_LIMIT",
+      "severity": "WARN",
+      "explanation": "By default you can upload videos up to 15 minutes long; longer uploads need a phone-verified channel.",
+      "message_fail": "This depends on your account, not on the file. A verified channel can upload up to 12 hours.",
+      "source_ref": "Y-S5",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "youtube.container_recommended",
+      "property": "container.format",
+      "operator": "in",
+      "expected": ["mp4"],
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "MP4 is the recommended container.",
+      "source_ref": "Y-S1",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "youtube.video_codec",
+      "property": "video.codec",
+      "operator": "in",
+      "expected": ["h264"],
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "H.264 is the recommended video codec.",
+      "source_ref": "Y-S1",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "youtube.h264_profile",
+      "property": "video.profile",
+      "operator": "matches",
+      "expected": "High.*",
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "H.264 High Profile is recommended.",
+      "applies_when": [
+        { "property": "video.codec", "operator": "in", "expected": ["h264"] }
+      ],
+      "source_ref": "Y-S1",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "youtube.chroma_subsampling",
+      "property": "video.chroma_subsampling",
+      "operator": "eq",
+      "expected": "4:2:0",
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "4:2:0 chroma subsampling is recommended.",
+      "source_ref": "Y-S1",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "youtube.progressive_scan",
+      "property": "video.scan_type",
+      "operator": "eq",
+      "expected": "progressive",
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "Progressive scan is recommended; interlaced content should be deinterlaced before upload.",
+      "source_ref": "Y-S1",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "youtube.faststart",
+      "property": "container.faststart",
+      "operator": "eq",
+      "expected": true,
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "The moov atom should be at the front of the file (fast start).",
+      "source_ref": "Y-S1",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "youtube.edit_lists",
+      "property": "container.edit_lists_present",
+      "operator": "eq",
+      "expected": false,
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "No edit lists, or the video might not get processed correctly.",
+      "note": "Detecting edit lists needs atom-level inspection, which PreflightQC V1 does not perform.",
+      "measurable_offline": false,
+      "source_ref": "Y-S1",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "youtube.audio_codec",
+      "property": "audio.codec",
+      "operator": "in",
+      "expected": ["aac", "opus"],
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "AAC-LC or Opus audio is recommended.",
+      "source_ref": "Y-S1",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "youtube.audio_sample_rate",
+      "property": "audio.sample_rate",
+      "operator": "eq",
+      "expected": 48000,
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "A 48 kHz audio sample rate is recommended.",
+      "source_ref": "Y-S1",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "youtube.audio_bitrate_stereo",
+      "property": "audio.bitrate",
+      "operator": "gte",
+      "expected": 384000,
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "A stereo audio bitrate of 384 kbps is recommended.",
+      "applies_when": [
+        { "property": "audio.channels", "operator": "eq", "expected": 2 }
+      ],
+      "source_ref": "Y-S1",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "youtube.colour_space_sdr",
+      "property": "video.colour_space",
+      "operator": "eq",
+      "expected": "bt709",
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "BT.709 is the recommended SDR colour space.",
+      "applies_when": [
+        { "property": "video.transfer_characteristics", "operator": "not_in", "expected": ["pq", "hlg"] }
+      ],
+      "source_ref": "Y-S1",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "youtube.hdr_bit_depth",
+      "property": "video.bit_depth",
+      "operator": "gte",
+      "expected": 10,
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "HDR uploads should be 10-bit or 12-bit.",
+      "applies_when": [
+        { "property": "video.transfer_characteristics", "operator": "in", "expected": ["pq", "hlg"] }
+      ],
+      "source_ref": "Y-S4",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "youtube.hdr_colour_primaries",
+      "property": "video.colour_primaries",
+      "operator": "eq",
+      "expected": "bt2020",
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "HDR uploads should use Rec.2020 colour primaries.",
+      "applies_when": [
+        { "property": "video.transfer_characteristics", "operator": "in", "expected": ["pq", "hlg"] }
+      ],
+      "source_ref": "Y-S4",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "youtube.hdr_metadata_present",
+      "property": "video.hdr_format",
+      "operator": "present",
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "HDR metadata must be present in the codec or container, or the video will not be processed as HDR.",
+      "message_fail": "This file signals an HDR transfer function but carries no HDR metadata, so YouTube would not process it as HDR.",
+      "applies_when": [
+        { "property": "video.transfer_characteristics", "operator": "in", "expected": ["pq", "hlg"] }
+      ],
+      "source_ref": "Y-S4",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "youtube.dolby_vision",
+      "property": "video.dolby_vision",
+      "operator": "absent",
+      "classification": "UNKNOWN",
+      "severity": "INFO",
+      "explanation": "Dolby Vision is not listed among YouTube's supported HDR upload formats.",
+      "note": "YouTube neither documents support nor documents rejection, so PreflightQC reports the presence of Dolby Vision metadata without judging it.",
+      "source_ref": "Y-S4",
+      "confidence": "LOW",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "youtube.minimum_resolution",
+      "property": "video.display_height",
+      "operator": "gte",
+      "expected": 240,
+      "classification": "UNKNOWN",
+      "severity": "INFO",
+      "explanation": "240p is the lowest resolution in YouTube's recommended encoding table.",
+      "note": "YouTube publishes no minimum-resolution rejection threshold, so this is reported for information only.",
+      "source_ref": "Y-S3",
+      "confidence": "LOW",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "youtube.max_resolution",
+      "property": "video.display_width",
+      "operator": "lte",
+      "expected": 7680,
+      "classification": "DOCUMENTED_LIMIT",
+      "severity": "WARN",
+      "explanation": "8K (7680x4320) is the maximum resolution YouTube plays back.",
+      "source_ref": "Y-S3",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    }
+  ]
+}

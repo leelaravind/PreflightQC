@@ -1,0 +1,17 @@
+MICROSOFT VISUAL C++ RUNTIME — LICENCE TEXT REQUIRED
+====================================================
+
+THIS FILE IS A PLACEHOLDER. IT IS NOT A LICENCE.
+
+This product redistributes Microsoft Visual C++ runtime components
+(VCRUNTIME140.dll, VCRUNTIME140_1.dll, MSVCP140.dll, ucrtbase.dll and the
+api-ms-win-* forwarders), which arrive as part of the frozen CPython runtime.
+
+Microsoft does not ship a licence text alongside these DLLs, so it cannot be
+collected automatically. Before release, a human must replace this file with the
+"Microsoft Software License Terms" for the Microsoft Visual C++ Redistributable
+version actually shipped, obtained from the redistributable package or from
+Microsoft's Visual Studio licence terms page, and confirm the redistribution
+rights cover this product.
+
+Tracked as an open action in docs/reports/RELEASE-AUDIT-V1.md.

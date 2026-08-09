@@ -1,0 +1,203 @@
+{
+  "preset_id": "ig_feed",
+  "platform": "Meta / Instagram",
+  "display_name": "Instagram Feed video",
+  "description": "Instagram Feed video. Deliberately advisory: Instagram publishes no dedicated file-specification block for Feed video, so this preset carries no hard failures.",
+  "origin": "shipped",
+  "ruleset_version": "2026-08-09.1",
+  "last_verified_date": "2026-08-09",
+  "byte_convention": "Decimal bytes (1 MB = 1,000,000).",
+  "caveats": [
+    "Instagram publishes no dedicated file-specification block for Feed video. The values here come from the Ads Guide and general upload help, which are JavaScript-rendered and were captured at medium confidence.",
+    "Because no value reaches the confidence needed for a hard requirement, this preset contains NO failing rules. Everything is a warning or informational.",
+    "The Ads Guide is internally inconsistent about Feed aspect ratio: the Awareness objective states 9:16 at 1080x1920 with a 250 px minimum width, while other objectives state 4:5 at 1080x1080 with a 500 px minimum. Both are reported; neither is enforced."
+  ],
+  "sources": [
+    {
+      "source_ref": "M-S5",
+      "title": "Ads Guide, Instagram Feed video (Awareness)",
+      "url": "https://www.facebook.com/business/ads-guide/update/video/instagram-feed",
+      "access_date": "2026-08-09",
+      "confidence": "MEDIUM"
+    },
+    {
+      "source_ref": "M-S3",
+      "title": "Upload a Video, Meta Business Help Center",
+      "url": "https://www.facebook.com/business/help/163131210928551",
+      "access_date": "2026-08-09",
+      "confidence": "HIGH"
+    },
+    {
+      "source_ref": "M-S8",
+      "title": "Ads Guide, Facebook Feed video (Awareness)",
+      "url": "https://www.facebook.com/business/ads-guide/update/video",
+      "access_date": "2026-08-09",
+      "confidence": "HIGH"
+    }
+  ],
+  "rules": [
+    {
+      "rule_id": "ig_feed.container",
+      "property": "container.format",
+      "operator": "in",
+      "expected": ["mp4", "mov", "gif"],
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "MP4, MOV or GIF are the recommended file types.",
+      "message_fail": "MP4 is recommended, but nearly all video file types are accepted.",
+      "source_ref": "M-S5",
+      "confidence": "MEDIUM",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "ig_feed.aspect_ratio",
+      "property": "video.display_aspect_ratio",
+      "operator": "eq",
+      "expected": 0.5625,
+      "tolerance": 0.01,
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "A 9:16 aspect ratio is recommended for the Awareness objective.",
+      "message_fail": "Instagram's own guidance differs by objective: 9:16 for Awareness, 4:5 elsewhere. Neither is an upload requirement.",
+      "source_ref": "M-S5",
+      "confidence": "MEDIUM",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "ig_feed.resolution",
+      "property": "video.display_width",
+      "operator": "gte",
+      "expected": 1080,
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "A resolution of 1080x1920 is recommended.",
+      "source_ref": "M-S5",
+      "confidence": "MEDIUM",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "ig_feed.min_width",
+      "property": "video.display_width",
+      "operator": "gte",
+      "expected": 250,
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "A minimum width of 250 pixels is documented for the Awareness objective.",
+      "message_fail": "This figure was captured from a JavaScript-rendered page at medium confidence, and other objectives state 500 px. PreflightQC does not treat it as a hard limit.",
+      "source_ref": "M-S5",
+      "confidence": "MEDIUM",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "ig_feed.file_size",
+      "property": "file.size_bytes",
+      "operator": "lte",
+      "expected": 4000000000,
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "A maximum file size of 4 GB is documented.",
+      "message_fail": "Captured at medium confidence from a JavaScript-rendered page; reported rather than enforced.",
+      "source_ref": "M-S5",
+      "confidence": "MEDIUM",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "ig_feed.duration",
+      "property": "file.duration_seconds",
+      "operator": "range",
+      "expected": { "min": 1, "max": 3600 },
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "A duration between 1 second and 60 minutes is documented.",
+      "source_ref": "M-S5",
+      "confidence": "MEDIUM",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "ig_feed.general_upload_duration",
+      "property": "file.duration_seconds",
+      "operator": "lt",
+      "expected": 14400,
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "General video uploads must be less than 240 minutes long.",
+      "source_ref": "M-S3",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "ig_feed.fixed_frame_rate",
+      "property": "video.frame_rate_mode",
+      "operator": "constant_only",
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "A fixed frame rate is recommended.",
+      "message_fail": "Variable frame rate is a recommendation to avoid, not a rejection condition.",
+      "source_ref": "M-S8",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "ig_feed.progressive_scan",
+      "property": "video.scan_type",
+      "operator": "eq",
+      "expected": "progressive",
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "Progressive scan is recommended.",
+      "source_ref": "M-S8",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "ig_feed.video_codec",
+      "property": "video.codec",
+      "operator": "in",
+      "expected": ["h264"],
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "H.264 compression is recommended.",
+      "source_ref": "M-S8",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "ig_feed.audio_codec",
+      "property": "audio.codec",
+      "operator": "in",
+      "expected": ["aac"],
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "Stereo AAC audio is recommended.",
+      "source_ref": "M-S8",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "ig_feed.audio_bitrate",
+      "property": "audio.bitrate",
+      "operator": "gte",
+      "expected": 128000,
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "Stereo AAC audio compression at 128 kbps or more is recommended.",
+      "source_ref": "M-S3",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "ig_feed.edit_lists",
+      "property": "container.edit_lists_present",
+      "operator": "eq",
+      "expected": false,
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "Videos should not contain edit lists or special boxes in file containers.",
+      "note": "Detecting edit lists needs atom-level inspection, which PreflightQC V1 does not perform.",
+      "measurable_offline": false,
+      "source_ref": "M-S8",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    }
+  ]
+}

@@ -138,7 +138,7 @@ Python binding under LGPLv3, which is compliable without a purchase.
 | PyInstaller | GPL **with a bootloader exception** permitting closed-source distribution of frozen apps | No | Build tool; verify the exception applies to the shipped bootloader |
 | Inno Setup | Modified BSD-style | No | Build tool; notice if the stub is embedded |
 | pytest, ruff, mypy, coverage | MIT / BSD | No | Dev-only; not shipped |
-| ffprobe + `libav*` | LGPL 2.1+ | No (subprocess + shared) | Full FFmpeg checklist — see licensing gate |
+| ffprobe + `libav*` | **LGPL 3.0+** (verified build carries `--enable-version3`) | No (subprocess + shared) | Full FFmpeg checklist — see licensing gate §2.0 |
 | MediaInfo | BSD-2-Clause | No | Attribution sentence |
 | ZenLib | zlib | No | Attribution |
 
@@ -150,9 +150,12 @@ scores higher on "commercial redistribution".
 Three things make it acceptable:
 
 1. **The compliance machinery is already required.** PreflightQC must already ship LGPL
-   2.1 text, a notice file, a source-availability link, unobfuscated shared libraries, and
+   text, a notice file, a source-availability link, unobfuscated shared libraries, and
    an EULA free of a reverse-engineering prohibition — all for FFmpeg. Adding LGPLv3 Qt
-   extends an existing process rather than creating a new one.
+   extends an existing process rather than creating a new one. **This argument became
+   stronger after the 2026-08-09 amendment**: the verified FFmpeg build is itself LGPL
+   **v3**, so Qt and FFmpeg now sit under the same licence version and constitute a
+   single compliance surface and a single legal conversation.
 2. **PyInstaller one-dir satisfies the shared-library mechanism.** Qt's `.dll` files and
    PySide6's `.pyd` extension modules sit as separate, unobfuscated files in
    `_internal/`. A user can replace them with an interface-compatible build. This is

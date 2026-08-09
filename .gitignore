@@ -2,6 +2,15 @@
 # PreflightQC .gitignore
 # ---------------------------------------------------------------------------
 
+# --- Third-party corresponding source (gate G-5) ---------------------------
+# The FFmpeg source archive and the build-recipe archive are NOT committed: they are
+# ~17 MB of upstream code, and Git is the wrong container for it. What IS committed is
+# everything needed to rebuild them byte-for-byte — upstream repository, commit, archive
+# prefix, exact command and expected SHA-256, all in packaging/binaries.lock.json.
+#   python tools/fetch_corresponding_source.py
+# The working checkouts those archives are built from are pure scratch space.
+third-party/source/
+
 # --- Third-party binaries -------------------------------------------------
 # ffprobe, the libav* shared libraries and MediaInfo are NEVER committed to
 # this repository. They are fetched at packaging time from their pinned,
@@ -20,6 +29,10 @@ third-party/**/*.tar.gz
 # --- Generated / synthetic test media -------------------------------------
 # The golden corpus is GENERATED from a committed manifest, never committed.
 test-assets/generated/
+# Phase 1 spike media and raw inspector dumps: generated from a real encoder, large,
+# and reproducible. The findings summary is small enough to keep; the raw matrix is not.
+spikes/samples/
+spikes/probe-matrix.json
 test-assets/**/*.mp4
 test-assets/**/*.mov
 test-assets/**/*.mkv
@@ -74,6 +87,13 @@ $RECYCLE.BIN/
 local-profiles/
 logs/
 *.log
+
+# --- Windows shell artefact -----------------------------------------------
+# A literal, unexpanded "%SystemDrive%" folder that Windows itself occasionally
+# creates in a working directory during heavy file activity. It holds Windows shell
+# caches and is not produced by PreflightQC — nothing in this codebase references
+# that variable. Excluded so it cannot be committed by accident.
+%SystemDrive%/
 
 # --- Secrets --------------------------------------------------------------
 .env

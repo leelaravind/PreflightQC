@@ -1,0 +1,3746 @@
+{
+  "determinability_matrix": {
+    "audio.bitrate": {
+      "KNOWN": 4,
+      "UNDETERMINED": 11
+    },
+    "audio.channel_layout": {
+      "KNOWN": 5,
+      "UNDETERMINED": 10
+    },
+    "audio.channels": {
+      "KNOWN": 5,
+      "UNDETERMINED": 10
+    },
+    "audio.codec": {
+      "KNOWN": 5,
+      "UNDETERMINED": 10
+    },
+    "audio.duration_seconds": {
+      "KNOWN": 5,
+      "UNDETERMINED": 10
+    },
+    "audio.present": {
+      "KNOWN": 15
+    },
+    "audio.sample_rate": {
+      "KNOWN": 5,
+      "UNDETERMINED": 10
+    },
+    "container.audio_stream_count": {
+      "KNOWN": 12,
+      "UNDETERMINED": 3
+    },
+    "container.edit_lists_present": {
+      "UNDETERMINED": 15
+    },
+    "container.faststart": {
+      "KNOWN": 12,
+      "UNDETERMINED": 3
+    },
+    "container.format": {
+      "KNOWN": 11,
+      "UNDETERMINED": 4
+    },
+    "container.major_brand": {
+      "KNOWN": 11,
+      "UNDETERMINED": 4
+    },
+    "container.overall_bitrate": {
+      "KNOWN": 12,
+      "UNDETERMINED": 3
+    },
+    "container.stream_count": {
+      "KNOWN": 11,
+      "UNDETERMINED": 4
+    },
+    "container.video_stream_count": {
+      "KNOWN": 12,
+      "UNDETERMINED": 3
+    },
+    "file.duration_seconds": {
+      "KNOWN": 12,
+      "UNDETERMINED": 3
+    },
+    "file.size_bytes": {
+      "KNOWN": 15
+    },
+    "video.bit_depth": {
+      "KNOWN": 12,
+      "UNDETERMINED": 3
+    },
+    "video.bitrate": {
+      "KNOWN": 12,
+      "UNDETERMINED": 3
+    },
+    "video.chroma_subsampling": {
+      "KNOWN": 12,
+      "UNDETERMINED": 3
+    },
+    "video.codec": {
+      "KNOWN": 12,
+      "UNDETERMINED": 3
+    },
+    "video.coded_height": {
+      "KNOWN": 11,
+      "UNDETERMINED": 4
+    },
+    "video.coded_width": {
+      "KNOWN": 11,
+      "UNDETERMINED": 4
+    },
+    "video.colour_primaries": {
+      "UNDETERMINED": 15
+    },
+    "video.colour_range": {
+      "KNOWN": 2,
+      "UNDETERMINED": 13
+    },
+    "video.colour_space": {
+      "KNOWN": 1,
+      "UNDETERMINED": 14
+    },
+    "video.display_aspect_ratio": {
+      "KNOWN": 12,
+      "UNDETERMINED": 3
+    },
+    "video.display_height": {
+      "KNOWN": 12,
+      "UNDETERMINED": 3
+    },
+    "video.display_width": {
+      "KNOWN": 12,
+      "UNDETERMINED": 3
+    },
+    "video.dolby_vision": {
+      "UNDETERMINED": 15
+    },
+    "video.frame_rate": {
+      "KNOWN": 12,
+      "UNDETERMINED": 3
+    },
+    "video.frame_rate_mode": {
+      "KNOWN": 12,
+      "UNDETERMINED": 3
+    },
+    "video.gop_closed": {
+      "UNDETERMINED": 15
+    },
+    "video.hdr_format": {
+      "UNDETERMINED": 15
+    },
+    "video.height": {
+      "KNOWN": 12,
+      "UNDETERMINED": 3
+    },
+    "video.level": {
+      "KNOWN": 11,
+      "UNDETERMINED": 4
+    },
+    "video.max_cll": {
+      "UNDETERMINED": 15
+    },
+    "video.max_fall": {
+      "UNDETERMINED": 15
+    },
+    "video.pixel_format": {
+      "KNOWN": 11,
+      "UNDETERMINED": 4
+    },
+    "video.profile": {
+      "KNOWN": 12,
+      "UNDETERMINED": 3
+    },
+    "video.rotation_degrees": {
+      "KNOWN": 12,
+      "UNDETERMINED": 3
+    },
+    "video.sample_aspect_ratio": {
+      "KNOWN": 12,
+      "UNDETERMINED": 3
+    },
+    "video.scan_type": {
+      "KNOWN": 12,
+      "UNDETERMINED": 3
+    },
+    "video.transfer_characteristics": {
+      "UNDETERMINED": 15
+    },
+    "video.width": {
+      "KNOWN": 12,
+      "UNDETERMINED": 3
+    }
+  },
+  "ffprobe_configuration": "--prefix=/ffbuild/prefix --pkg-config-flags=--static --pkg-config=pkg-config --cross-prefix=x86_64-w64-mingw32- --arch=x86_64 --target-os=mingw32 --enable-version3 --disable-debug --enable-shared --disable-static --disable-w32threads --enable-pthreads --enable-iconv --enable-zlib --enable-libxml2 --enable-libvmaf --enable-fontconfig --enable-libharfbuzz --enable-libfreetype --enable-libfribidi --enable-vulkan --enable-libshaderc --enable-libvorbis --disable-libxcb --disable-xlib --disable-libpulse --enable-gmp --enable-lzma --enable-liblcevc-dec --enable-opencl --enable-amf --enable-libaom --enable-libaribb24 --disable-avisynth --enable-chromaprint --enable-libdav1d --disable-libdavs2 --disable-libdvdread --disable-libdvdnav --disable-libfdk-aac --enable-ffnvcodec --enable-cuda-llvm --disable-frei0r --enable-libgme --enable-libkvazaar --enable-libaribcaption --enable-libass --enable-libbluray --enable-libjxl --enable-libmp3lame --enable-libopus --enable-libplacebo --enable-librist --enable-libssh --enable-libtheora --enable-libvpx --enable-libwebp --enable-libzmq --enable-lv2 --enable-libvpl --enable-openal --enable-liboapv --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenh264 --enable-libopenjpeg --enable-libopenmpt --enable-librav1e --disable-librubberband --enable-schannel --enable-sdl2 --enable-libsnappy --enable-libsoxr --enable-libsrt --enable-libsvtav1 --enable-libtwolame --enable-libuavs3d --disable-libdrm --enable-vaapi --disable-libvidstab --enable-libvvenc --disable-whisper --disable-libx264 --disable-libx265 --disable-libxavs2 --disable-libxvid --enable-libzimg --enable-libzvbi --extra-cflags=-DLIBTWOLAME_STATIC --extra-cxxflags= --extra-libs=-lgomp --extra-ldflags=-pthread --extra-ldexeflags= --cc=x86_64-w64-mingw32-gcc --cxx=x86_64-w64-mingw32-g++ --ar=x86_64-w64-mingw32-gcc-ar --ranlib=x86_64-w64-mingw32-gcc-ranlib --nm=x86_64-w64-mingw32-gcc-nm --extra-version=20260809",
+  "files": [
+    {
+      "conflicts": [],
+      "ffprobe_ok": true,
+      "file": "01_h264_1080x1920_30_aac.mp4",
+      "mediainfo_ok": true,
+      "normalised": {
+        "audio.bitrate": {
+          "display": "128309",
+          "from": "ffprobe:streams[].bit_rate",
+          "state": "KNOWN"
+        },
+        "audio.channel_layout": {
+          "display": "stereo",
+          "from": "ffprobe:streams[].channel_layout",
+          "state": "KNOWN"
+        },
+        "audio.channels": {
+          "display": "2",
+          "from": "ffprobe:streams[].channels",
+          "state": "KNOWN"
+        },
+        "audio.codec": {
+          "display": "aac",
+          "from": "ffprobe:streams[].codec_name",
+          "state": "KNOWN"
+        },
+        "audio.duration_seconds": {
+          "display": "4.0",
+          "from": "ffprobe:streams[].duration",
+          "state": "KNOWN"
+        },
+        "audio.present": {
+          "display": "True",
+          "from": "computed:audio.present (derived from streams[])",
+          "state": "KNOWN"
+        },
+        "audio.sample_rate": {
+          "display": "48000",
+          "from": "ffprobe:streams[].sample_rate",
+          "state": "KNOWN"
+        },
+        "container.audio_stream_count": {
+          "display": "1",
+          "from": "ffprobe:streams[audio]",
+          "state": "KNOWN"
+        },
+        "container.edit_lists_present": {
+          "display": "could not be determined (edit-list presence requires atom-level inspection; not determined by PreflightQC V1)",
+          "reason": "edit-list presence requires atom-level inspection; not determined by PreflightQC V1",
+          "state": "UNDETERMINED"
+        },
+        "container.faststart": {
+          "display": "True",
+          "from": "mediainfo:General.IsStreamable",
+          "state": "KNOWN"
+        },
+        "container.format": {
+          "display": "frozenset({'3gp', 'mp4', 'mov'})",
+          "from": "ffprobe:format.format_name",
+          "state": "KNOWN"
+        },
+        "container.major_brand": {
+          "display": "isom",
+          "from": "ffprobe:format.tags.major_brand",
+          "state": "KNOWN"
+        },
+        "container.overall_bitrate": {
+          "display": "2142786",
+          "from": "ffprobe:format.bit_rate",
+          "state": "KNOWN"
+        },
+        "container.stream_count": {
+          "display": "2",
+          "from": "ffprobe:format.nb_streams",
+          "state": "KNOWN"
+        },
+        "container.video_stream_count": {
+          "display": "1",
+          "from": "ffprobe:streams[video]",
+          "state": "KNOWN"
+        },
+        "file.duration_seconds": {
+          "display": "4.0",
+          "from": "ffprobe:format.duration",
+          "state": "KNOWN"
+        },
+        "file.size_bytes": {
+          "display": "1071393",
+          "from": "filesystem:stat.st_size",
+          "state": "KNOWN"
+        },
+        "video.bit_depth": {
+          "display": "8",
+          "from": "ffprobe:streams[].bits_per_raw_sample",
+          "state": "KNOWN"
+        },
+        "video.bitrate": {
+          "display": "2004062",
+          "from": "ffprobe:streams[].bit_rate",
+          "state": "KNOWN"
+        },
+        "video.chroma_subsampling": {
+          "display": "4:2:0",
+          "from": "ffprobe:streams[].pix_fmt",
+          "state": "KNOWN"
+        },
+        "video.codec": {
+          "display": "h264",
+          "from": "ffprobe:streams[].codec_name",
+          "state": "KNOWN"
+        },
+        "video.coded_height": {
+          "display": "1920",
+          "from": "ffprobe:streams[].coded_height",
+          "state": "KNOWN"
+        },
+        "video.coded_width": {
+          "display": "1080",
+          "from": "ffprobe:streams[].coded_width",
+          "state": "KNOWN"
+        },
+        "video.colour_primaries": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.colour_range": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.colour_space": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.display_aspect_ratio": {
+          "display": "9/16",
+          "from": "computed:video.display_aspect_ratio (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)",
+          "state": "KNOWN"
+        },
+        "video.display_height": {
+          "display": "1920",
+          "from": "computed:video.display_height (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)",
+          "state": "KNOWN"
+        },
+        "video.display_width": {
+          "display": "1080",
+          "from": "computed:video.display_width (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)",
+          "state": "KNOWN"
+        },
+        "video.dolby_vision": {
+          "display": "could not be determined (no Dolby Vision metadata found (note: DV in raw HEVC is a documented inspector limitation))",
+          "reason": "no Dolby Vision metadata found (note: DV in raw HEVC is a documented inspector limitation)",
+          "state": "UNDETERMINED"
+        },
+        "video.frame_rate": {
+          "display": "30",
+          "from": "ffprobe:streams[].avg_frame_rate",
+          "state": "KNOWN"
+        },
+        "video.frame_rate_mode": {
+          "display": "CFR",
+          "from": "mediainfo:Video.FrameRate_Mode",
+          "state": "KNOWN"
+        },
+        "video.gop_closed": {
+          "display": "could not be determined (closed-GOP verification requires packet-level analysis; not measured by PreflightQC V1)",
+          "reason": "closed-GOP verification requires packet-level analysis; not measured by PreflightQC V1",
+          "state": "UNDETERMINED"
+        },
+        "video.hdr_format": {
+          "display": "could not be determined (no HDR metadata found)",
+          "reason": "no HDR metadata found",
+          "state": "UNDETERMINED"
+        },
+        "video.height": {
+          "display": "1920",
+          "from": "ffprobe:streams[].height",
+          "state": "KNOWN"
+        },
+        "video.level": {
+          "display": "40",
+          "from": "ffprobe:streams[].level",
+          "state": "KNOWN"
+        },
+        "video.max_cll": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "video.max_fall": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "video.pixel_format": {
+          "display": "yuv420p",
+          "from": "ffprobe:streams[].pix_fmt",
+          "state": "KNOWN"
+        },
+        "video.profile": {
+          "display": "Constrained Baseline",
+          "from": "ffprobe:streams[].profile",
+          "state": "KNOWN"
+        },
+        "video.rotation_degrees": {
+          "display": "0",
+          "from": "mediainfo:side_data[Display Matrix].rotation",
+          "state": "KNOWN"
+        },
+        "video.sample_aspect_ratio": {
+          "display": "1",
+          "from": "ffprobe:streams[].sample_aspect_ratio",
+          "state": "KNOWN"
+        },
+        "video.scan_type": {
+          "display": "progressive",
+          "from": "mediainfo:Video.ScanType",
+          "state": "KNOWN"
+        },
+        "video.transfer_characteristics": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.width": {
+          "display": "1080",
+          "from": "ffprobe:streams[].width",
+          "state": "KNOWN"
+        }
+      },
+      "notes": [],
+      "size_bytes": 1071393,
+      "verdict": "INSPECTED"
+    },
+    {
+      "conflicts": [],
+      "ffprobe_ok": true,
+      "file": "02_h264_no_audio.mp4",
+      "mediainfo_ok": true,
+      "normalised": {
+        "audio.bitrate": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.channel_layout": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.channels": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.codec": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.duration_seconds": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.present": {
+          "display": "False",
+          "from": "computed:audio.present (derived from streams[])",
+          "state": "KNOWN"
+        },
+        "audio.sample_rate": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "container.audio_stream_count": {
+          "display": "0",
+          "from": "ffprobe:streams[audio]",
+          "state": "KNOWN"
+        },
+        "container.edit_lists_present": {
+          "display": "could not be determined (edit-list presence requires atom-level inspection; not determined by PreflightQC V1)",
+          "reason": "edit-list presence requires atom-level inspection; not determined by PreflightQC V1",
+          "state": "UNDETERMINED"
+        },
+        "container.faststart": {
+          "display": "True",
+          "from": "mediainfo:General.IsStreamable",
+          "state": "KNOWN"
+        },
+        "container.format": {
+          "display": "frozenset({'3gp', 'mp4', 'mov'})",
+          "from": "ffprobe:format.format_name",
+          "state": "KNOWN"
+        },
+        "container.major_brand": {
+          "display": "isom",
+          "from": "ffprobe:format.tags.major_brand",
+          "state": "KNOWN"
+        },
+        "container.overall_bitrate": {
+          "display": "2028789",
+          "from": "ffprobe:format.bit_rate",
+          "state": "KNOWN"
+        },
+        "container.stream_count": {
+          "display": "1",
+          "from": "ffprobe:format.nb_streams",
+          "state": "KNOWN"
+        },
+        "container.video_stream_count": {
+          "display": "1",
+          "from": "ffprobe:streams[video]",
+          "state": "KNOWN"
+        },
+        "file.duration_seconds": {
+          "display": "3.0",
+          "from": "ffprobe:format.duration",
+          "state": "KNOWN"
+        },
+        "file.size_bytes": {
+          "display": "760796",
+          "from": "filesystem:stat.st_size",
+          "state": "KNOWN"
+        },
+        "video.bit_depth": {
+          "display": "8",
+          "from": "ffprobe:streams[].bits_per_raw_sample",
+          "state": "KNOWN"
+        },
+        "video.bitrate": {
+          "display": "2025578",
+          "from": "ffprobe:streams[].bit_rate",
+          "state": "KNOWN"
+        },
+        "video.chroma_subsampling": {
+          "display": "4:2:0",
+          "from": "ffprobe:streams[].pix_fmt",
+          "state": "KNOWN"
+        },
+        "video.codec": {
+          "display": "h264",
+          "from": "ffprobe:streams[].codec_name",
+          "state": "KNOWN"
+        },
+        "video.coded_height": {
+          "display": "1920",
+          "from": "ffprobe:streams[].coded_height",
+          "state": "KNOWN"
+        },
+        "video.coded_width": {
+          "display": "1080",
+          "from": "ffprobe:streams[].coded_width",
+          "state": "KNOWN"
+        },
+        "video.colour_primaries": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.colour_range": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.colour_space": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.display_aspect_ratio": {
+          "display": "9/16",
+          "from": "computed:video.display_aspect_ratio (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)",
+          "state": "KNOWN"
+        },
+        "video.display_height": {
+          "display": "1920",
+          "from": "computed:video.display_height (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)",
+          "state": "KNOWN"
+        },
+        "video.display_width": {
+          "display": "1080",
+          "from": "computed:video.display_width (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)",
+          "state": "KNOWN"
+        },
+        "video.dolby_vision": {
+          "display": "could not be determined (no Dolby Vision metadata found (note: DV in raw HEVC is a documented inspector limitation))",
+          "reason": "no Dolby Vision metadata found (note: DV in raw HEVC is a documented inspector limitation)",
+          "state": "UNDETERMINED"
+        },
+        "video.frame_rate": {
+          "display": "30",
+          "from": "ffprobe:streams[].avg_frame_rate",
+          "state": "KNOWN"
+        },
+        "video.frame_rate_mode": {
+          "display": "CFR",
+          "from": "mediainfo:Video.FrameRate_Mode",
+          "state": "KNOWN"
+        },
+        "video.gop_closed": {
+          "display": "could not be determined (closed-GOP verification requires packet-level analysis; not measured by PreflightQC V1)",
+          "reason": "closed-GOP verification requires packet-level analysis; not measured by PreflightQC V1",
+          "state": "UNDETERMINED"
+        },
+        "video.hdr_format": {
+          "display": "could not be determined (no HDR metadata found)",
+          "reason": "no HDR metadata found",
+          "state": "UNDETERMINED"
+        },
+        "video.height": {
+          "display": "1920",
+          "from": "ffprobe:streams[].height",
+          "state": "KNOWN"
+        },
+        "video.level": {
+          "display": "40",
+          "from": "ffprobe:streams[].level",
+          "state": "KNOWN"
+        },
+        "video.max_cll": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "video.max_fall": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "video.pixel_format": {
+          "display": "yuv420p",
+          "from": "ffprobe:streams[].pix_fmt",
+          "state": "KNOWN"
+        },
+        "video.profile": {
+          "display": "Constrained Baseline",
+          "from": "ffprobe:streams[].profile",
+          "state": "KNOWN"
+        },
+        "video.rotation_degrees": {
+          "display": "0",
+          "from": "mediainfo:side_data[Display Matrix].rotation",
+          "state": "KNOWN"
+        },
+        "video.sample_aspect_ratio": {
+          "display": "1",
+          "from": "ffprobe:streams[].sample_aspect_ratio",
+          "state": "KNOWN"
+        },
+        "video.scan_type": {
+          "display": "progressive",
+          "from": "mediainfo:Video.ScanType",
+          "state": "KNOWN"
+        },
+        "video.transfer_characteristics": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.width": {
+          "display": "1080",
+          "from": "ffprobe:streams[].width",
+          "state": "KNOWN"
+        }
+      },
+      "notes": [],
+      "size_bytes": 760796,
+      "verdict": "INSPECTED"
+    },
+    {
+      "conflicts": [],
+      "ffprobe_ok": true,
+      "file": "03_h264_1920x1080_25.mp4",
+      "mediainfo_ok": true,
+      "normalised": {
+        "audio.bitrate": {
+          "display": "128300",
+          "from": "ffprobe:streams[].bit_rate",
+          "state": "KNOWN"
+        },
+        "audio.channel_layout": {
+          "display": "stereo",
+          "from": "ffprobe:streams[].channel_layout",
+          "state": "KNOWN"
+        },
+        "audio.channels": {
+          "display": "2",
+          "from": "ffprobe:streams[].channels",
+          "state": "KNOWN"
+        },
+        "audio.codec": {
+          "display": "aac",
+          "from": "ffprobe:streams[].codec_name",
+          "state": "KNOWN"
+        },
+        "audio.duration_seconds": {
+          "display": "3.0",
+          "from": "ffprobe:streams[].duration",
+          "state": "KNOWN"
+        },
+        "audio.present": {
+          "display": "True",
+          "from": "computed:audio.present (derived from streams[])",
+          "state": "KNOWN"
+        },
+        "audio.sample_rate": {
+          "display": "48000",
+          "from": "ffprobe:streams[].sample_rate",
+          "state": "KNOWN"
+        },
+        "container.audio_stream_count": {
+          "display": "1",
+          "from": "ffprobe:streams[audio]",
+          "state": "KNOWN"
+        },
+        "container.edit_lists_present": {
+          "display": "could not be determined (edit-list presence requires atom-level inspection; not determined by PreflightQC V1)",
+          "reason": "edit-list presence requires atom-level inspection; not determined by PreflightQC V1",
+          "state": "UNDETERMINED"
+        },
+        "container.faststart": {
+          "display": "False",
+          "from": "mediainfo:General.IsStreamable",
+          "state": "KNOWN"
+        },
+        "container.format": {
+          "display": "frozenset({'3gp', 'mp4', 'mov'})",
+          "from": "ffprobe:format.format_name",
+          "state": "KNOWN"
+        },
+        "container.major_brand": {
+          "display": "isom",
+          "from": "ffprobe:format.tags.major_brand",
+          "state": "KNOWN"
+        },
+        "container.overall_bitrate": {
+          "display": "2135408",
+          "from": "ffprobe:format.bit_rate",
+          "state": "KNOWN"
+        },
+        "container.stream_count": {
+          "display": "2",
+          "from": "ffprobe:format.nb_streams",
+          "state": "KNOWN"
+        },
+        "container.video_stream_count": {
+          "display": "1",
+          "from": "ffprobe:streams[video]",
+          "state": "KNOWN"
+        },
+        "file.duration_seconds": {
+          "display": "3.0",
+          "from": "ffprobe:format.duration",
+          "state": "KNOWN"
+        },
+        "file.size_bytes": {
+          "display": "800778",
+          "from": "filesystem:stat.st_size",
+          "state": "KNOWN"
+        },
+        "video.bit_depth": {
+          "display": "8",
+          "from": "ffprobe:streams[].bits_per_raw_sample",
+          "state": "KNOWN"
+        },
+        "video.bitrate": {
+          "display": "1997914",
+          "from": "ffprobe:streams[].bit_rate",
+          "state": "KNOWN"
+        },
+        "video.chroma_subsampling": {
+          "display": "4:2:0",
+          "from": "ffprobe:streams[].pix_fmt",
+          "state": "KNOWN"
+        },
+        "video.codec": {
+          "display": "h264",
+          "from": "ffprobe:streams[].codec_name",
+          "state": "KNOWN"
+        },
+        "video.coded_height": {
+          "display": "1080",
+          "from": "ffprobe:streams[].coded_height",
+          "state": "KNOWN"
+        },
+        "video.coded_width": {
+          "display": "1920",
+          "from": "ffprobe:streams[].coded_width",
+          "state": "KNOWN"
+        },
+        "video.colour_primaries": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.colour_range": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.colour_space": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.display_aspect_ratio": {
+          "display": "16/9",
+          "from": "computed:video.display_aspect_ratio (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)",
+          "state": "KNOWN"
+        },
+        "video.display_height": {
+          "display": "1080",
+          "from": "computed:video.display_height (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)",
+          "state": "KNOWN"
+        },
+        "video.display_width": {
+          "display": "1920",
+          "from": "computed:video.display_width (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)",
+          "state": "KNOWN"
+        },
+        "video.dolby_vision": {
+          "display": "could not be determined (no Dolby Vision metadata found (note: DV in raw HEVC is a documented inspector limitation))",
+          "reason": "no Dolby Vision metadata found (note: DV in raw HEVC is a documented inspector limitation)",
+          "state": "UNDETERMINED"
+        },
+        "video.frame_rate": {
+          "display": "25",
+          "from": "ffprobe:streams[].avg_frame_rate",
+          "state": "KNOWN"
+        },
+        "video.frame_rate_mode": {
+          "display": "CFR",
+          "from": "mediainfo:Video.FrameRate_Mode",
+          "state": "KNOWN"
+        },
+        "video.gop_closed": {
+          "display": "could not be determined (closed-GOP verification requires packet-level analysis; not measured by PreflightQC V1)",
+          "reason": "closed-GOP verification requires packet-level analysis; not measured by PreflightQC V1",
+          "state": "UNDETERMINED"
+        },
+        "video.hdr_format": {
+          "display": "could not be determined (no HDR metadata found)",
+          "reason": "no HDR metadata found",
+          "state": "UNDETERMINED"
+        },
+        "video.height": {
+          "display": "1080",
+          "from": "ffprobe:streams[].height",
+          "state": "KNOWN"
+        },
+        "video.level": {
+          "display": "40",
+          "from": "ffprobe:streams[].level",
+          "state": "KNOWN"
+        },
+        "video.max_cll": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "video.max_fall": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "video.pixel_format": {
+          "display": "yuv420p",
+          "from": "ffprobe:streams[].pix_fmt",
+          "state": "KNOWN"
+        },
+        "video.profile": {
+          "display": "Constrained Baseline",
+          "from": "ffprobe:streams[].profile",
+          "state": "KNOWN"
+        },
+        "video.rotation_degrees": {
+          "display": "0",
+          "from": "mediainfo:side_data[Display Matrix].rotation",
+          "state": "KNOWN"
+        },
+        "video.sample_aspect_ratio": {
+          "display": "1",
+          "from": "ffprobe:streams[].sample_aspect_ratio",
+          "state": "KNOWN"
+        },
+        "video.scan_type": {
+          "display": "progressive",
+          "from": "mediainfo:Video.ScanType",
+          "state": "KNOWN"
+        },
+        "video.transfer_characteristics": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.width": {
+          "display": "1920",
+          "from": "ffprobe:streams[].width",
+          "state": "KNOWN"
+        }
+      },
+      "notes": [],
+      "size_bytes": 800778,
+      "verdict": "INSPECTED"
+    },
+    {
+      "conflicts": [],
+      "ffprobe_ok": true,
+      "file": "04_anamorphic_sar43.mp4",
+      "mediainfo_ok": true,
+      "normalised": {
+        "audio.bitrate": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.channel_layout": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.channels": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.codec": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.duration_seconds": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.present": {
+          "display": "False",
+          "from": "computed:audio.present (derived from streams[])",
+          "state": "KNOWN"
+        },
+        "audio.sample_rate": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "container.audio_stream_count": {
+          "display": "0",
+          "from": "ffprobe:streams[audio]",
+          "state": "KNOWN"
+        },
+        "container.edit_lists_present": {
+          "display": "could not be determined (edit-list presence requires atom-level inspection; not determined by PreflightQC V1)",
+          "reason": "edit-list presence requires atom-level inspection; not determined by PreflightQC V1",
+          "state": "UNDETERMINED"
+        },
+        "container.faststart": {
+          "display": "False",
+          "from": "mediainfo:General.IsStreamable",
+          "state": "KNOWN"
+        },
+        "container.format": {
+          "display": "frozenset({'3gp', 'mp4', 'mov'})",
+          "from": "ffprobe:format.format_name",
+          "state": "KNOWN"
+        },
+        "container.major_brand": {
+          "display": "isom",
+          "from": "ffprobe:format.tags.major_brand",
+          "state": "KNOWN"
+        },
+        "container.overall_bitrate": {
+          "display": "1976754",
+          "from": "ffprobe:format.bit_rate",
+          "state": "KNOWN"
+        },
+        "container.stream_count": {
+          "display": "1",
+          "from": "ffprobe:format.nb_streams",
+          "state": "KNOWN"
+        },
+        "container.video_stream_count": {
+          "display": "1",
+          "from": "ffprobe:streams[video]",
+          "state": "KNOWN"
+        },
+        "file.duration_seconds": {
+          "display": "3.0",
+          "from": "ffprobe:format.duration",
+          "state": "KNOWN"
+        },
+        "file.size_bytes": {
+          "display": "741283",
+          "from": "filesystem:stat.st_size",
+          "state": "KNOWN"
+        },
+        "video.bit_depth": {
+          "display": "8",
+          "from": "ffprobe:streams[].bits_per_raw_sample",
+          "state": "KNOWN"
+        },
+        "video.bitrate": {
+          "display": "1973693",
+          "from": "ffprobe:streams[].bit_rate",
+          "state": "KNOWN"
+        },
+        "video.chroma_subsampling": {
+          "display": "4:2:0",
+          "from": "ffprobe:streams[].pix_fmt",
+          "state": "KNOWN"
+        },
+        "video.codec": {
+          "display": "h264",
+          "from": "ffprobe:streams[].codec_name",
+          "state": "KNOWN"
+        },
+        "video.coded_height": {
+          "display": "1080",
+          "from": "ffprobe:streams[].coded_height",
+          "state": "KNOWN"
+        },
+        "video.coded_width": {
+          "display": "1440",
+          "from": "ffprobe:streams[].coded_width",
+          "state": "KNOWN"
+        },
+        "video.colour_primaries": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.colour_range": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.colour_space": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.display_aspect_ratio": {
+          "display": "16/9",
+          "from": "computed:video.display_aspect_ratio (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)",
+          "state": "KNOWN"
+        },
+        "video.display_height": {
+          "display": "1080",
+          "from": "computed:video.display_height (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)",
+          "state": "KNOWN"
+        },
+        "video.display_width": {
+          "display": "1920",
+          "from": "computed:video.display_width (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)",
+          "state": "KNOWN"
+        },
+        "video.dolby_vision": {
+          "display": "could not be determined (no Dolby Vision metadata found (note: DV in raw HEVC is a documented inspector limitation))",
+          "reason": "no Dolby Vision metadata found (note: DV in raw HEVC is a documented inspector limitation)",
+          "state": "UNDETERMINED"
+        },
+        "video.frame_rate": {
+          "display": "25",
+          "from": "ffprobe:streams[].avg_frame_rate",
+          "state": "KNOWN"
+        },
+        "video.frame_rate_mode": {
+          "display": "CFR",
+          "from": "mediainfo:Video.FrameRate_Mode",
+          "state": "KNOWN"
+        },
+        "video.gop_closed": {
+          "display": "could not be determined (closed-GOP verification requires packet-level analysis; not measured by PreflightQC V1)",
+          "reason": "closed-GOP verification requires packet-level analysis; not measured by PreflightQC V1",
+          "state": "UNDETERMINED"
+        },
+        "video.hdr_format": {
+          "display": "could not be determined (no HDR metadata found)",
+          "reason": "no HDR metadata found",
+          "state": "UNDETERMINED"
+        },
+        "video.height": {
+          "display": "1080",
+          "from": "ffprobe:streams[].height",
+          "state": "KNOWN"
+        },
+        "video.level": {
+          "display": "40",
+          "from": "ffprobe:streams[].level",
+          "state": "KNOWN"
+        },
+        "video.max_cll": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "video.max_fall": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "video.pixel_format": {
+          "display": "yuv420p",
+          "from": "ffprobe:streams[].pix_fmt",
+          "state": "KNOWN"
+        },
+        "video.profile": {
+          "display": "Constrained Baseline",
+          "from": "ffprobe:streams[].profile",
+          "state": "KNOWN"
+        },
+        "video.rotation_degrees": {
+          "display": "0",
+          "from": "mediainfo:side_data[Display Matrix].rotation",
+          "state": "KNOWN"
+        },
+        "video.sample_aspect_ratio": {
+          "display": "4/3",
+          "from": "ffprobe:streams[].sample_aspect_ratio",
+          "state": "KNOWN"
+        },
+        "video.scan_type": {
+          "display": "progressive",
+          "from": "mediainfo:Video.ScanType",
+          "state": "KNOWN"
+        },
+        "video.transfer_characteristics": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.width": {
+          "display": "1440",
+          "from": "ffprobe:streams[].width",
+          "state": "KNOWN"
+        }
+      },
+      "notes": [],
+      "size_bytes": 741283,
+      "verdict": "INSPECTED"
+    },
+    {
+      "conflicts": [],
+      "ffprobe_ok": true,
+      "file": "05_vp9.webm",
+      "mediainfo_ok": true,
+      "normalised": {
+        "audio.bitrate": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.channel_layout": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.channels": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.codec": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.duration_seconds": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.present": {
+          "display": "False",
+          "from": "computed:audio.present (derived from streams[])",
+          "state": "KNOWN"
+        },
+        "audio.sample_rate": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "container.audio_stream_count": {
+          "display": "0",
+          "from": "ffprobe:streams[audio]",
+          "state": "KNOWN"
+        },
+        "container.edit_lists_present": {
+          "display": "could not be determined (edit-list presence requires atom-level inspection; not determined by PreflightQC V1)",
+          "reason": "edit-list presence requires atom-level inspection; not determined by PreflightQC V1",
+          "state": "UNDETERMINED"
+        },
+        "container.faststart": {
+          "display": "True",
+          "from": "mediainfo:General.IsStreamable",
+          "state": "KNOWN"
+        },
+        "container.format": {
+          "display": "frozenset({'webm', 'mkv'})",
+          "from": "ffprobe:format.format_name",
+          "state": "KNOWN"
+        },
+        "container.major_brand": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "container.overall_bitrate": {
+          "display": "404434",
+          "from": "ffprobe:format.bit_rate",
+          "state": "KNOWN"
+        },
+        "container.stream_count": {
+          "display": "1",
+          "from": "ffprobe:format.nb_streams",
+          "state": "KNOWN"
+        },
+        "container.video_stream_count": {
+          "display": "1",
+          "from": "ffprobe:streams[video]",
+          "state": "KNOWN"
+        },
+        "file.duration_seconds": {
+          "display": "3.0",
+          "from": "ffprobe:format.duration",
+          "state": "KNOWN"
+        },
+        "file.size_bytes": {
+          "display": "151663",
+          "from": "filesystem:stat.st_size",
+          "state": "KNOWN"
+        },
+        "video.bit_depth": {
+          "display": "8",
+          "from": "ffprobe:streams[].pix_fmt",
+          "state": "KNOWN"
+        },
+        "video.bitrate": {
+          "display": "381519",
+          "from": "mediainfo:Video.BitRate",
+          "state": "KNOWN"
+        },
+        "video.chroma_subsampling": {
+          "display": "4:2:0",
+          "from": "ffprobe:streams[].pix_fmt",
+          "state": "KNOWN"
+        },
+        "video.codec": {
+          "display": "vp9",
+          "from": "ffprobe:streams[].codec_name",
+          "state": "KNOWN"
+        },
+        "video.coded_height": {
+          "display": "480",
+          "from": "ffprobe:streams[].coded_height",
+          "state": "KNOWN"
+        },
+        "video.coded_width": {
+          "display": "640",
+          "from": "ffprobe:streams[].coded_width",
+          "state": "KNOWN"
+        },
+        "video.colour_primaries": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.colour_range": {
+          "display": "limited",
+          "from": "ffprobe:streams[].color_range",
+          "state": "KNOWN"
+        },
+        "video.colour_space": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.display_aspect_ratio": {
+          "display": "4/3",
+          "from": "computed:video.display_aspect_ratio (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)",
+          "state": "KNOWN"
+        },
+        "video.display_height": {
+          "display": "480",
+          "from": "computed:video.display_height (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)",
+          "state": "KNOWN"
+        },
+        "video.display_width": {
+          "display": "640",
+          "from": "computed:video.display_width (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)",
+          "state": "KNOWN"
+        },
+        "video.dolby_vision": {
+          "display": "could not be determined (no Dolby Vision metadata found (note: DV in raw HEVC is a documented inspector limitation))",
+          "reason": "no Dolby Vision metadata found (note: DV in raw HEVC is a documented inspector limitation)",
+          "state": "UNDETERMINED"
+        },
+        "video.frame_rate": {
+          "display": "24",
+          "from": "ffprobe:streams[].avg_frame_rate",
+          "state": "KNOWN"
+        },
+        "video.frame_rate_mode": {
+          "display": "CFR",
+          "from": "mediainfo:Video.FrameRate_Mode",
+          "state": "KNOWN"
+        },
+        "video.gop_closed": {
+          "display": "could not be determined (closed-GOP verification requires packet-level analysis; not measured by PreflightQC V1)",
+          "reason": "closed-GOP verification requires packet-level analysis; not measured by PreflightQC V1",
+          "state": "UNDETERMINED"
+        },
+        "video.hdr_format": {
+          "display": "could not be determined (no HDR metadata found)",
+          "reason": "no HDR metadata found",
+          "state": "UNDETERMINED"
+        },
+        "video.height": {
+          "display": "480",
+          "from": "ffprobe:streams[].height",
+          "state": "KNOWN"
+        },
+        "video.level": {
+          "display": "-99",
+          "from": "ffprobe:streams[].level",
+          "state": "KNOWN"
+        },
+        "video.max_cll": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "video.max_fall": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "video.pixel_format": {
+          "display": "yuv420p",
+          "from": "ffprobe:streams[].pix_fmt",
+          "state": "KNOWN"
+        },
+        "video.profile": {
+          "display": "Profile 0",
+          "from": "ffprobe:streams[].profile",
+          "state": "KNOWN"
+        },
+        "video.rotation_degrees": {
+          "display": "0",
+          "from": "computed:video.rotation_degrees (derived from absence of rotation metadata)",
+          "state": "KNOWN"
+        },
+        "video.sample_aspect_ratio": {
+          "display": "1",
+          "from": "ffprobe:streams[].sample_aspect_ratio",
+          "state": "KNOWN"
+        },
+        "video.scan_type": {
+          "display": "progressive",
+          "from": "ffprobe:streams[].field_order",
+          "state": "KNOWN"
+        },
+        "video.transfer_characteristics": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.width": {
+          "display": "640",
+          "from": "ffprobe:streams[].width",
+          "state": "KNOWN"
+        }
+      },
+      "notes": [],
+      "size_bytes": 151663,
+      "verdict": "INSPECTED"
+    },
+    {
+      "conflicts": [],
+      "ffprobe_ok": true,
+      "file": "06_h264.mov",
+      "mediainfo_ok": true,
+      "normalised": {
+        "audio.bitrate": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.channel_layout": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.channels": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.codec": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.duration_seconds": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.present": {
+          "display": "False",
+          "from": "computed:audio.present (derived from streams[])",
+          "state": "KNOWN"
+        },
+        "audio.sample_rate": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "container.audio_stream_count": {
+          "display": "0",
+          "from": "ffprobe:streams[audio]",
+          "state": "KNOWN"
+        },
+        "container.edit_lists_present": {
+          "display": "could not be determined (edit-list presence requires atom-level inspection; not determined by PreflightQC V1)",
+          "reason": "edit-list presence requires atom-level inspection; not determined by PreflightQC V1",
+          "state": "UNDETERMINED"
+        },
+        "container.faststart": {
+          "display": "False",
+          "from": "mediainfo:General.IsStreamable",
+          "state": "KNOWN"
+        },
+        "container.format": {
+          "display": "frozenset({'3gp', 'mp4', 'mov'})",
+          "from": "ffprobe:format.format_name",
+          "state": "KNOWN"
+        },
+        "container.major_brand": {
+          "display": "qt",
+          "from": "ffprobe:format.tags.major_brand",
+          "state": "KNOWN"
+        },
+        "container.overall_bitrate": {
+          "display": "1991725",
+          "from": "ffprobe:format.bit_rate",
+          "state": "KNOWN"
+        },
+        "container.stream_count": {
+          "display": "1",
+          "from": "ffprobe:format.nb_streams",
+          "state": "KNOWN"
+        },
+        "container.video_stream_count": {
+          "display": "1",
+          "from": "ffprobe:streams[video]",
+          "state": "KNOWN"
+        },
+        "file.duration_seconds": {
+          "display": "3.0",
+          "from": "ffprobe:format.duration",
+          "state": "KNOWN"
+        },
+        "file.size_bytes": {
+          "display": "746897",
+          "from": "filesystem:stat.st_size",
+          "state": "KNOWN"
+        },
+        "video.bit_depth": {
+          "display": "8",
+          "from": "ffprobe:streams[].bits_per_raw_sample",
+          "state": "KNOWN"
+        },
+        "video.bitrate": {
+          "display": "1988658",
+          "from": "ffprobe:streams[].bit_rate",
+          "state": "KNOWN"
+        },
+        "video.chroma_subsampling": {
+          "display": "4:2:0",
+          "from": "ffprobe:streams[].pix_fmt",
+          "state": "KNOWN"
+        },
+        "video.codec": {
+          "display": "h264",
+          "from": "ffprobe:streams[].codec_name",
+          "state": "KNOWN"
+        },
+        "video.coded_height": {
+          "display": "720",
+          "from": "ffprobe:streams[].coded_height",
+          "state": "KNOWN"
+        },
+        "video.coded_width": {
+          "display": "1280",
+          "from": "ffprobe:streams[].coded_width",
+          "state": "KNOWN"
+        },
+        "video.colour_primaries": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.colour_range": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.colour_space": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.display_aspect_ratio": {
+          "display": "16/9",
+          "from": "computed:video.display_aspect_ratio (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)",
+          "state": "KNOWN"
+        },
+        "video.display_height": {
+          "display": "720",
+          "from": "computed:video.display_height (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)",
+          "state": "KNOWN"
+        },
+        "video.display_width": {
+          "display": "1280",
+          "from": "computed:video.display_width (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)",
+          "state": "KNOWN"
+        },
+        "video.dolby_vision": {
+          "display": "could not be determined (no Dolby Vision metadata found (note: DV in raw HEVC is a documented inspector limitation))",
+          "reason": "no Dolby Vision metadata found (note: DV in raw HEVC is a documented inspector limitation)",
+          "state": "UNDETERMINED"
+        },
+        "video.frame_rate": {
+          "display": "30",
+          "from": "ffprobe:streams[].avg_frame_rate",
+          "state": "KNOWN"
+        },
+        "video.frame_rate_mode": {
+          "display": "CFR",
+          "from": "mediainfo:Video.FrameRate_Mode",
+          "state": "KNOWN"
+        },
+        "video.gop_closed": {
+          "display": "could not be determined (closed-GOP verification requires packet-level analysis; not measured by PreflightQC V1)",
+          "reason": "closed-GOP verification requires packet-level analysis; not measured by PreflightQC V1",
+          "state": "UNDETERMINED"
+        },
+        "video.hdr_format": {
+          "display": "could not be determined (no HDR metadata found)",
+          "reason": "no HDR metadata found",
+          "state": "UNDETERMINED"
+        },
+        "video.height": {
+          "display": "720",
+          "from": "ffprobe:streams[].height",
+          "state": "KNOWN"
+        },
+        "video.level": {
+          "display": "31",
+          "from": "ffprobe:streams[].level",
+          "state": "KNOWN"
+        },
+        "video.max_cll": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "video.max_fall": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "video.pixel_format": {
+          "display": "yuv420p",
+          "from": "ffprobe:streams[].pix_fmt",
+          "state": "KNOWN"
+        },
+        "video.profile": {
+          "display": "Constrained Baseline",
+          "from": "ffprobe:streams[].profile",
+          "state": "KNOWN"
+        },
+        "video.rotation_degrees": {
+          "display": "0",
+          "from": "mediainfo:side_data[Display Matrix].rotation",
+          "state": "KNOWN"
+        },
+        "video.sample_aspect_ratio": {
+          "display": "1",
+          "from": "ffprobe:streams[].sample_aspect_ratio",
+          "state": "KNOWN"
+        },
+        "video.scan_type": {
+          "display": "progressive",
+          "from": "mediainfo:Video.ScanType",
+          "state": "KNOWN"
+        },
+        "video.transfer_characteristics": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.width": {
+          "display": "1280",
+          "from": "ffprobe:streams[].width",
+          "state": "KNOWN"
+        }
+      },
+      "notes": [],
+      "size_bytes": 746897,
+      "verdict": "INSPECTED"
+    },
+    {
+      "conflicts": [],
+      "ffprobe_ok": true,
+      "file": "07_interlaced_tff.mp4",
+      "mediainfo_ok": true,
+      "normalised": {
+        "audio.bitrate": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.channel_layout": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.channels": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.codec": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.duration_seconds": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.present": {
+          "display": "False",
+          "from": "computed:audio.present (derived from streams[])",
+          "state": "KNOWN"
+        },
+        "audio.sample_rate": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "container.audio_stream_count": {
+          "display": "0",
+          "from": "ffprobe:streams[audio]",
+          "state": "KNOWN"
+        },
+        "container.edit_lists_present": {
+          "display": "could not be determined (edit-list presence requires atom-level inspection; not determined by PreflightQC V1)",
+          "reason": "edit-list presence requires atom-level inspection; not determined by PreflightQC V1",
+          "state": "UNDETERMINED"
+        },
+        "container.faststart": {
+          "display": "False",
+          "from": "mediainfo:General.IsStreamable",
+          "state": "KNOWN"
+        },
+        "container.format": {
+          "display": "frozenset({'3gp', 'mp4', 'mov'})",
+          "from": "ffprobe:format.format_name",
+          "state": "KNOWN"
+        },
+        "container.major_brand": {
+          "display": "isom",
+          "from": "ffprobe:format.tags.major_brand",
+          "state": "KNOWN"
+        },
+        "container.overall_bitrate": {
+          "display": "2007229",
+          "from": "ffprobe:format.bit_rate",
+          "state": "KNOWN"
+        },
+        "container.stream_count": {
+          "display": "1",
+          "from": "ffprobe:format.nb_streams",
+          "state": "KNOWN"
+        },
+        "container.video_stream_count": {
+          "display": "1",
+          "from": "ffprobe:streams[video]",
+          "state": "KNOWN"
+        },
+        "file.duration_seconds": {
+          "display": "3.0",
+          "from": "ffprobe:format.duration",
+          "state": "KNOWN"
+        },
+        "file.size_bytes": {
+          "display": "752711",
+          "from": "filesystem:stat.st_size",
+          "state": "KNOWN"
+        },
+        "video.bit_depth": {
+          "display": "8",
+          "from": "ffprobe:streams[].bits_per_raw_sample",
+          "state": "KNOWN"
+        },
+        "video.bitrate": {
+          "display": "2004181",
+          "from": "ffprobe:streams[].bit_rate",
+          "state": "KNOWN"
+        },
+        "video.chroma_subsampling": {
+          "display": "4:2:0",
+          "from": "ffprobe:streams[].pix_fmt",
+          "state": "KNOWN"
+        },
+        "video.codec": {
+          "display": "h264",
+          "from": "ffprobe:streams[].codec_name",
+          "state": "KNOWN"
+        },
+        "video.coded_height": {
+          "display": "576",
+          "from": "ffprobe:streams[].coded_height",
+          "state": "KNOWN"
+        },
+        "video.coded_width": {
+          "display": "720",
+          "from": "ffprobe:streams[].coded_width",
+          "state": "KNOWN"
+        },
+        "video.colour_primaries": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.colour_range": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.colour_space": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.display_aspect_ratio": {
+          "display": "5/4",
+          "from": "computed:video.display_aspect_ratio (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)",
+          "state": "KNOWN"
+        },
+        "video.display_height": {
+          "display": "576",
+          "from": "computed:video.display_height (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)",
+          "state": "KNOWN"
+        },
+        "video.display_width": {
+          "display": "720",
+          "from": "computed:video.display_width (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)",
+          "state": "KNOWN"
+        },
+        "video.dolby_vision": {
+          "display": "could not be determined (no Dolby Vision metadata found (note: DV in raw HEVC is a documented inspector limitation))",
+          "reason": "no Dolby Vision metadata found (note: DV in raw HEVC is a documented inspector limitation)",
+          "state": "UNDETERMINED"
+        },
+        "video.frame_rate": {
+          "display": "25",
+          "from": "ffprobe:streams[].avg_frame_rate",
+          "state": "KNOWN"
+        },
+        "video.frame_rate_mode": {
+          "display": "CFR",
+          "from": "mediainfo:Video.FrameRate_Mode",
+          "state": "KNOWN"
+        },
+        "video.gop_closed": {
+          "display": "could not be determined (closed-GOP verification requires packet-level analysis; not measured by PreflightQC V1)",
+          "reason": "closed-GOP verification requires packet-level analysis; not measured by PreflightQC V1",
+          "state": "UNDETERMINED"
+        },
+        "video.hdr_format": {
+          "display": "could not be determined (no HDR metadata found)",
+          "reason": "no HDR metadata found",
+          "state": "UNDETERMINED"
+        },
+        "video.height": {
+          "display": "576",
+          "from": "ffprobe:streams[].height",
+          "state": "KNOWN"
+        },
+        "video.level": {
+          "display": "30",
+          "from": "ffprobe:streams[].level",
+          "state": "KNOWN"
+        },
+        "video.max_cll": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "video.max_fall": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "video.pixel_format": {
+          "display": "yuv420p",
+          "from": "ffprobe:streams[].pix_fmt",
+          "state": "KNOWN"
+        },
+        "video.profile": {
+          "display": "Constrained Baseline",
+          "from": "ffprobe:streams[].profile",
+          "state": "KNOWN"
+        },
+        "video.rotation_degrees": {
+          "display": "0",
+          "from": "mediainfo:side_data[Display Matrix].rotation",
+          "state": "KNOWN"
+        },
+        "video.sample_aspect_ratio": {
+          "display": "1",
+          "from": "ffprobe:streams[].sample_aspect_ratio",
+          "state": "KNOWN"
+        },
+        "video.scan_type": {
+          "display": "progressive",
+          "from": "mediainfo:Video.ScanType",
+          "state": "KNOWN"
+        },
+        "video.transfer_characteristics": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.width": {
+          "display": "720",
+          "from": "ffprobe:streams[].width",
+          "state": "KNOWN"
+        }
+      },
+      "notes": [],
+      "size_bytes": 752711,
+      "verdict": "INSPECTED"
+    },
+    {
+      "conflicts": [],
+      "ffprobe_ok": true,
+      "file": "08_hdr_pq_10bit.webm",
+      "mediainfo_ok": true,
+      "normalised": {
+        "audio.bitrate": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.channel_layout": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.channels": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.codec": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.duration_seconds": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.present": {
+          "display": "False",
+          "from": "computed:audio.present (derived from streams[])",
+          "state": "KNOWN"
+        },
+        "audio.sample_rate": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "container.audio_stream_count": {
+          "display": "0",
+          "from": "ffprobe:streams[audio]",
+          "state": "KNOWN"
+        },
+        "container.edit_lists_present": {
+          "display": "could not be determined (edit-list presence requires atom-level inspection; not determined by PreflightQC V1)",
+          "reason": "edit-list presence requires atom-level inspection; not determined by PreflightQC V1",
+          "state": "UNDETERMINED"
+        },
+        "container.faststart": {
+          "display": "True",
+          "from": "mediainfo:General.IsStreamable",
+          "state": "KNOWN"
+        },
+        "container.format": {
+          "display": "frozenset({'webm', 'mkv'})",
+          "from": "ffprobe:format.format_name",
+          "state": "KNOWN"
+        },
+        "container.major_brand": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "container.overall_bitrate": {
+          "display": "916061",
+          "from": "ffprobe:format.bit_rate",
+          "state": "KNOWN"
+        },
+        "container.stream_count": {
+          "display": "1",
+          "from": "ffprobe:format.nb_streams",
+          "state": "KNOWN"
+        },
+        "container.video_stream_count": {
+          "display": "1",
+          "from": "ffprobe:streams[video]",
+          "state": "KNOWN"
+        },
+        "file.duration_seconds": {
+          "display": "3.0",
+          "from": "ffprobe:format.duration",
+          "state": "KNOWN"
+        },
+        "file.size_bytes": {
+          "display": "343523",
+          "from": "filesystem:stat.st_size",
+          "state": "KNOWN"
+        },
+        "video.bit_depth": {
+          "display": "10",
+          "from": "ffprobe:streams[].pix_fmt",
+          "state": "KNOWN"
+        },
+        "video.bitrate": {
+          "display": "872885",
+          "from": "mediainfo:Video.BitRate",
+          "state": "KNOWN"
+        },
+        "video.chroma_subsampling": {
+          "display": "4:2:0",
+          "from": "ffprobe:streams[].pix_fmt",
+          "state": "KNOWN"
+        },
+        "video.codec": {
+          "display": "vp9",
+          "from": "ffprobe:streams[].codec_name",
+          "state": "KNOWN"
+        },
+        "video.coded_height": {
+          "display": "1080",
+          "from": "ffprobe:streams[].coded_height",
+          "state": "KNOWN"
+        },
+        "video.coded_width": {
+          "display": "1920",
+          "from": "ffprobe:streams[].coded_width",
+          "state": "KNOWN"
+        },
+        "video.colour_primaries": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.colour_range": {
+          "display": "limited",
+          "from": "ffprobe:streams[].color_range",
+          "state": "KNOWN"
+        },
+        "video.colour_space": {
+          "display": "bt2020nc",
+          "from": "ffprobe:streams[].color_space",
+          "state": "KNOWN"
+        },
+        "video.display_aspect_ratio": {
+          "display": "16/9",
+          "from": "computed:video.display_aspect_ratio (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)",
+          "state": "KNOWN"
+        },
+        "video.display_height": {
+          "display": "1080",
+          "from": "computed:video.display_height (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)",
+          "state": "KNOWN"
+        },
+        "video.display_width": {
+          "display": "1920",
+          "from": "computed:video.display_width (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)",
+          "state": "KNOWN"
+        },
+        "video.dolby_vision": {
+          "display": "could not be determined (no Dolby Vision metadata found (note: DV in raw HEVC is a documented inspector limitation))",
+          "reason": "no Dolby Vision metadata found (note: DV in raw HEVC is a documented inspector limitation)",
+          "state": "UNDETERMINED"
+        },
+        "video.frame_rate": {
+          "display": "24",
+          "from": "ffprobe:streams[].avg_frame_rate",
+          "state": "KNOWN"
+        },
+        "video.frame_rate_mode": {
+          "display": "CFR",
+          "from": "mediainfo:Video.FrameRate_Mode",
+          "state": "KNOWN"
+        },
+        "video.gop_closed": {
+          "display": "could not be determined (closed-GOP verification requires packet-level analysis; not measured by PreflightQC V1)",
+          "reason": "closed-GOP verification requires packet-level analysis; not measured by PreflightQC V1",
+          "state": "UNDETERMINED"
+        },
+        "video.hdr_format": {
+          "display": "could not be determined (no HDR metadata found)",
+          "reason": "no HDR metadata found",
+          "state": "UNDETERMINED"
+        },
+        "video.height": {
+          "display": "1080",
+          "from": "ffprobe:streams[].height",
+          "state": "KNOWN"
+        },
+        "video.level": {
+          "display": "-99",
+          "from": "ffprobe:streams[].level",
+          "state": "KNOWN"
+        },
+        "video.max_cll": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "video.max_fall": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "video.pixel_format": {
+          "display": "yuv420p10le",
+          "from": "ffprobe:streams[].pix_fmt",
+          "state": "KNOWN"
+        },
+        "video.profile": {
+          "display": "Profile 2",
+          "from": "ffprobe:streams[].profile",
+          "state": "KNOWN"
+        },
+        "video.rotation_degrees": {
+          "display": "0",
+          "from": "computed:video.rotation_degrees (derived from absence of rotation metadata)",
+          "state": "KNOWN"
+        },
+        "video.sample_aspect_ratio": {
+          "display": "1",
+          "from": "ffprobe:streams[].sample_aspect_ratio",
+          "state": "KNOWN"
+        },
+        "video.scan_type": {
+          "display": "progressive",
+          "from": "ffprobe:streams[].field_order",
+          "state": "KNOWN"
+        },
+        "video.transfer_characteristics": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.width": {
+          "display": "1920",
+          "from": "ffprobe:streams[].width",
+          "state": "KNOWN"
+        }
+      },
+      "notes": [],
+      "size_bytes": 343523,
+      "verdict": "INSPECTED"
+    },
+    {
+      "conflicts": [],
+      "ffprobe_ok": true,
+      "file": "09_rotated90.mp4",
+      "mediainfo_ok": true,
+      "normalised": {
+        "audio.bitrate": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.channel_layout": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.channels": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.codec": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.duration_seconds": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.present": {
+          "display": "False",
+          "from": "computed:audio.present (derived from streams[])",
+          "state": "KNOWN"
+        },
+        "audio.sample_rate": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "container.audio_stream_count": {
+          "display": "0",
+          "from": "ffprobe:streams[audio]",
+          "state": "KNOWN"
+        },
+        "container.edit_lists_present": {
+          "display": "could not be determined (edit-list presence requires atom-level inspection; not determined by PreflightQC V1)",
+          "reason": "edit-list presence requires atom-level inspection; not determined by PreflightQC V1",
+          "state": "UNDETERMINED"
+        },
+        "container.faststart": {
+          "display": "False",
+          "from": "mediainfo:General.IsStreamable",
+          "state": "KNOWN"
+        },
+        "container.format": {
+          "display": "frozenset({'3gp', 'mp4', 'mov'})",
+          "from": "ffprobe:format.format_name",
+          "state": "KNOWN"
+        },
+        "container.major_brand": {
+          "display": "isom",
+          "from": "ffprobe:format.tags.major_brand",
+          "state": "KNOWN"
+        },
+        "container.overall_bitrate": {
+          "display": "2082877",
+          "from": "ffprobe:format.bit_rate",
+          "state": "KNOWN"
+        },
+        "container.stream_count": {
+          "display": "1",
+          "from": "ffprobe:format.nb_streams",
+          "state": "KNOWN"
+        },
+        "container.video_stream_count": {
+          "display": "1",
+          "from": "ffprobe:streams[video]",
+          "state": "KNOWN"
+        },
+        "file.duration_seconds": {
+          "display": "3.0",
+          "from": "ffprobe:format.duration",
+          "state": "KNOWN"
+        },
+        "file.size_bytes": {
+          "display": "781079",
+          "from": "filesystem:stat.st_size",
+          "state": "KNOWN"
+        },
+        "video.bit_depth": {
+          "display": "8",
+          "from": "ffprobe:streams[].bits_per_raw_sample",
+          "state": "KNOWN"
+        },
+        "video.bitrate": {
+          "display": "2079666",
+          "from": "ffprobe:streams[].bit_rate",
+          "state": "KNOWN"
+        },
+        "video.chroma_subsampling": {
+          "display": "4:2:0",
+          "from": "ffprobe:streams[].pix_fmt",
+          "state": "KNOWN"
+        },
+        "video.codec": {
+          "display": "h264",
+          "from": "ffprobe:streams[].codec_name",
+          "state": "KNOWN"
+        },
+        "video.coded_height": {
+          "display": "1080",
+          "from": "ffprobe:streams[].coded_height",
+          "state": "KNOWN"
+        },
+        "video.coded_width": {
+          "display": "1920",
+          "from": "ffprobe:streams[].coded_width",
+          "state": "KNOWN"
+        },
+        "video.colour_primaries": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.colour_range": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.colour_space": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.display_aspect_ratio": {
+          "display": "16/9",
+          "from": "computed:video.display_aspect_ratio (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)",
+          "state": "KNOWN"
+        },
+        "video.display_height": {
+          "display": "1080",
+          "from": "computed:video.display_height (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)",
+          "state": "KNOWN"
+        },
+        "video.display_width": {
+          "display": "1920",
+          "from": "computed:video.display_width (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)",
+          "state": "KNOWN"
+        },
+        "video.dolby_vision": {
+          "display": "could not be determined (no Dolby Vision metadata found (note: DV in raw HEVC is a documented inspector limitation))",
+          "reason": "no Dolby Vision metadata found (note: DV in raw HEVC is a documented inspector limitation)",
+          "state": "UNDETERMINED"
+        },
+        "video.frame_rate": {
+          "display": "30",
+          "from": "ffprobe:streams[].avg_frame_rate",
+          "state": "KNOWN"
+        },
+        "video.frame_rate_mode": {
+          "display": "CFR",
+          "from": "mediainfo:Video.FrameRate_Mode",
+          "state": "KNOWN"
+        },
+        "video.gop_closed": {
+          "display": "could not be determined (closed-GOP verification requires packet-level analysis; not measured by PreflightQC V1)",
+          "reason": "closed-GOP verification requires packet-level analysis; not measured by PreflightQC V1",
+          "state": "UNDETERMINED"
+        },
+        "video.hdr_format": {
+          "display": "could not be determined (no HDR metadata found)",
+          "reason": "no HDR metadata found",
+          "state": "UNDETERMINED"
+        },
+        "video.height": {
+          "display": "1080",
+          "from": "ffprobe:streams[].height",
+          "state": "KNOWN"
+        },
+        "video.level": {
+          "display": "40",
+          "from": "ffprobe:streams[].level",
+          "state": "KNOWN"
+        },
+        "video.max_cll": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "video.max_fall": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "video.pixel_format": {
+          "display": "yuv420p",
+          "from": "ffprobe:streams[].pix_fmt",
+          "state": "KNOWN"
+        },
+        "video.profile": {
+          "display": "Constrained Baseline",
+          "from": "ffprobe:streams[].profile",
+          "state": "KNOWN"
+        },
+        "video.rotation_degrees": {
+          "display": "0",
+          "from": "mediainfo:side_data[Display Matrix].rotation",
+          "state": "KNOWN"
+        },
+        "video.sample_aspect_ratio": {
+          "display": "1",
+          "from": "ffprobe:streams[].sample_aspect_ratio",
+          "state": "KNOWN"
+        },
+        "video.scan_type": {
+          "display": "progressive",
+          "from": "mediainfo:Video.ScanType",
+          "state": "KNOWN"
+        },
+        "video.transfer_characteristics": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.width": {
+          "display": "1920",
+          "from": "ffprobe:streams[].width",
+          "state": "KNOWN"
+        }
+      },
+      "notes": [],
+      "size_bytes": 781079,
+      "verdict": "INSPECTED"
+    },
+    {
+      "conflicts": [],
+      "ffprobe_ok": true,
+      "file": "10_mono_44k.mp4",
+      "mediainfo_ok": true,
+      "normalised": {
+        "audio.bitrate": {
+          "display": "69761",
+          "from": "ffprobe:streams[].bit_rate",
+          "state": "KNOWN"
+        },
+        "audio.channel_layout": {
+          "display": "mono",
+          "from": "ffprobe:streams[].channel_layout",
+          "state": "KNOWN"
+        },
+        "audio.channels": {
+          "display": "1",
+          "from": "ffprobe:streams[].channels",
+          "state": "KNOWN"
+        },
+        "audio.codec": {
+          "display": "aac",
+          "from": "ffprobe:streams[].codec_name",
+          "state": "KNOWN"
+        },
+        "audio.duration_seconds": {
+          "display": "3.0",
+          "from": "ffprobe:streams[].duration",
+          "state": "KNOWN"
+        },
+        "audio.present": {
+          "display": "True",
+          "from": "computed:audio.present (derived from streams[])",
+          "state": "KNOWN"
+        },
+        "audio.sample_rate": {
+          "display": "44100",
+          "from": "ffprobe:streams[].sample_rate",
+          "state": "KNOWN"
+        },
+        "container.audio_stream_count": {
+          "display": "1",
+          "from": "ffprobe:streams[audio]",
+          "state": "KNOWN"
+        },
+        "container.edit_lists_present": {
+          "display": "could not be determined (edit-list presence requires atom-level inspection; not determined by PreflightQC V1)",
+          "reason": "edit-list presence requires atom-level inspection; not determined by PreflightQC V1",
+          "state": "UNDETERMINED"
+        },
+        "container.faststart": {
+          "display": "False",
+          "from": "mediainfo:General.IsStreamable",
+          "state": "KNOWN"
+        },
+        "container.format": {
+          "display": "frozenset({'3gp', 'mp4', 'mov'})",
+          "from": "ffprobe:format.format_name",
+          "state": "KNOWN"
+        },
+        "container.major_brand": {
+          "display": "isom",
+          "from": "ffprobe:format.tags.major_brand",
+          "state": "KNOWN"
+        },
+        "container.overall_bitrate": {
+          "display": "2089056",
+          "from": "ffprobe:format.bit_rate",
+          "state": "KNOWN"
+        },
+        "container.stream_count": {
+          "display": "2",
+          "from": "ffprobe:format.nb_streams",
+          "state": "KNOWN"
+        },
+        "container.video_stream_count": {
+          "display": "1",
+          "from": "ffprobe:streams[video]",
+          "state": "KNOWN"
+        },
+        "file.duration_seconds": {
+          "display": "3.0",
+          "from": "ffprobe:format.duration",
+          "state": "KNOWN"
+        },
+        "file.size_bytes": {
+          "display": "783396",
+          "from": "filesystem:stat.st_size",
+          "state": "KNOWN"
+        },
+        "video.bit_depth": {
+          "display": "8",
+          "from": "ffprobe:streams[].bits_per_raw_sample",
+          "state": "KNOWN"
+        },
+        "video.bitrate": {
+          "display": "2008192",
+          "from": "ffprobe:streams[].bit_rate",
+          "state": "KNOWN"
+        },
+        "video.chroma_subsampling": {
+          "display": "4:2:0",
+          "from": "ffprobe:streams[].pix_fmt",
+          "state": "KNOWN"
+        },
+        "video.codec": {
+          "display": "h264",
+          "from": "ffprobe:streams[].codec_name",
+          "state": "KNOWN"
+        },
+        "video.coded_height": {
+          "display": "360",
+          "from": "ffprobe:streams[].coded_height",
+          "state": "KNOWN"
+        },
+        "video.coded_width": {
+          "display": "640",
+          "from": "ffprobe:streams[].coded_width",
+          "state": "KNOWN"
+        },
+        "video.colour_primaries": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.colour_range": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.colour_space": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.display_aspect_ratio": {
+          "display": "16/9",
+          "from": "computed:video.display_aspect_ratio (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)",
+          "state": "KNOWN"
+        },
+        "video.display_height": {
+          "display": "360",
+          "from": "computed:video.display_height (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)",
+          "state": "KNOWN"
+        },
+        "video.display_width": {
+          "display": "640",
+          "from": "computed:video.display_width (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)",
+          "state": "KNOWN"
+        },
+        "video.dolby_vision": {
+          "display": "could not be determined (no Dolby Vision metadata found (note: DV in raw HEVC is a documented inspector limitation))",
+          "reason": "no Dolby Vision metadata found (note: DV in raw HEVC is a documented inspector limitation)",
+          "state": "UNDETERMINED"
+        },
+        "video.frame_rate": {
+          "display": "30",
+          "from": "ffprobe:streams[].avg_frame_rate",
+          "state": "KNOWN"
+        },
+        "video.frame_rate_mode": {
+          "display": "CFR",
+          "from": "mediainfo:Video.FrameRate_Mode",
+          "state": "KNOWN"
+        },
+        "video.gop_closed": {
+          "display": "could not be determined (closed-GOP verification requires packet-level analysis; not measured by PreflightQC V1)",
+          "reason": "closed-GOP verification requires packet-level analysis; not measured by PreflightQC V1",
+          "state": "UNDETERMINED"
+        },
+        "video.hdr_format": {
+          "display": "could not be determined (no HDR metadata found)",
+          "reason": "no HDR metadata found",
+          "state": "UNDETERMINED"
+        },
+        "video.height": {
+          "display": "360",
+          "from": "ffprobe:streams[].height",
+          "state": "KNOWN"
+        },
+        "video.level": {
+          "display": "30",
+          "from": "ffprobe:streams[].level",
+          "state": "KNOWN"
+        },
+        "video.max_cll": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "video.max_fall": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "video.pixel_format": {
+          "display": "yuv420p",
+          "from": "ffprobe:streams[].pix_fmt",
+          "state": "KNOWN"
+        },
+        "video.profile": {
+          "display": "Constrained Baseline",
+          "from": "ffprobe:streams[].profile",
+          "state": "KNOWN"
+        },
+        "video.rotation_degrees": {
+          "display": "0",
+          "from": "mediainfo:side_data[Display Matrix].rotation",
+          "state": "KNOWN"
+        },
+        "video.sample_aspect_ratio": {
+          "display": "1",
+          "from": "ffprobe:streams[].sample_aspect_ratio",
+          "state": "KNOWN"
+        },
+        "video.scan_type": {
+          "display": "progressive",
+          "from": "mediainfo:Video.ScanType",
+          "state": "KNOWN"
+        },
+        "video.transfer_characteristics": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.width": {
+          "display": "640",
+          "from": "ffprobe:streams[].width",
+          "state": "KNOWN"
+        }
+      },
+      "notes": [],
+      "size_bytes": 783396,
+      "verdict": "INSPECTED"
+    },
+    {
+      "conflicts": [],
+      "ffprobe_ok": true,
+      "file": "90_truncated.mp4",
+      "mediainfo_ok": true,
+      "normalised": {
+        "audio.bitrate": {
+          "display": "128309",
+          "from": "ffprobe:streams[].bit_rate",
+          "state": "KNOWN"
+        },
+        "audio.channel_layout": {
+          "display": "stereo",
+          "from": "ffprobe:streams[].channel_layout",
+          "state": "KNOWN"
+        },
+        "audio.channels": {
+          "display": "2",
+          "from": "ffprobe:streams[].channels",
+          "state": "KNOWN"
+        },
+        "audio.codec": {
+          "display": "aac",
+          "from": "ffprobe:streams[].codec_name",
+          "state": "KNOWN"
+        },
+        "audio.duration_seconds": {
+          "display": "4.0",
+          "from": "ffprobe:streams[].duration",
+          "state": "KNOWN"
+        },
+        "audio.present": {
+          "display": "True",
+          "from": "computed:audio.present (derived from streams[])",
+          "state": "KNOWN"
+        },
+        "audio.sample_rate": {
+          "display": "48000",
+          "from": "ffprobe:streams[].sample_rate",
+          "state": "KNOWN"
+        },
+        "container.audio_stream_count": {
+          "display": "1",
+          "from": "ffprobe:streams[audio]",
+          "state": "KNOWN"
+        },
+        "container.edit_lists_present": {
+          "display": "could not be determined (edit-list presence requires atom-level inspection; not determined by PreflightQC V1)",
+          "reason": "edit-list presence requires atom-level inspection; not determined by PreflightQC V1",
+          "state": "UNDETERMINED"
+        },
+        "container.faststart": {
+          "display": "True",
+          "from": "mediainfo:General.IsStreamable",
+          "state": "KNOWN"
+        },
+        "container.format": {
+          "display": "frozenset({'3gp', 'mp4', 'mov'})",
+          "from": "ffprobe:format.format_name",
+          "state": "KNOWN"
+        },
+        "container.major_brand": {
+          "display": "isom",
+          "from": "ffprobe:format.tags.major_brand",
+          "state": "KNOWN"
+        },
+        "container.overall_bitrate": {
+          "display": "400000",
+          "from": "ffprobe:format.bit_rate",
+          "state": "KNOWN"
+        },
+        "container.stream_count": {
+          "display": "2",
+          "from": "ffprobe:format.nb_streams",
+          "state": "KNOWN"
+        },
+        "container.video_stream_count": {
+          "display": "1",
+          "from": "ffprobe:streams[video]",
+          "state": "KNOWN"
+        },
+        "file.duration_seconds": {
+          "display": "4.0",
+          "from": "ffprobe:format.duration",
+          "state": "KNOWN"
+        },
+        "file.size_bytes": {
+          "display": "200000",
+          "from": "filesystem:stat.st_size",
+          "state": "KNOWN"
+        },
+        "video.bit_depth": {
+          "display": "8",
+          "from": "ffprobe:streams[].bits_per_raw_sample",
+          "state": "KNOWN"
+        },
+        "video.bitrate": {
+          "display": "2004062",
+          "from": "ffprobe:streams[].bit_rate",
+          "state": "KNOWN"
+        },
+        "video.chroma_subsampling": {
+          "display": "4:2:0",
+          "from": "ffprobe:streams[].pix_fmt",
+          "state": "KNOWN"
+        },
+        "video.codec": {
+          "display": "h264",
+          "from": "ffprobe:streams[].codec_name",
+          "state": "KNOWN"
+        },
+        "video.coded_height": {
+          "display": "1920",
+          "from": "ffprobe:streams[].coded_height",
+          "state": "KNOWN"
+        },
+        "video.coded_width": {
+          "display": "1080",
+          "from": "ffprobe:streams[].coded_width",
+          "state": "KNOWN"
+        },
+        "video.colour_primaries": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.colour_range": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.colour_space": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.display_aspect_ratio": {
+          "display": "9/16",
+          "from": "computed:video.display_aspect_ratio (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)",
+          "state": "KNOWN"
+        },
+        "video.display_height": {
+          "display": "1920",
+          "from": "computed:video.display_height (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)",
+          "state": "KNOWN"
+        },
+        "video.display_width": {
+          "display": "1080",
+          "from": "computed:video.display_width (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)",
+          "state": "KNOWN"
+        },
+        "video.dolby_vision": {
+          "display": "could not be determined (no Dolby Vision metadata found (note: DV in raw HEVC is a documented inspector limitation))",
+          "reason": "no Dolby Vision metadata found (note: DV in raw HEVC is a documented inspector limitation)",
+          "state": "UNDETERMINED"
+        },
+        "video.frame_rate": {
+          "display": "30",
+          "from": "ffprobe:streams[].avg_frame_rate",
+          "state": "KNOWN"
+        },
+        "video.frame_rate_mode": {
+          "display": "CFR",
+          "from": "mediainfo:Video.FrameRate_Mode",
+          "state": "KNOWN"
+        },
+        "video.gop_closed": {
+          "display": "could not be determined (closed-GOP verification requires packet-level analysis; not measured by PreflightQC V1)",
+          "reason": "closed-GOP verification requires packet-level analysis; not measured by PreflightQC V1",
+          "state": "UNDETERMINED"
+        },
+        "video.hdr_format": {
+          "display": "could not be determined (no HDR metadata found)",
+          "reason": "no HDR metadata found",
+          "state": "UNDETERMINED"
+        },
+        "video.height": {
+          "display": "1920",
+          "from": "ffprobe:streams[].height",
+          "state": "KNOWN"
+        },
+        "video.level": {
+          "display": "40",
+          "from": "ffprobe:streams[].level",
+          "state": "KNOWN"
+        },
+        "video.max_cll": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "video.max_fall": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "video.pixel_format": {
+          "display": "yuv420p",
+          "from": "ffprobe:streams[].pix_fmt",
+          "state": "KNOWN"
+        },
+        "video.profile": {
+          "display": "Constrained Baseline",
+          "from": "ffprobe:streams[].profile",
+          "state": "KNOWN"
+        },
+        "video.rotation_degrees": {
+          "display": "0",
+          "from": "mediainfo:side_data[Display Matrix].rotation",
+          "state": "KNOWN"
+        },
+        "video.sample_aspect_ratio": {
+          "display": "1",
+          "from": "ffprobe:streams[].sample_aspect_ratio",
+          "state": "KNOWN"
+        },
+        "video.scan_type": {
+          "display": "progressive",
+          "from": "mediainfo:Video.ScanType",
+          "state": "KNOWN"
+        },
+        "video.transfer_characteristics": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.width": {
+          "display": "1080",
+          "from": "ffprobe:streams[].width",
+          "state": "KNOWN"
+        }
+      },
+      "notes": [],
+      "size_bytes": 200000,
+      "verdict": "INSPECTED"
+    },
+    {
+      "conflicts": [],
+      "ffprobe_failure": {
+        "kind": "FILE_UNREADABLE",
+        "message": "Invalid data found when processing input"
+      },
+      "ffprobe_ok": false,
+      "file": "91_header_only.mp4",
+      "mediainfo_ok": true,
+      "normalised": {
+        "audio.bitrate": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "audio.channel_layout": {
+          "display": "L R",
+          "from": "mediainfo:Audio.ChannelLayout",
+          "state": "KNOWN"
+        },
+        "audio.channels": {
+          "display": "2",
+          "from": "mediainfo:Audio.Channels",
+          "state": "KNOWN"
+        },
+        "audio.codec": {
+          "display": "aac",
+          "from": "mediainfo:Audio.Format",
+          "state": "KNOWN"
+        },
+        "audio.duration_seconds": {
+          "display": "4.0",
+          "from": "mediainfo:Audio.Duration",
+          "state": "KNOWN"
+        },
+        "audio.present": {
+          "display": "True",
+          "from": "computed:audio.present (derived from streams[])",
+          "state": "KNOWN"
+        },
+        "audio.sample_rate": {
+          "display": "48000",
+          "from": "mediainfo:Audio.SamplingRate",
+          "state": "KNOWN"
+        },
+        "container.audio_stream_count": {
+          "display": "1",
+          "from": "mediainfo:General.AudioCount",
+          "state": "KNOWN"
+        },
+        "container.edit_lists_present": {
+          "display": "could not be determined (edit-list presence requires atom-level inspection; not determined by PreflightQC V1)",
+          "reason": "edit-list presence requires atom-level inspection; not determined by PreflightQC V1",
+          "state": "UNDETERMINED"
+        },
+        "container.faststart": {
+          "display": "could not be determined (fast-start position requires atom-level inspection; not determined by PreflightQC V1)",
+          "reason": "fast-start position requires atom-level inspection; not determined by PreflightQC V1",
+          "state": "UNDETERMINED"
+        },
+        "container.format": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "container.major_brand": {
+          "display": "isom",
+          "from": "mediainfo:General.CodecID",
+          "state": "KNOWN"
+        },
+        "container.overall_bitrate": {
+          "display": "8192",
+          "from": "mediainfo:General.OverallBitRate",
+          "state": "KNOWN"
+        },
+        "container.stream_count": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "container.video_stream_count": {
+          "display": "1",
+          "from": "mediainfo:General.VideoCount",
+          "state": "KNOWN"
+        },
+        "file.duration_seconds": {
+          "display": "4.0",
+          "from": "mediainfo:General.Duration",
+          "state": "KNOWN"
+        },
+        "file.size_bytes": {
+          "display": "4096",
+          "from": "filesystem:stat.st_size",
+          "state": "KNOWN"
+        },
+        "video.bit_depth": {
+          "display": "8",
+          "from": "mediainfo:Video.BitDepth",
+          "state": "KNOWN"
+        },
+        "video.bitrate": {
+          "display": "2004062",
+          "from": "mediainfo:Video.BitRate",
+          "state": "KNOWN"
+        },
+        "video.chroma_subsampling": {
+          "display": "4:2:0",
+          "from": "mediainfo:Video.ChromaSubsampling",
+          "state": "KNOWN"
+        },
+        "video.codec": {
+          "display": "h264",
+          "from": "mediainfo:Video.Format",
+          "state": "KNOWN"
+        },
+        "video.coded_height": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "video.coded_width": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "video.colour_primaries": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.colour_range": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.colour_space": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.display_aspect_ratio": {
+          "display": "9/16",
+          "from": "computed:video.display_aspect_ratio (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)",
+          "state": "KNOWN"
+        },
+        "video.display_height": {
+          "display": "1920",
+          "from": "computed:video.display_height (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)",
+          "state": "KNOWN"
+        },
+        "video.display_width": {
+          "display": "1080",
+          "from": "computed:video.display_width (derived from video.width, video.height, video.sample_aspect_ratio, video.rotation_degrees)",
+          "state": "KNOWN"
+        },
+        "video.dolby_vision": {
+          "display": "could not be determined (no Dolby Vision metadata found (note: DV in raw HEVC is a documented inspector limitation))",
+          "reason": "no Dolby Vision metadata found (note: DV in raw HEVC is a documented inspector limitation)",
+          "state": "UNDETERMINED"
+        },
+        "video.frame_rate": {
+          "display": "30",
+          "from": "mediainfo:Video.FrameRate",
+          "state": "KNOWN"
+        },
+        "video.frame_rate_mode": {
+          "display": "CFR",
+          "from": "mediainfo:Video.FrameRate_Mode",
+          "state": "KNOWN"
+        },
+        "video.gop_closed": {
+          "display": "could not be determined (closed-GOP verification requires packet-level analysis; not measured by PreflightQC V1)",
+          "reason": "closed-GOP verification requires packet-level analysis; not measured by PreflightQC V1",
+          "state": "UNDETERMINED"
+        },
+        "video.hdr_format": {
+          "display": "could not be determined (no HDR metadata found)",
+          "reason": "no HDR metadata found",
+          "state": "UNDETERMINED"
+        },
+        "video.height": {
+          "display": "1920",
+          "from": "mediainfo:Video.Height",
+          "state": "KNOWN"
+        },
+        "video.level": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "video.max_cll": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "video.max_fall": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "video.pixel_format": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "video.profile": {
+          "display": "Constrained Baseline",
+          "from": "mediainfo:Video.Format_Profile",
+          "state": "KNOWN"
+        },
+        "video.rotation_degrees": {
+          "display": "0",
+          "from": "mediainfo:side_data[Display Matrix].rotation",
+          "state": "KNOWN"
+        },
+        "video.sample_aspect_ratio": {
+          "display": "1",
+          "from": "mediainfo:Video.PixelAspectRatio",
+          "state": "KNOWN"
+        },
+        "video.scan_type": {
+          "display": "progressive",
+          "from": "mediainfo:Video.ScanType",
+          "state": "KNOWN"
+        },
+        "video.transfer_characteristics": {
+          "display": "could not be determined (the stream carries no colour description)",
+          "reason": "the stream carries no colour description",
+          "state": "UNDETERMINED"
+        },
+        "video.width": {
+          "display": "1080",
+          "from": "mediainfo:Video.Width",
+          "state": "KNOWN"
+        }
+      },
+      "notes": [],
+      "size_bytes": 4096,
+      "verdict": "INSPECTED"
+    },
+    {
+      "conflicts": [],
+      "ffprobe_failure": {
+        "kind": "FILE_UNREADABLE",
+        "message": "Invalid data found when processing input"
+      },
+      "ffprobe_ok": false,
+      "file": "92_not_media.mp4",
+      "mediainfo_ok": true,
+      "normalised": {
+        "audio.bitrate": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.channel_layout": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.channels": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.codec": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.duration_seconds": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.present": {
+          "display": "False",
+          "from": "computed:audio.present (derived from streams[])",
+          "state": "KNOWN"
+        },
+        "audio.sample_rate": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "container.audio_stream_count": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "container.edit_lists_present": {
+          "display": "could not be determined (edit-list presence requires atom-level inspection; not determined by PreflightQC V1)",
+          "reason": "edit-list presence requires atom-level inspection; not determined by PreflightQC V1",
+          "state": "UNDETERMINED"
+        },
+        "container.faststart": {
+          "display": "could not be determined (fast-start position requires atom-level inspection; not determined by PreflightQC V1)",
+          "reason": "fast-start position requires atom-level inspection; not determined by PreflightQC V1",
+          "state": "UNDETERMINED"
+        },
+        "container.format": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "container.major_brand": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "container.overall_bitrate": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "container.stream_count": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "container.video_stream_count": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "file.duration_seconds": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "file.size_bytes": {
+          "display": "43",
+          "from": "filesystem:stat.st_size",
+          "state": "KNOWN"
+        },
+        "video.bit_depth": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.bitrate": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.chroma_subsampling": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.codec": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.coded_height": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.coded_width": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.colour_primaries": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.colour_range": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.colour_space": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.display_aspect_ratio": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.display_height": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.display_width": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.dolby_vision": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.frame_rate": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.frame_rate_mode": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.gop_closed": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.hdr_format": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.height": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.level": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.max_cll": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.max_fall": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.pixel_format": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.profile": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.rotation_degrees": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.sample_aspect_ratio": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.scan_type": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.transfer_characteristics": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.width": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        }
+      },
+      "notes": [],
+      "size_bytes": 43,
+      "verdict": "INSPECTED"
+    },
+    {
+      "conflicts": [],
+      "ffprobe_failure": {
+        "kind": "FILE_UNREADABLE",
+        "message": "Invalid data found when processing input"
+      },
+      "ffprobe_ok": false,
+      "file": "93_zero_bytes.mp4",
+      "mediainfo_ok": true,
+      "normalised": {
+        "audio.bitrate": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.channel_layout": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.channels": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.codec": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.duration_seconds": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.present": {
+          "display": "False",
+          "from": "computed:audio.present (derived from streams[])",
+          "state": "KNOWN"
+        },
+        "audio.sample_rate": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "container.audio_stream_count": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "container.edit_lists_present": {
+          "display": "could not be determined (edit-list presence requires atom-level inspection; not determined by PreflightQC V1)",
+          "reason": "edit-list presence requires atom-level inspection; not determined by PreflightQC V1",
+          "state": "UNDETERMINED"
+        },
+        "container.faststart": {
+          "display": "could not be determined (fast-start position requires atom-level inspection; not determined by PreflightQC V1)",
+          "reason": "fast-start position requires atom-level inspection; not determined by PreflightQC V1",
+          "state": "UNDETERMINED"
+        },
+        "container.format": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "container.major_brand": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "container.overall_bitrate": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "container.stream_count": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "container.video_stream_count": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "file.duration_seconds": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "file.size_bytes": {
+          "display": "0",
+          "from": "filesystem:stat.st_size",
+          "state": "KNOWN"
+        },
+        "video.bit_depth": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.bitrate": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.chroma_subsampling": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.codec": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.coded_height": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.coded_width": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.colour_primaries": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.colour_range": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.colour_space": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.display_aspect_ratio": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.display_height": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.display_width": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.dolby_vision": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.frame_rate": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.frame_rate_mode": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.gop_closed": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.hdr_format": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.height": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.level": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.max_cll": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.max_fall": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.pixel_format": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.profile": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.rotation_degrees": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.sample_aspect_ratio": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.scan_type": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.transfer_characteristics": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.width": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        }
+      },
+      "notes": [],
+      "size_bytes": 0,
+      "verdict": "INSPECTED"
+    },
+    {
+      "conflicts": [],
+      "ffprobe_failure": {
+        "kind": "FILE_UNREADABLE",
+        "message": "Invalid data found when processing input"
+      },
+      "ffprobe_ok": false,
+      "file": "94_corrupt_moov.mp4",
+      "mediainfo_ok": true,
+      "normalised": {
+        "audio.bitrate": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.channel_layout": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.channels": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.codec": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.duration_seconds": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "audio.present": {
+          "display": "False",
+          "from": "computed:audio.present (derived from streams[])",
+          "state": "KNOWN"
+        },
+        "audio.sample_rate": {
+          "display": "could not be determined (the file has no audio stream)",
+          "reason": "the file has no audio stream",
+          "state": "UNDETERMINED"
+        },
+        "container.audio_stream_count": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "container.edit_lists_present": {
+          "display": "could not be determined (edit-list presence requires atom-level inspection; not determined by PreflightQC V1)",
+          "reason": "edit-list presence requires atom-level inspection; not determined by PreflightQC V1",
+          "state": "UNDETERMINED"
+        },
+        "container.faststart": {
+          "display": "False",
+          "from": "mediainfo:General.IsStreamable",
+          "state": "KNOWN"
+        },
+        "container.format": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "container.major_brand": {
+          "display": "isom",
+          "from": "mediainfo:General.CodecID",
+          "state": "KNOWN"
+        },
+        "container.overall_bitrate": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "container.stream_count": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "container.video_stream_count": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "file.duration_seconds": {
+          "display": "could not be determined (no inspector reported this property)",
+          "reason": "no inspector reported this property",
+          "state": "UNDETERMINED"
+        },
+        "file.size_bytes": {
+          "display": "1071393",
+          "from": "filesystem:stat.st_size",
+          "state": "KNOWN"
+        },
+        "video.bit_depth": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.bitrate": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.chroma_subsampling": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.codec": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.coded_height": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.coded_width": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.colour_primaries": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.colour_range": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.colour_space": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.display_aspect_ratio": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.display_height": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.display_width": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.dolby_vision": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.frame_rate": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.frame_rate_mode": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.gop_closed": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.hdr_format": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.height": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.level": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.max_cll": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.max_fall": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.pixel_format": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.profile": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.rotation_degrees": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.sample_aspect_ratio": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.scan_type": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.transfer_characteristics": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        },
+        "video.width": {
+          "display": "could not be determined (the file has no video stream)",
+          "reason": "the file has no video stream",
+          "state": "UNDETERMINED"
+        }
+      },
+      "notes": [],
+      "size_bytes": 1071393,
+      "verdict": "INSPECTED"
+    }
+  ],
+  "inspectors": {
+    "ffprobe": {
+      "licence": "LGPL-3.0-or-later",
+      "path": "F:\\PreflightQC\\third-party\\bin\\ffprobe.exe",
+      "version": "n8.1.2-34-g9b6c8969e0-20260809"
+    },
+    "mediainfo": {
+      "licence": "BSD-2-Clause",
+      "path": "F:\\PreflightQC\\third-party\\bin\\mediainfo.exe",
+      "version": "26.05"
+    }
+  },
+  "sample_count": 15
+}

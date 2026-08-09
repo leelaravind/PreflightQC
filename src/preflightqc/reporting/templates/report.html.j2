@@ -1,0 +1,172 @@
+{#
+  The human-readable report.
+
+  Fully self-contained by requirement (spec 17.3): CSS is inlined, there are no remote
+  fonts, no scripts, no images and no CDN references. A report a user emails to a client
+  must render identically on a machine with no network, and must not phone home when
+  opened.
+
+  It is also print-clean, because V1 ships no native PDF writer and the browser's
+  "Print to PDF" is the supported route to a PDF deliverable.
+#}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PreflightQC report — {{ report.preset_display_name }}</title>
+<style>
+  :root {
+    --fail: #b3261e;
+    --warn: #8a5a00;
+    --pass: #1c6b3c;
+    --info: #40484e;
+    --unknown: #5a4b7c;
+    --line: #d7dbdf;
+    --muted: #5c666e;
+    --bg: #ffffff;
+    --fg: #16191c;
+    --panel: #f6f8f9;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 2rem 1.5rem 4rem;
+    background: var(--bg); color: var(--fg);
+    font: 15px/1.55 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    max-width: 72rem; margin-inline: auto;
+  }
+  h1 { font-size: 1.6rem; margin: 0 0 .25rem; }
+  h2 { font-size: 1.15rem; margin: 2.5rem 0 .75rem; padding-bottom: .3rem; border-bottom: 2px solid var(--line); }
+  h3 { font-size: 1rem; margin: 0; font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; }
+  p { margin: .4rem 0; }
+  .muted { color: var(--muted); font-size: .875rem; }
+  .meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: .35rem 1.5rem; margin: 1rem 0; }
+  .meta div { font-size: .875rem; }
+  .meta dt { color: var(--muted); display: inline; }
+  .meta dd { display: inline; margin: 0; font-weight: 600; }
+  .totals { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0; }
+  .chip { border: 1px solid var(--line); border-radius: 4px; padding: .5rem .85rem; min-width: 6.5rem; background: var(--panel); }
+  .chip b { display: block; font-size: 1.35rem; line-height: 1.2; }
+  .chip span { font-size: .75rem; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+  .banner { border-left: 4px solid var(--warn); background: #fff8e8; padding: .75rem 1rem; margin: 1rem 0; }
+  .banner.note { border-left-color: var(--info); background: var(--panel); }
+  .file { border: 1px solid var(--line); border-radius: 6px; margin: 1rem 0; overflow: hidden; break-inside: avoid; }
+  .file > header { display: flex; align-items: baseline; gap: .75rem; padding: .7rem 1rem; background: var(--panel); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .file > header .path { font-size: .75rem; color: var(--muted); word-break: break-all; flex-basis: 100%; }
+  .badge { font-size: .7rem; font-weight: 700; letter-spacing: .05em; padding: .2rem .5rem; border-radius: 3px; color: #fff; white-space: nowrap; }
+  .badge.FAIL { background: var(--fail); }
+  .badge.WARN { background: var(--warn); }
+  .badge.PASS { background: var(--pass); }
+  .badge.INFO { background: var(--info); }
+  .badge.UNKNOWN { background: var(--unknown); }
+  .badge.NOT_INSPECTED, .badge.NOT_APPLICABLE { background: var(--muted); }
+  table { width: 100%; border-collapse: collapse; font-size: .875rem; }
+  th, td { text-align: left; padding: .5rem .75rem; border-top: 1px solid var(--line); vertical-align: top; }
+  th { font-size: .72rem; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); background: #fbfcfc; }
+  td.sev { white-space: nowrap; width: 1%; }
+  .detected { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; font-size: .8rem; }
+  .src { font-size: .75rem; color: var(--muted); word-break: break-all; }
+  footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--line); font-size: .8rem; color: var(--muted); }
+  ul.caveats { margin: .4rem 0 0; padding-left: 1.1rem; font-size: .85rem; color: var(--muted); }
+  @media print {
+    body { padding: 0; font-size: 11pt; max-width: none; }
+    .file, tr { break-inside: avoid; }
+    h2 { break-after: avoid; }
+  }
+</style>
+
+<h1>PreflightQC report</h1>
+<p class="muted">{{ report.preset_display_name }} — {{ report.preset_platform }}</p>
+
+{% if report.is_partial %}
+<div class="banner"><strong>Partial report.</strong> {{ report.partial_note }}</div>
+{% endif %}
+
+<div class="meta">
+  <div><dt>PreflightQC version:</dt> <dd>{{ report.product_version }}</dd></div>
+  <div><dt>Scan started:</dt> <dd>{{ report.scan_started }}</dd></div>
+  <div><dt>Scan finished:</dt> <dd>{{ report.scan_finished }}</dd></div>
+  <div><dt>Timezone:</dt> <dd>{{ report.timezone }}</dd></div>
+  <div><dt>Preset id:</dt> <dd>{{ report.preset_id }}</dd></div>
+  <div><dt>Rule-set version:</dt> <dd>{{ report.ruleset_version }}</dd></div>
+  <div><dt>Rules last verified:</dt> <dd>{{ report.preset_last_verified }}</dd></div>
+  {% for name, version in report.inspector_versions.items() | sort %}
+  <div><dt>{{ name }}:</dt> <dd>{{ version }}</dd></div>
+  {% endfor %}
+</div>
+
+<div class="totals">
+  {% for status, count in report.status_counts.items() %}{% if count or status in ('PASS', 'WARN', 'FAIL') %}
+  <div class="chip"><b>{{ count }}</b><span>{{ status.replace('_', ' ') }}</span></div>
+  {% endif %}{% endfor %}
+</div>
+
+{% if report.preset_caveats %}
+<div class="banner note">
+  <strong>About this preset</strong>
+  <ul class="caveats">{% for caveat in report.preset_caveats %}<li>{{ caveat }}</li>{% endfor %}</ul>
+</div>
+{% endif %}
+
+<h2>Files</h2>
+{% for file in report.files %}
+<section class="file">
+  <header>
+    <span class="badge {{ file.status }}">{{ file.status.replace('_', ' ') }}</span>
+    <h3>{{ file.name }}</h3>
+    {% if file.status in ('PASS', 'WARN', 'FAIL') %}
+    <span class="muted">{{ file.checks_passed }} checks passed</span>
+    {% endif %}
+    <span class="path">{{ file.path }}</span>
+  </header>
+
+  {% if file.failure_message %}
+  <table><tr><td>
+    <strong>Not inspected — {{ file.failure_kind }}.</strong> {{ file.failure_message }}
+    {% if file.failure_hint %}<div class="muted">{{ file.failure_hint }}</div>{% endif %}
+    <div class="muted">PreflightQC did not validate this file, so it has no verdict about it.</div>
+  </td></tr></table>
+  {% elif file.actionable %}
+  <table>
+    <thead><tr>
+      <th>Severity</th><th>Property</th><th>Detected</th><th>Expected</th><th>Explanation</th>
+    </tr></thead>
+    <tbody>
+    {% for finding in file.actionable %}
+      <tr>
+        <td class="sev"><span class="badge {{ finding.severity }}">{{ finding.severity }}</span></td>
+        <td>{{ finding.property_label }}<div class="muted">{{ finding.rule_id }}</div></td>
+        <td class="detected">{{ finding.detected }}</td>
+        <td class="detected">{{ finding.expected }}</td>
+        <td>
+          {{ finding.explanation }}
+          {% if finding.unknown_reason %}<div class="muted">Not evaluated: {{ finding.unknown_reason }}</div>{% endif %}
+          {% if finding.provenance %}<div class="muted">Read from {{ finding.provenance }}</div>{% endif %}
+          <div class="src">{{ finding.source_title }} — {{ finding.source_url }} (accessed {{ finding.source_access_date }}, confidence {{ finding.source_confidence }})</div>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <table><tr><td class="muted">
+    All {{ file.checks_passed }} checks in this preset passed. No warnings or failures.
+  </td></tr></table>
+  {% endif %}
+
+  {% if file.diagnostics %}
+  <table><tr><td class="muted">
+    {% for note in file.diagnostics %}{{ note }}<br>{% endfor %}
+  </td></tr></table>
+  {% endif %}
+</section>
+{% endfor %}
+
+{% if report.unprocessed %}
+<h2>Not processed</h2>
+<ul class="caveats">{% for path in report.unprocessed %}<li>{{ path }}</li>{% endfor %}</ul>
+{% endif %}
+
+<footer>
+  <p><strong>{{ report.approved_claim }}</strong></p>
+  <p>{{ report.non_destructive_statement }}</p>
+  <p>{{ report.accuracy_statement }}</p>
+  {% if report.byte_convention %}<p>{{ report.byte_convention }}</p>{% endif %}
+</footer>

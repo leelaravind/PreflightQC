@@ -1,0 +1,204 @@
+{
+  "preset_id": "linkedin_video_ads",
+  "platform": "LinkedIn",
+  "display_name": "LinkedIn — Video Ads",
+  "description": "Sponsored in-feed video ads. MP4 only, tightly bounded dimensions, and a published 5% aspect-ratio tolerance.",
+  "origin": "shipped",
+  "ruleset_version": "2026-08-09.1",
+  "last_verified_date": "2026-08-09",
+  "byte_convention": "Decimal bytes (500 MB = 500,000,000; the 75 KB floor is treated as 76,800 bytes). LinkedIn does not state binary or decimal, so PreflightQC uses the conservative reading.",
+  "caveats": [
+    "The maximum ad file size is 500 MB, per LinkedIn's own specification page and the Microsoft Learn Videos API. The 200 MB figure repeated in many third-party blogs is not authoritative and is not used here.",
+    "LinkedIn publishes an explicit 5% aspect-ratio tolerance, which PreflightQC applies to the ratio bounds.",
+    "LinkedIn does not publish a hard video-codec whitelist for ads, so non-H.264 is a warning rather than a failure. Apple ProRes is separately documented as unsupported and does fail.",
+    "Captions are supplied as a separate SRT sidecar or burned into the picture. Neither is determinable from the delivered file, so caption presence is never checked.",
+    "Organic and advertising specifications are different products and must never be merged."
+  ],
+  "sources": [
+    {
+      "source_ref": "L-S3",
+      "title": "Video Ads Specifications, LinkedIn Marketing Solutions",
+      "url": "https://business.linkedin.com/advertise/ads/sponsored-content/video-ads/specs",
+      "access_date": "2026-08-09",
+      "confidence": "HIGH"
+    },
+    {
+      "source_ref": "L-S4",
+      "title": "Video ads advertising specifications, LinkedIn Marketing Solutions Help",
+      "url": "https://www.linkedin.com/help/lms/answer/a424737",
+      "access_date": "2026-08-09",
+      "confidence": "HIGH"
+    },
+    {
+      "source_ref": "L-S7",
+      "title": "Videos API, Microsoft Learn (LinkedIn Marketing)",
+      "url": "https://learn.microsoft.com/en-us/linkedin/marketing/community-management/shares/videos-api",
+      "access_date": "2026-08-09",
+      "confidence": "HIGH"
+    }
+  ],
+  "rules": [
+    {
+      "rule_id": "linkedin_ads.container",
+      "property": "container.format",
+      "operator": "in",
+      "expected": ["mp4"],
+      "classification": "HARD_REQUIREMENT",
+      "severity": "FAIL",
+      "explanation": "The video file type must be MP4.",
+      "source_ref": "L-S3",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "linkedin_ads.max_file_size",
+      "property": "file.size_bytes",
+      "operator": "lte",
+      "expected": 500000000,
+      "classification": "HARD_REQUIREMENT",
+      "severity": "FAIL",
+      "explanation": "Maximum video file size is 500 MB.",
+      "note": "Third-party guides widely repeat a 200 MB figure. That is not authoritative; LinkedIn and the Microsoft Learn API docs both state 500 MB.",
+      "source_ref": "L-S3",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "linkedin_ads.min_file_size",
+      "property": "file.size_bytes",
+      "operator": "gte",
+      "expected": 76800,
+      "classification": "HARD_REQUIREMENT",
+      "severity": "FAIL",
+      "explanation": "Minimum video file size is 75 KB.",
+      "source_ref": "L-S3",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "linkedin_ads.duration",
+      "property": "file.duration_seconds",
+      "operator": "range",
+      "expected": { "min": 3, "max": 1800 },
+      "classification": "HARD_REQUIREMENT",
+      "severity": "FAIL",
+      "explanation": "Video duration must be between 3 seconds and 30 minutes.",
+      "source_ref": "L-S3",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "linkedin_ads.width",
+      "property": "video.display_width",
+      "operator": "range",
+      "expected": { "min": 360, "max": 1920 },
+      "classification": "HARD_REQUIREMENT",
+      "severity": "FAIL",
+      "explanation": "Width must be between 360 and 1920 pixels.",
+      "source_ref": "L-S3",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "linkedin_ads.height",
+      "property": "video.display_height",
+      "operator": "range",
+      "expected": { "min": 360, "max": 1920 },
+      "classification": "HARD_REQUIREMENT",
+      "severity": "FAIL",
+      "explanation": "Height must be between 360 and 1920 pixels.",
+      "source_ref": "L-S3",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "linkedin_ads.aspect_ratio",
+      "property": "video.display_aspect_ratio",
+      "operator": "range",
+      "expected": { "min": 0.563, "max": 1.778 },
+      "tolerance": 0.05,
+      "relative_tolerance": true,
+      "classification": "HARD_REQUIREMENT",
+      "severity": "FAIL",
+      "explanation": "Aspect ratio must be between 9:16 (0.563) and 16:9 (1.778), with a 5% tolerance.",
+      "source_ref": "L-S3",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "linkedin_ads.audio_sample_rate",
+      "property": "audio.sample_rate",
+      "operator": "lt",
+      "expected": 64000,
+      "classification": "HARD_REQUIREMENT",
+      "severity": "FAIL",
+      "explanation": "Video sound rate must be less than 64 kHz.",
+      "source_ref": "L-S3",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "linkedin_ads.prores_unsupported",
+      "property": "video.codec",
+      "operator": "not_in",
+      "expected": ["prores"],
+      "classification": "HARD_REQUIREMENT",
+      "severity": "FAIL",
+      "explanation": "Apple ProRes is not supported.",
+      "source_ref": "L-S4",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "linkedin_ads.video_codec",
+      "property": "video.codec",
+      "operator": "in",
+      "expected": ["h264"],
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "H.264/AVC is the expected video codec for LinkedIn video ads.",
+      "message_fail": "LinkedIn's ad specification enumerates the container but does not publish a hard video-codec whitelist, so this is not a rejection condition.",
+      "source_ref": "L-S3",
+      "confidence": "MEDIUM",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "linkedin_ads.audio_format",
+      "property": "audio.codec",
+      "operator": "in",
+      "expected": ["aac", "mp4a"],
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "The video sound format should be AAC or MPEG4.",
+      "source_ref": "L-S3",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "linkedin_ads.frame_rate",
+      "property": "video.frame_rate",
+      "operator": "lte",
+      "expected": 30,
+      "tolerance": 0.01,
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "The recommended frame rate is 30 frames per second.",
+      "source_ref": "L-S3",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "linkedin_ads.captions_not_inspectable",
+      "property": "container.stream_count",
+      "operator": "present",
+      "classification": "UNKNOWN",
+      "severity": "INFO",
+      "explanation": "Stream count, reported for information.",
+      "note": "LinkedIn captions are supplied as a separate SRT sidecar or burned into the picture, so caption presence cannot be determined from the delivered file and is never checked.",
+      "measurable_offline": false,
+      "source_ref": "L-S3",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    }
+  ]
+}

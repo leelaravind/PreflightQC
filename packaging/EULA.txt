@@ -1,0 +1,154 @@
+PREFLIGHTQC — END USER LICENCE AGREEMENT (DRAFT)
+================================================================================
+
+DRAFT — NOT LEGAL ADVICE, NOT CLEARED FOR RELEASE.
+
+This document has not been reviewed by a qualified software-IP attorney. Review
+is a release prerequisite (gate G-12) and has not been performed. Do not
+distribute PreflightQC commercially with this text in its current state.
+
+--------------------------------------------------------------------------------
+1. LICENCE GRANT
+--------------------------------------------------------------------------------
+
+Subject to these terms, you are granted a non-exclusive, non-transferable
+licence to install and use PreflightQC ("the Software") on computers you own or
+control.
+
+--------------------------------------------------------------------------------
+2. WHAT THE SOFTWARE DOES, AND DOES NOT DO
+--------------------------------------------------------------------------------
+
+PreflightQC inspects video files and reports whether their technical properties
+meet a chosen delivery specification. It does not modify, encode, transcode,
+repair or upload your files, and it makes no network connections.
+
+PreflightQC reports what the file's metadata says. Acceptance by any platform is
+that platform's decision, and platforms change their requirements without
+notice. A PASS result is not a guarantee of acceptance, and the Software is not
+affiliated with, endorsed by, or certified by any platform whose specifications
+it validates against.
+
+--------------------------------------------------------------------------------
+3. OPEN SOURCE COMPONENTS — YOUR RIGHTS UNDER THEM ARE NOT LIMITED BY THIS EULA
+--------------------------------------------------------------------------------
+
+The Software includes third-party components under their own licences, listed in
+full in THIRD-PARTY-NOTICES.txt with their licence texts in the licenses folder.
+
+In particular:
+
+  * The Software includes unmodified binaries from the FFmpeg project
+    (https://ffmpeg.org), used under the GNU Lesser General Public License
+    version 3 ("LGPLv3").
+
+  * The Software uses the Qt toolkit via PySide6, also under the LGPLv3.
+
+WHERE ANY TERM OF THIS AGREEMENT CONFLICTS WITH THE TERMS OF AN OPEN SOURCE
+LICENCE COVERING A COMPONENT, THE OPEN SOURCE LICENCE PREVAILS FOR THAT
+COMPONENT.
+
+3.1 No claim of ownership over FFmpeg
+
+The publisher of PreflightQC does not own FFmpeg and claims no ownership,
+authorship or proprietary right in it. FFmpeg is the property of its respective
+copyright holders and is used here solely under the LGPLv3.
+
+3.2 Reverse engineering — express carve-out
+
+You may reverse engineer, decompile and disassemble the LGPL-licensed components
+of the Software, and modify them for your own use, to the extent those rights
+are granted to you by the LGPLv3 — including for the purpose of debugging your
+modifications to those components.
+
+This agreement does not prohibit reverse engineering, and no term of it shall be
+read as restricting the rights the LGPLv3 grants you.
+
+3.3 Replacing the LGPL libraries
+
+The FFmpeg libraries are shipped as separate, unmodified, unobfuscated files in
+the bin folder, and the Qt libraries as separate, unmodified, unobfuscated files
+in the _internal\PySide6 folder. You may replace either with compatible versions
+of your own. The publisher does not warrant the Software's behaviour after such
+a replacement, but does not restrict your right to make one.
+
+3.4 Corresponding source
+
+The complete corresponding source code for the FFmpeg libraries distributed with
+the Software, together with the build configuration used to produce them, is
+available at the location given in THIRD-PARTY-NOTICES.txt for at least three
+years from the date you received the Software, at no charge beyond the cost of
+distribution.
+
+--------------------------------------------------------------------------------
+4. YOUR FILES
+--------------------------------------------------------------------------------
+
+The Software opens your video files read-only and never writes to them. It sends
+nothing anywhere: it has no network capability, no account, and no telemetry.
+Reports you export are written only where you choose to write them.
+
+--------------------------------------------------------------------------------
+5. DISCLAIMER OF WARRANTY
+--------------------------------------------------------------------------------
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+
+Nothing in this section limits any warranty or liability that cannot be excluded
+under the law applicable to you as a consumer.
+
+--------------------------------------------------------------------------------
+6. LIMITATION OF LIABILITY
+--------------------------------------------------------------------------------
+
+To the maximum extent permitted by applicable law, the publisher shall not be
+liable for any indirect, incidental, special or consequential damages arising
+out of the use of or inability to use the Software, including rejected or
+delayed deliveries.
+
+Nothing in this section limits liability for death or personal injury caused by
+negligence, for fraud, or for any other liability that cannot lawfully be
+excluded.
+
+--------------------------------------------------------------------------------
+7. TRADEMARKS
+--------------------------------------------------------------------------------
+
+Instagram and Meta are trademarks of Meta Platforms, Inc. TikTok is a trademark
+of ByteDance Ltd. YouTube is a trademark of Google LLC. LinkedIn is a trademark
+of LinkedIn Corporation. Qt is a trademark of The Qt Company Ltd. These names are
+used descriptively only, to identify the delivery specifications the Software
+validates against.
+
+--------------------------------------------------------------------------------
+8. TRANSLATIONS
+--------------------------------------------------------------------------------
+
+If this agreement is translated, the carve-outs in section 3 — the open source
+precedence clause, the FFmpeg ownership disclaimer, and the reverse engineering
+carve-out — must be carried into every translation. A translation that reinstates
+a reverse engineering prohibition would conflict with the LGPLv3 in the language
+its reader actually relies on, which is exactly the failure the carve-out exists
+to prevent.
+
+--------------------------------------------------------------------------------
+9. OPEN QUESTIONS FOR ATTORNEY REVIEW (G-12)
+--------------------------------------------------------------------------------
+
+Recorded here so they are not lost, and so no one mistakes this draft for a
+cleared document:
+
+  1. LGPLv3 "Installation Information" for User Products (LGPLv3 section 4 /
+     GPLv3 section 6) — the effect, if any, on a desktop application delivered
+     as an installer.
+  2. LGPLv3 patent provisions and their interaction with commercial
+     distribution.
+  3. Whether the section 3.2 carve-out is drafted broadly enough for every
+     jurisdiction in which the Software will be sold.
+  4. Governing law and jurisdiction, which this draft deliberately does not
+     state.
+  5. Consumer-law limits on sections 5 and 6 in each target market.
+  6. Whether the Microsoft Visual C++ runtime redistribution terms are satisfied
+     as shipped.

@@ -1,0 +1,223 @@
+{
+  "preset_id": "tiktok_content_posting_api",
+  "platform": "TikTok",
+  "display_name": "TikTok — Content Posting API",
+  "description": "TikTok delivery through the Content Posting API. This is the richest machine-readable specification TikTok publishes and the only one enumerating codecs, frame-rate bounds and pixel minimums and maximums.",
+  "origin": "shipped",
+  "ruleset_version": "2026-08-09.1",
+  "last_verified_date": "2026-08-09",
+  "byte_convention": "Decimal bytes (1 GB = 1,000,000,000).",
+  "caveats": [
+    "TikTok's own documentation gives four different official maximum durations across overlapping upload paths: 10 minutes for this API, 30 minutes for TikTok Studio, and 60 minutes for in-app upload (10 minutes for in-app recording). Pick the preset that matches how you will actually deliver.",
+    "TikTok re-encodes every upload, so many properties are silently normalised rather than rejected. Only the published API restriction table is enforced here.",
+    "TikTok publishes nothing about codec profile/level, HDR, colour, bit depth, chroma subsampling, fast start, pixel aspect ratio, GOP, interlacing, or loudness. Those are reported as unknown, never judged."
+  ],
+  "sources": [
+    {
+      "source_ref": "T-S8",
+      "title": "Media Transfer Guide — Video restrictions, TikTok for Developers",
+      "url": "https://developers.tiktok.com/doc/content-posting-api-media-transfer-guide",
+      "access_date": "2026-08-09",
+      "confidence": "HIGH"
+    },
+    {
+      "source_ref": "T-S9",
+      "title": "Get Started — Direct Post / Upload, TikTok for Developers",
+      "url": "https://developers.tiktok.com/doc/content-posting-api-get-started",
+      "access_date": "2026-08-09",
+      "confidence": "MEDIUM"
+    },
+    {
+      "source_ref": "T-S1",
+      "title": "Tools for creators (TikTok Studio), TikTok Help Center",
+      "url": "https://support.tiktok.com/en/using-tiktok/creating-videos/creator-tools-on-tiktok",
+      "access_date": "2026-08-09",
+      "confidence": "HIGH"
+    },
+    {
+      "source_ref": "T-S2",
+      "title": "Camera tools, TikTok Help Center",
+      "url": "https://support.tiktok.com/en/using-tiktok/creating-videos/camera-tools",
+      "access_date": "2026-08-09",
+      "confidence": "HIGH"
+    }
+  ],
+  "rules": [
+    {
+      "rule_id": "tiktok_api.container",
+      "property": "container.format",
+      "operator": "in",
+      "expected": ["mp4", "webm", "mov"],
+      "classification": "DOCUMENTED_LIMIT",
+      "severity": "FAIL",
+      "explanation": "Supported media formats are MP4 (recommended), WebM and MOV.",
+      "source_ref": "T-S8",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_api.video_codec",
+      "property": "video.codec",
+      "operator": "in",
+      "expected": ["h264", "hevc", "vp8", "vp9"],
+      "classification": "DOCUMENTED_LIMIT",
+      "severity": "FAIL",
+      "explanation": "Supported codecs are H.264 (recommended), H.265, VP8 and VP9.",
+      "source_ref": "T-S8",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_api.width_bounds",
+      "property": "video.display_width",
+      "operator": "range",
+      "expected": { "min": 360, "max": 4096 },
+      "classification": "DOCUMENTED_LIMIT",
+      "severity": "FAIL",
+      "explanation": "Width must be at least 360 and at most 4096 pixels.",
+      "source_ref": "T-S8",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_api.height_bounds",
+      "property": "video.display_height",
+      "operator": "range",
+      "expected": { "min": 360, "max": 4096 },
+      "classification": "DOCUMENTED_LIMIT",
+      "severity": "FAIL",
+      "explanation": "Height must be at least 360 and at most 4096 pixels.",
+      "source_ref": "T-S8",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_api.frame_rate",
+      "property": "video.frame_rate",
+      "operator": "range",
+      "expected": { "min": 23, "max": 60 },
+      "tolerance": 0.01,
+      "classification": "DOCUMENTED_LIMIT",
+      "severity": "FAIL",
+      "explanation": "Frame rate must be a minimum of 23 and a maximum of 60 FPS.",
+      "source_ref": "T-S8",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_api.duration",
+      "property": "file.duration_seconds",
+      "operator": "lte",
+      "expected": 600,
+      "classification": "DOCUMENTED_LIMIT",
+      "severity": "FAIL",
+      "explanation": "The longest video that can be sent through the upload endpoint is 10 minutes.",
+      "note": "Other TikTok delivery paths document different maximums; see this preset's caveats.",
+      "source_ref": "T-S8",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_api.file_size",
+      "property": "file.size_bytes",
+      "operator": "lte",
+      "expected": 4000000000,
+      "classification": "DOCUMENTED_LIMIT",
+      "severity": "FAIL",
+      "explanation": "Maximum file size is 4 GB.",
+      "source_ref": "T-S8",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_api.audio_codec",
+      "property": "audio.codec",
+      "operator": "in",
+      "expected": ["aac"],
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "AAC audio is recommended (the documented example pairs H.264 with AAC).",
+      "message_fail": "TikTok does not state a hard audio codec rule and re-encodes every upload.",
+      "source_ref": "T-S9",
+      "confidence": "MEDIUM",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_api.aspect_ratio",
+      "property": "video.display_aspect_ratio",
+      "operator": "eq",
+      "expected": 0.5625,
+      "tolerance": 0.01,
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "9:16 is the native and recommended aspect ratio.",
+      "message_fail": "1:1 and 16:9 are also accepted and are letterboxed on playback.",
+      "source_ref": "T-S1",
+      "confidence": "MEDIUM",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_api.recommended_resolution",
+      "property": "video.display_height",
+      "operator": "gte",
+      "expected": 1920,
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "1080x1920 is the recommended delivery resolution.",
+      "message_fail": "720x1280 is the documented minimum for the Studio upload path; this is a quality recommendation only.",
+      "source_ref": "T-S1",
+      "confidence": "MEDIUM",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_api.constant_frame_rate",
+      "property": "video.frame_rate_mode",
+      "operator": "constant_only",
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "A constant frame rate avoids reinterpretation during TikTok's server-side transcode.",
+      "message_fail": "TikTok publishes no VFR policy; this is quality guidance only.",
+      "source_ref": "T-S8",
+      "confidence": "LOW",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_api.other_path_studio_duration",
+      "property": "file.duration_seconds",
+      "operator": "lte",
+      "expected": 1800,
+      "classification": "UNKNOWN",
+      "severity": "INFO",
+      "explanation": "TikTok Studio web upload documents a 30-minute maximum.",
+      "note": "Reported so the contradiction between TikTok's own published limits is visible rather than silently resolved.",
+      "source_ref": "T-S1",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_api.other_path_in_app_duration",
+      "property": "file.duration_seconds",
+      "operator": "lte",
+      "expected": 3600,
+      "classification": "UNKNOWN",
+      "severity": "INFO",
+      "explanation": "In-app upload documents a 60-minute maximum (10 minutes for in-app recording).",
+      "note": "Reported so the contradiction between TikTok's own published limits is visible rather than silently resolved.",
+      "source_ref": "T-S2",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_api.hdr_colour",
+      "property": "video.transfer_characteristics",
+      "operator": "present",
+      "classification": "UNKNOWN",
+      "severity": "INFO",
+      "explanation": "Colour transfer characteristics, reported for information.",
+      "note": "TikTok publishes no HDR, colour, bit-depth or chroma acceptance criteria.",
+      "source_ref": "T-S8",
+      "confidence": "LOW",
+      "last_verified_date": "2026-08-09"
+    }
+  ]
+}

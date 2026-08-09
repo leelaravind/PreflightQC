@@ -13,17 +13,39 @@ It never modifies the source video files.
 
 ## Project status
 
-**Phase: PLANNING / SPEC LOCK.**
+**Phase: IMPLEMENTED, NOT RELEASABLE.**
 
-- No production application code exists in this repository.
-- No binaries are bundled.
-- No release, installer, or distribution artefact has been produced.
-- `src/`, `tests/`, `test-assets/`, `packaging/` and `third-party/` are reserved
-  placeholders. They are populated only when the implementation plan is explicitly
-  approved for execution.
+- The application, the 12 platform presets and the test suite are built and green
+  (957 tests passing, 92% coverage, clean type and lint checks).
+- **No binaries are bundled**, so the product has never inspected a real video file.
+  `ffprobe` and MediaInfo must be supplied before it can run — see GATE-1 below.
+- No package, installer or release artefact has been produced.
+- Licensing gates are open, including attorney review. **This build must not be
+  distributed.**
 
-Implementation must not begin until an explicit instruction approves
-`docs/planning/IMPLEMENTATION-PLAN-V1.md` for execution.
+Full detail: `docs/reports/IMPLEMENTATION-COMPLETION-V1.md`.
+
+### Running it in development
+
+```
+py -3.12 -m venv .venv
+.venv\Scripts\python -m pip install -r requirements.lock
+.venv\Scripts\python -m pip install -e . --no-deps
+.venv\Scripts\python -m pytest            # 957 tests
+.venv\Scripts\python -m preflightqc.ui.app # needs GATE-1 first
+```
+
+### GATE-1 — the next action
+
+Place checksum-verified binaries in `third-party/bin/`:
+
+- `ffprobe.exe` and its `libav*` DLLs, from **BtbN FFmpeg-Builds `win64-lgpl-shared`
+  only**. Not gyan.dev (GPLv3), not any static build.
+- `mediainfo.exe`, **>= 0.7.63** (target 26.05), from mediaarea.net or the official
+  MediaArea GitHub release. Not the GUI. Not a libcurl-enabled build.
+
+Then run `python spikes/probe_matrix.py`. It audits the ffprobe build for prohibited
+components and refuses to proceed if any are found.
 
 ## What V1 is
 

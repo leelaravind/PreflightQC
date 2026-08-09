@@ -33,19 +33,54 @@ copyleft-licensed components — is the entire reason this gate exists.
 | Layer | Licence posture |
 | --- | --- |
 | PreflightQC application code | Proprietary, closed source |
-| `ffprobe` + `libav*` shared libraries | **LGPL 2.1+** — obligations, no copyleft on our source if handled correctly |
+| `ffprobe` + `libav*` shared libraries | **LGPL 3.0+** — obligations, no copyleft on our source if handled correctly. *Amended 2026-08-09: the verified build carries `--enable-version3`. See §2.0.* |
 | MediaInfo + ZenLib | **BSD-2-Clause / zlib** — attribution only |
 | PySide6 / Qt 6 (if ADR-001 primary stack) | **LGPLv3** — obligations, and the largest open question |
 | Other Python runtime dependencies | Permissive (PSF, BSD, MIT) — notices only |
 
 ---
 
-## 2. FFMPEG / FFPROBE — LGPL 2.1
+## 2. FFMPEG / FFPROBE — LGPL 3.0
+
+### 2.0 AMENDMENT — 2026-08-09 (SPEC LOCK)
+
+**This section originally required LGPL v2.1. It now requires LGPL v3.**
+
+The requirement was written before any binary had been obtained, on the assumption that
+an "LGPL build" of FFmpeg meant LGPL v2.1. Verification of the actual mainstream Windows
+build disproved that assumption.
+
+**Evidence.** The BtbN `win64-lgpl-shared` build
+(`n8.1.2-34-g9b6c8969e0-20260809`) reports `--enable-version3` in its configuration and
+ships the **LGPL v3** licence text as its `LICENSE.txt`. FFmpeg's own `LICENSE.md` states:
+
+> The following libraries are under LGPL version 3: gmp, libaribb24, liblensfun.
+> When combining them with FFmpeg, use the configure option `--enable-version3` to
+> upgrade FFmpeg to the LGPL v3.
+
+**Decision.** `--enable-version3` is **permitted**, and `gmp`, `libaribb24` and
+`liblensfun` are permitted **as part of a verified LGPLv3 build**. They upgrade the
+licence version; they do not introduce copyleft over PreflightQC's own source.
+
+**Why not build a custom LGPLv2.1 FFmpeg instead.** Doing so would make PreflightQC a
+"modifier" under §2.5, taking on source-correspondence duties for a build we produced
+ourselves — a materially *worse* licensing position than using an unmodified official
+binary. The amendment accepts the licence version the ecosystem actually ships.
+
+**What does not change.** `--enable-gpl` and `--enable-nonfree` remain absolutely
+prohibited, as does every library in FFmpeg's `EXTERNAL_LIBRARY_GPL_LIST`, its nonfree
+list, and `libsmbclient`. The verified build disables all of them.
+
+**What this costs.** LGPL v3 carries terms v2.1 does not: installation information for
+"User Products", and explicit patent provisions. Their effect on a commercial desktop
+product is squarely an attorney question and is folded into **G-12**. It is the *same*
+licence family as the PySide6/Qt question already open as **Q-1 / G-13**, so it is one
+legal conversation rather than two.
 
 ### 2.1 The posture
 
-Ship an **unmodified, official LGPL-2.1 shared build** of `ffprobe` and its `libav*`
-DLLs. Invoke `ffprobe` as a **separate child process**. Bundle **no GPL and no nonfree
+Ship an **unmodified, official LGPL shared build** of `ffprobe` and its `libav*`
+DLLs. The verified build is **LGPL v3**. Invoke `ffprobe` as a **separate child process**. Bundle **no GPL and no nonfree
 component**. Ship **no `ffmpeg` encoder**.
 
 Two independent protections, deliberately stacked:
@@ -61,7 +96,7 @@ arguments normally make two separate programs — and in the same breath concede
 *"a legal question, which ultimately judges will decide."* We therefore do not rely on it
 alone.
 
-### 2.2 What triggers GPL (must never happen)
+### 2.2 What triggers GPL or an unredistributable binary (must never happen)
 
 | Trigger | Effect |
 | --- | --- |
@@ -69,7 +104,7 @@ alone.
 | Any GPL external library | `libx264`, `libx265`, `libxvid`, `libxavs`, `libxavs2`, `libdavs2`, `frei0r`, `libcdio`, `librubberband`, `libvidstab`, `avisynth` |
 | GPL-only internal files | `vf_delogo.c`, `vf_hqdn3d.c`, `vf_cropdetect.c`, `flac_dsp_gpl.asm`, `idct_mmx.c` |
 | `libsmbclient` | Forces **GPL v3** |
-| `--enable-version3` libs | `libaribb24`, `liblensfun`, `gmp` (LGPLv3) |
+| ~~`--enable-version3` libs~~ | **No longer a trigger.** `libaribb24`, `liblensfun` and `gmp` are LGPLv3 and are **permitted** under the §2.0 amendment. They upgrade the licence version; they do not create copyleft. |
 | `--enable-nonfree` | *"will cause the resulting binary to be unredistributable"* — Fraunhofer FDK AAC, OpenSSL in incompatible combinations, CUDA SDK (`libnpp`, `cuda-nvcc`) |
 
 **`--enable-nonfree` is an absolute no-ship.** Not a risk to manage — a build that must
@@ -84,7 +119,10 @@ never enter the package.
 | `evermeet.cx` (macOS) | **REJECTED** — built with `--enable-gpl --enable-libx264 --enable-libx265`; also Intel-only. (Moot for V1: Windows only.) |
 | Any static build | **REJECTED for V1** — static linking forces the LGPL §6 object-file/relink route, which is far more burdensome for closed source |
 
-### 2.4 The LGPL 2.1 compliance checklist
+### 2.4 The LGPL compliance checklist
+
+Item wording below reflects the **LGPL v3** posture set in §2.0. The structure of the
+obligations is unchanged from v2.1; only the version named in the notices differs.
 
 From FFmpeg's own `legal.html`. Every item is a Phase 12 gate.
 
@@ -95,13 +133,13 @@ From FFmpeg's own `legal.html`. Every item is a Phase 12 gate.
 | 3 | Distribute the **corresponding FFmpeg source** that *"corresponds exactly to the library binaries"* | G-5 |
 | 4 | Explain the **configure line** in a text file shipped with the product | G-6 |
 | 5 | **Host the source on the same webserver** as the binary | G-5 |
-| 6 | Download-page notice: *"This software uses code of FFmpeg licensed under the LGPLv2.1 and its source can be downloaded here"* | G-2 |
-| 7 | About-box notice: *"This software uses libraries from the FFmpeg project under the LGPLv2.1"* | G-2 |
-| 8 | Mention FFmpeg and LGPLv2.1 **in the EULA** | G-8 |
+| 6 | Download-page notice: *"This software uses code of FFmpeg licensed under the LGPLv3 and its source can be downloaded here"* | G-2 |
+| 7 | About-box notice: *"This software uses libraries from the FFmpeg project under the LGPLv3"* | G-2 |
+| 8 | Mention FFmpeg and LGPLv3 **in the EULA** | G-8 |
 | 9 | If the EULA claims ownership of code, **explicitly disclaim ownership of FFmpeg** | G-8 |
 | 10 | **Remove any reverse-engineering prohibition** from the EULA — **and all translations** | G-8 |
 | 11 | **Do not obfuscate DLL names.** `avcodec-MyProg.dll` is acceptable; `MyProgDec.dll` is not | G-7 |
-| 12 | Ship the **full LGPL 2.1 licence text** | G-2 |
+| 12 | Ship the **full LGPL 3.0 licence text** (and LGPL 2.1, which v3 incorporates by reference and which covers libzvbi) | G-2 |
 | 13 | Preserve all upstream copyright notices | G-2 |
 | 14 | Credit the IJG *"in the documentation accompanying your program"* **if** the libjpeg-derived files (`jfdctfst.c`, `jfdctint_template.c`, `jrevdct.c`) are present in the shipped build | G-2 |
 
@@ -118,6 +156,28 @@ produce.
 **Mitigation (required, Phase 12):** archive the **exact source tarball and build
 configuration** that produced the shipped binaries, alongside the binaries themselves, and
 host both. Do not rely solely on a link to the distributor.
+
+#### 2.5.1 Status — 2026-08-09
+
+**Done.** The mitigation is implemented and mechanically enforced. Full detail in
+`docs/licensing/CORRESPONDING-SOURCE-PLAN.md`; the short version:
+
+| Item | Result |
+| --- | --- |
+| Source identified | FFmpeg commit `9b6c8969e05b4f0b29f0f85cd501be6b3e582e6b` — the `-g9b6c8969e0` in the shipped binary's own version string |
+| Correspondence proven | Four independent ways: `RELEASE` = 8.1.2; 34 commits after tag `n8.1.2` (confirmed upstream); commit hash; and **all seven** `libav*`/`libsw*` version triplets matching what the binary prints |
+| Archived | `ffmpeg-n8.1.2-34-g9b6c8969e0.tar.gz`, SHA-256 `39002bfe…`, reproducible byte-for-byte via `git archive` |
+| Build recipe archived | `BtbN/FFmpeg-Builds` @ `2437e7b868da…`, SHA-256 `b2392046…` |
+| Enforced | `packaging/verify_source.py` fails the audit on any divergence; 26 tests, mostly negative |
+| **Not done** | **Hosting.** No release domain exists yet, so `hosting_url` is a declared `PLACEHOLDER`. A human must publish both archives and commit to a 3-year offer. |
+
+Independently, the recipe corroborates the §2.0 amendment: `variants/defaults-lgpl.sh`
+sets `FF_CONFIGURE="--enable-version3 --disable-debug"` and `LICENSE_FILE="COPYING.LGPLv3"`,
+so the LGPL variant is **LGPLv3 by construction** and cannot carry `--enable-gpl`.
+
+The prior state was the near-miss this section warns about: the repository held
+`ffmpeg-9.0.tar.xz` against an **8.1.2** binary — the wrong major release, which would have
+looked like compliance and been worth nothing.
 
 ### 2.6 Patent posture
 
@@ -258,6 +318,31 @@ Every file in the release package must map to a manifest entry, or be first-part
 is no "miscellaneous" category. The generator enumerates the **frozen environment**, not
 `requirements.in`, so transitive Python dependencies cannot be missed.
 
+### 5.2 `published_checksum` — what counts, and what to do when there isn't one
+
+The field exists to answer one question: *did the bytes we shipped come from the publisher?*
+An operator-supplied hash cannot answer it, because it only records what we happened to be
+given. Two levels of answer are acceptable, and they must never be conflated:
+
+| Level | Meaning | Record as |
+| --- | --- | --- |
+| **Digest-authenticated** | The publisher publishes a checksum file; our bytes match it | `published_checksum` = the published value, with its source URL |
+| **Origin-authenticated** | The publisher publishes no checksum; our bytes are byte-identical to a fresh TLS download from the publisher's own host | `published_checksum` = `NOT PUBLISHED BY VENDOR`, plus `origin_verified_sha256` and the method |
+
+Status at 2026-08-09 (G-10 **resolved**):
+
+| Component | Level | Evidence |
+| --- | --- | --- |
+| ffprobe / libav* | **Digest-authenticated** | BtbN ships `checksums.sha256` per release. Both the rolling `latest` asset and the pinned immutable asset were downloaded and matched exactly. |
+| MediaInfo | **Origin-authenticated** | MediaArea publishes no checksum for the Windows CLI zip — `.sha256`, `.sha512`, `SHA256SUMS` and `checksums.txt` all return 404 and the GitHub release carries no assets. The archive was re-downloaded from `mediaarea.net` over TLS and is byte-identical, as is the extracted `MediaInfo.exe`. |
+
+**Pinning rule (added 2026-08-09).** `download_url` must name an **immutable** release
+asset. BtbN's `latest` tag is rolling — the same filename is replaced on every rebuild — so
+pinning to it makes the build unreproducible the next day and quietly detaches the checksum
+from the binary it was meant to protect. The dated `autobuild-*` asset is immutable and is
+what is pinned; its eight extracted files were confirmed byte-identical to the installed
+ones. A test asserts the pinned URL is not a `latest` URL.
+
 ---
 
 ## 6. THIRD-PARTY-NOTICES — RELEASE GATE
@@ -265,8 +350,9 @@ is no "miscellaneous" category. The generator enumerates the **frozen environmen
 Generated from the manifest. Must contain, at minimum:
 
 1. **FFmpeg**
-   - *"This software uses libraries from the FFmpeg project under the LGPLv2.1"*
-   - Full LGPL-2.1 text
+   - *"This software uses libraries from the FFmpeg project under the LGPLv3"*
+   - A statement that the build carries `--enable-version3` and is therefore LGPL v3
+   - Full LGPL-3.0 text (plus LGPL-2.1, incorporated by reference and covering libzvbi)
    - A statement that PreflightQC does not own FFmpeg, and where the copyright holders can
      be found
    - The exact configure line / build variant of the shipped binaries
@@ -288,7 +374,7 @@ Generated from the manifest. Must contain, at minimum:
 | --- | --- |
 | **No reverse-engineering prohibition** that conflicts with LGPL rights, or an explicit carve-out for the LGPL components | Direct FFmpeg checklist item; conflicts with LGPL-granted rights |
 | Explicit **disclaimer of ownership of FFmpeg** | Required if the EULA claims ownership of the software |
-| **Mention FFmpeg and LGPLv2.1** | Required |
+| **Mention FFmpeg and LGPLv3** | Required |
 | **Mention Qt/PySide6 and LGPLv3**, if applicable | Same reasoning |
 | **All translations carry the same edits** | Explicitly called out by the FFmpeg checklist |
 | No claim of platform endorsement or certification | Spec §4.1, §28.8 |
@@ -307,11 +393,52 @@ Checks:
    inspection:
 
 ```
-libx264      libx265      libxvid      libxavs      libxavs2     libdavs2
-frei0r       libcdio      librubberband             libvidstab   avisynth
-libsmbclient libaribb24   liblensfun   gmp          libzvbi
-libfdk-aac   libnpp       cuda-nvcc    OpenSSL (incompatible combinations)
+avisynth     frei0r       libcdio      libdavs2     libdvdnav    libdvdread
+librubberband             libvidstab   libx264      libx265      libxavs
+libxavs2     libxvid      libsmbclient
+decklink     libfdk-aac   libmpeghdec  libnpp       cuda-nvcc    cuda-sdk
+OpenSSL (incompatible combinations)
 ```
+
+This is exactly FFmpeg's own `EXTERNAL_LIBRARY_GPL_LIST`, `EXTERNAL_LIBRARY_GPLV3_LIST`,
+`EXTERNAL_LIBRARY_NONFREE_LIST` and `HWACCEL_LIBRARY_NONFREE_LIST`. Enabling any of them
+forces `--enable-gpl` or makes the binary unredistributable — the two outcomes that
+actually matter.
+
+**Removed from this list on 2026-08-09 (SPEC LOCK), with evidence:**
+
+| Component | Was listed as | Corrected classification | Evidence |
+| --- | --- | --- | --- |
+| `gmp` | prohibited (LGPLv3) | **permitted** under `--enable-version3` | FFmpeg `LICENSE.md`: *"The following libraries are under LGPL version 3: gmp, libaribb24, liblensfun."* Permitted by §2.0. |
+| `libaribb24` | prohibited (LGPLv3) | **permitted** under `--enable-version3` | As above. |
+| `liblensfun` | prohibited (LGPLv3) | **permitted** under `--enable-version3` | As above. |
+| `libzvbi` | prohibited (**"GPL-2+"**) | **permitted** — the source-pack classification was **stale** | See §7.1. |
+
+### 7.1 libzvbi — stale classification corrected
+
+The source pack recorded libzvbi as **GPL-2+**, which would have forced `--enable-gpl`.
+FFmpeg's own `configure` (9.0, line 7510) shows otherwise:
+
+```
+enabled libzvbi && require_pkg_config libzvbi zvbi-0.2 libzvbi.h vbi_decoder_new &&
+  { test_cpp_condition libzvbi.h "VBI_VERSION_MAJOR > 0 || VBI_VERSION_MINOR > 2 ||
+      VBI_VERSION_MINOR == 2 && VBI_VERSION_MICRO >= 28" ||
+    enabled gpl || die "ERROR: libzvbi requires version 0.2.28 or --enable-gpl."; }
+```
+
+Read that carefully: `--enable-gpl` is demanded **only** for libzvbi *below* 0.2.28.
+libzvbi relicensed from GPL-2+ to **LGPL-2.1-or-later** at 0.2.28, and FFmpeg encodes
+exactly that boundary. Corroborating: libzvbi appears in neither
+`EXTERNAL_LIBRARY_GPL_LIST` (configure lines 2029–2043) nor the GPL-v2 list in
+FFmpeg's `LICENSE.md`.
+
+**Therefore:** a build that enables libzvbi *without* `--enable-gpl` has, by FFmpeg's own
+check, linked the LGPL version. The verified BtbN build does exactly that.
+
+**This correction is evidence-led, not convenience-led.** The prohibition was not removed
+to make a gate pass — it was removed because the authoritative source shows it was
+mis-recorded, and the safety property it was protecting (*no GPL component*) is already
+enforced directly by the `--enable-gpl` check, which remains absolute.
 
 3. **No `ffmpeg.exe`** anywhere in the package.
 4. No shared-library filename is obfuscated.
@@ -329,8 +456,8 @@ All gates are **blocking**. No release proceeds with any gate open.
 | **G-1** | `DEPENDENCY-MANIFEST` complete; every checksum matches the shipped file | Yes |
 | **G-2** | `THIRD-PARTY-NOTICES` covers every manifest entry with the correct notice form | Yes |
 | **G-3** | Prohibited-component scan clean; no `ffmpeg.exe` | Yes |
-| **G-4** | Shipped ffprobe confirmed LGPL shared (no `--enable-gpl`, no `--enable-nonfree`) | Yes |
-| **G-5** | Version-matched FFmpeg source archived and same-server hosting confirmed | Partly |
+| **G-4** | Shipped ffprobe confirmed LGPL shared (no `--enable-gpl`, no `--enable-nonfree`, no prohibited component) **and its licence version recorded** (v2.1 or v3, per `--enable-version3`) | Yes |
+| **G-5** | Version-matched FFmpeg source archived and same-server hosting confirmed | Partly — archiving and correspondence are fully automated (`packaging/verify_source.py`); **hosting is a human action**. See `CORRESPONDING-SOURCE-PLAN.md`. |
 | **G-6** | Configure line / build recipe recorded and shipped | Yes |
 | **G-7** | DLL names unobfuscated | Yes |
 | **G-8** | EULA carve-outs present; translation requirement recorded | Manual |

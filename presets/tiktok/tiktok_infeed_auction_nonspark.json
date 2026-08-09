@@ -1,0 +1,215 @@
+{
+  "preset_id": "tiktok_infeed_auction_nonspark",
+  "platform": "TikTok",
+  "display_name": "TikTok — In-Feed Auction ad (Non-Spark)",
+  "description": "Paid In-Feed Auction placement, non-Spark. Ads Manager enforces concrete numeric limits that differ from the organic upload paths.",
+  "origin": "shipped",
+  "ruleset_version": "2026-08-09.1",
+  "last_verified_date": "2026-08-09",
+  "byte_convention": "Decimal bytes (1 MB = 1,000,000).",
+  "caveats": [
+    "Ad limits must never be applied to organic files, or organic limits to ads. They are different products.",
+    "Minimum dimensions depend on the aspect ratio: 540x960 for 9:16, 960x540 for 16:9, 640x640 for 1:1. A file whose ratio matches none of these is checked against the 9:16 floor only if its ratio is close to 9:16.",
+    "TikTok's ad help pages specify containers but do not authoritatively enumerate codecs, so H.264 is treated as a recommendation.",
+    "Spark Ads (Pull) inherit the organic post and carry no independent file limits; use an organic preset for those."
+  ],
+  "sources": [
+    {
+      "source_ref": "T-S3",
+      "title": "TikTok Auction In-Feed Ads, TikTok Business Help Center",
+      "url": "https://ads.tiktok.com/help/article/tiktok-auction-in-feed-ads",
+      "access_date": "2026-08-09",
+      "confidence": "HIGH"
+    }
+  ],
+  "rules": [
+    {
+      "rule_id": "tiktok_infeed.file_size",
+      "property": "file.size_bytes",
+      "operator": "lte",
+      "expected": 500000000,
+      "classification": "DOCUMENTED_LIMIT",
+      "severity": "FAIL",
+      "explanation": "File size must be less than or equal to 500 MB.",
+      "source_ref": "T-S3",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_infeed.video_bitrate",
+      "property": "video.bitrate",
+      "operator": "gte",
+      "expected": 516000,
+      "classification": "DOCUMENTED_LIMIT",
+      "severity": "FAIL",
+      "explanation": "Bitrate must be more than or equal to 516 kbps.",
+      "source_ref": "T-S3",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_infeed.container",
+      "property": "container.format",
+      "operator": "in",
+      "expected": ["mp4", "mov", "mpeg", "mpeg1", "mpeg2", "3gp", "avi"],
+      "classification": "DOCUMENTED_LIMIT",
+      "severity": "FAIL",
+      "explanation": "Accepted containers are .mp4, .mov, .mpeg, .3gp and .avi.",
+      "source_ref": "T-S3",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_infeed.duration",
+      "property": "file.duration_seconds",
+      "operator": "lte",
+      "expected": 600,
+      "classification": "DOCUMENTED_LIMIT",
+      "severity": "FAIL",
+      "explanation": "Duration must be up to 10 minutes.",
+      "source_ref": "T-S3",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_infeed.min_dimensions_vertical",
+      "property": "video.display_width",
+      "operator": "gte",
+      "expected": 540,
+      "classification": "DOCUMENTED_LIMIT",
+      "severity": "FAIL",
+      "explanation": "A 9:16 creative must be at least 540x960.",
+      "applies_when": [
+        {
+          "property": "video.display_aspect_ratio",
+          "operator": "range",
+          "expected": { "min": 0.5, "max": 0.63 }
+        }
+      ],
+      "source_ref": "T-S3",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_infeed.min_dimensions_vertical_height",
+      "property": "video.display_height",
+      "operator": "gte",
+      "expected": 960,
+      "classification": "DOCUMENTED_LIMIT",
+      "severity": "FAIL",
+      "explanation": "A 9:16 creative must be at least 540x960.",
+      "applies_when": [
+        {
+          "property": "video.display_aspect_ratio",
+          "operator": "range",
+          "expected": { "min": 0.5, "max": 0.63 }
+        }
+      ],
+      "source_ref": "T-S3",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_infeed.min_dimensions_landscape",
+      "property": "video.display_width",
+      "operator": "gte",
+      "expected": 960,
+      "classification": "DOCUMENTED_LIMIT",
+      "severity": "FAIL",
+      "explanation": "A 16:9 creative must be at least 960x540.",
+      "applies_when": [
+        {
+          "property": "video.display_aspect_ratio",
+          "operator": "range",
+          "expected": { "min": 1.6, "max": 1.9 }
+        }
+      ],
+      "source_ref": "T-S3",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_infeed.min_dimensions_landscape_height",
+      "property": "video.display_height",
+      "operator": "gte",
+      "expected": 540,
+      "classification": "DOCUMENTED_LIMIT",
+      "severity": "FAIL",
+      "explanation": "A 16:9 creative must be at least 960x540.",
+      "applies_when": [
+        {
+          "property": "video.display_aspect_ratio",
+          "operator": "range",
+          "expected": { "min": 1.6, "max": 1.9 }
+        }
+      ],
+      "source_ref": "T-S3",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_infeed.min_dimensions_square",
+      "property": "video.display_width",
+      "operator": "gte",
+      "expected": 640,
+      "classification": "DOCUMENTED_LIMIT",
+      "severity": "FAIL",
+      "explanation": "A 1:1 creative must be at least 640x640.",
+      "applies_when": [
+        {
+          "property": "video.display_aspect_ratio",
+          "operator": "range",
+          "expected": { "min": 0.95, "max": 1.05 }
+        }
+      ],
+      "source_ref": "T-S3",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_infeed.min_dimensions_square_height",
+      "property": "video.display_height",
+      "operator": "gte",
+      "expected": 640,
+      "classification": "DOCUMENTED_LIMIT",
+      "severity": "FAIL",
+      "explanation": "A 1:1 creative must be at least 640x640.",
+      "applies_when": [
+        {
+          "property": "video.display_aspect_ratio",
+          "operator": "range",
+          "expected": { "min": 0.95, "max": 1.05 }
+        }
+      ],
+      "source_ref": "T-S3",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_infeed.video_codec",
+      "property": "video.codec",
+      "operator": "in",
+      "expected": ["h264"],
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "H.264 is the widely recommended codec for TikTok ads.",
+      "message_fail": "TikTok's ad help pages specify containers but do not authoritatively enumerate codecs, so this is not a rejection condition.",
+      "source_ref": "T-S3",
+      "confidence": "LOW",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_infeed.audio_present",
+      "property": "audio.present",
+      "operator": "eq",
+      "expected": true,
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "TikTok's creative policy states that ad audio must not be completely silent.",
+      "message_fail": "This is a creative policy about content, not a file-metadata requirement, so PreflightQC reports it without rejecting the file.",
+      "source_ref": "T-S3",
+      "confidence": "MEDIUM",
+      "last_verified_date": "2026-08-09"
+    }
+  ]
+}

@@ -431,6 +431,9 @@ PreflightQC
 - **Do not** statically link FFmpeg libraries into the proprietary application.
 - **Do not** link `libav*` in-process.
 - **Do not** ship a GPL build. **Do not** ship a nonfree build.
+- The build may be LGPL **v2.1 or v3**. `--enable-version3` is permitted; the version
+  actually shipped must be detected and named in the notices. *(Amended 2026-08-09 by
+  SPEC LOCK; see `docs/licensing/LICENSING-GATE-V1.md` §2.0.)*
 - **Do not** bundle: `libx264`, `libx265`, `libxvid`, `libfdk-aac`, `libnpp` / CUDA
   nonfree components, `frei0r`, `libvidstab`, `libzvbi`, `libsmbclient`, `libaribb24`,
   or any other GPL/nonfree component identified by the source pack.
@@ -930,7 +933,9 @@ A V1 release package consists of:
    identifier, licence, official source URL, and verified checksum.
 6. `THIRD-PARTY-NOTICES` — every required notice and licence text, matching the actual
    shipped binaries.
-7. The full LGPL 2.1 licence text.
+7. The full LGPL 3.0 licence text — the licence the verified FFmpeg build is actually
+   under — together with the LGPL 2.1 text, which v3 incorporates by reference and
+   which covers libzvbi. *(Amended 2026-08-09 by SPEC LOCK; see licensing gate §2.0.)*
 8. FFmpeg attribution and configure/build information for the exact shipped build.
 9. Version-matched corresponding FFmpeg source, made available from the same server as
    the PreflightQC download.
@@ -944,11 +949,11 @@ A V1 release package consists of:
 | G-1 | `DEPENDENCY-MANIFEST` exists, is complete, and matches the actual contents of the release package byte-for-byte by checksum. |
 | G-2 | `THIRD-PARTY-NOTICES` exists and covers every component in the manifest, with the correct notice form for each licence. |
 | G-3 | Automated scan confirms no GPL or nonfree component from the §10.2 prohibited list is present. |
-| G-4 | The shipped ffprobe build is confirmed to be an LGPL shared build (not GPL, not nonfree) by inspecting its reported configuration. |
+| G-4 | The shipped ffprobe build is confirmed to be an LGPL shared build (not GPL, not nonfree, no prohibited component) by inspecting its reported configuration, **and the LGPL version it is actually under is recorded** so the shipped notices name the right one. |
 | G-5 | Corresponding FFmpeg source, version-matched to the shipped binaries, is archived and hosted on the same server as the download. |
 | G-6 | Configure line / build recipe for the exact shipped build is recorded and shipped. |
 | G-7 | DLL names are unobfuscated. |
-| G-8 | The EULA contains no reverse-engineering prohibition that conflicts with LGPL rights (or carves out the LGPL components), disclaims ownership of FFmpeg, and names FFmpeg and the LGPL 2.1. All EULA translations carry the same edits. |
+| G-8 | The EULA contains no reverse-engineering prohibition that conflicts with LGPL rights (or carves out the LGPL components), disclaims ownership of FFmpeg, and names FFmpeg and the LGPL version the shipped build actually carries (**LGPL 3.0** for the verified build). All EULA translations carry the same edits. |
 | G-9 | MediaInfo BSD-2-Clause attribution present; ZenLib zlib notice present; the third-party notice list matches the actual compiled feature set of the shipped MediaInfo binary. |
 | G-10 | Third-party binaries were obtained from official channels and their published checksums verified. |
 | G-11 | Application and installer are Authenticode code-signed. |

@@ -1,0 +1,137 @@
+{
+  "preset_id": "tiktok_topview_reservation",
+  "platform": "TikTok",
+  "display_name": "TikTok — TopView / Reservation ad",
+  "description": "Reserved TopView placement. The tightest TikTok envelope: a short fixed duration window and a much higher minimum bitrate than In-Feed Auction.",
+  "origin": "shipped",
+  "ruleset_version": "2026-08-09.1",
+  "last_verified_date": "2026-08-09",
+  "byte_convention": "Decimal bytes (1 MB = 1,000,000).",
+  "caveats": [
+    "TopView requires roughly five times the minimum bitrate of In-Feed Auction (2,500 kbps versus 516 kbps). Do not reuse an In-Feed master here without checking.",
+    "Spark Ads (Pull) on this placement carry no duration restriction because they inherit the organic post.",
+    "TikTok's ad help pages specify containers but do not authoritatively enumerate codecs."
+  ],
+  "sources": [
+    {
+      "source_ref": "T-S4",
+      "title": "TopView ad specifications, TikTok Business Help Center",
+      "url": "https://ads.tiktok.com/help/article/tiktok-reservation-topview",
+      "access_date": "2026-08-09",
+      "confidence": "HIGH"
+    }
+  ],
+  "rules": [
+    {
+      "rule_id": "tiktok_topview.duration",
+      "property": "file.duration_seconds",
+      "operator": "range",
+      "expected": { "min": 5, "max": 60 },
+      "classification": "DOCUMENTED_LIMIT",
+      "severity": "FAIL",
+      "explanation": "Duration must be between 5 and 60 seconds.",
+      "source_ref": "T-S4",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_topview.duration_recommended",
+      "property": "file.duration_seconds",
+      "operator": "range",
+      "expected": { "min": 9, "max": 15 },
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "A duration of 9 to 15 seconds is recommended.",
+      "message_fail": "This is a creative recommendation within the accepted 5 to 60 second window.",
+      "source_ref": "T-S4",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_topview.video_bitrate",
+      "property": "video.bitrate",
+      "operator": "gte",
+      "expected": 2500000,
+      "classification": "DOCUMENTED_LIMIT",
+      "severity": "FAIL",
+      "explanation": "Bitrate must be at least 2,500 kbps.",
+      "source_ref": "T-S4",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_topview.file_size",
+      "property": "file.size_bytes",
+      "operator": "lte",
+      "expected": 500000000,
+      "classification": "DOCUMENTED_LIMIT",
+      "severity": "FAIL",
+      "explanation": "File size must be at most 500 MB.",
+      "source_ref": "T-S4",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_topview.container",
+      "property": "container.format",
+      "operator": "in",
+      "expected": ["mp4", "mov", "mpeg", "mpeg1", "mpeg2", "3gp"],
+      "classification": "DOCUMENTED_LIMIT",
+      "severity": "FAIL",
+      "explanation": "Accepted containers are .mp4, .mov, .mpeg and .3gp.",
+      "source_ref": "T-S4",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_topview.min_width",
+      "property": "video.display_width",
+      "operator": "gte",
+      "expected": 540,
+      "classification": "DOCUMENTED_LIMIT",
+      "severity": "FAIL",
+      "explanation": "A 9:16 creative must be at least 540x960.",
+      "source_ref": "T-S4",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_topview.min_height",
+      "property": "video.display_height",
+      "operator": "gte",
+      "expected": 960,
+      "classification": "DOCUMENTED_LIMIT",
+      "severity": "FAIL",
+      "explanation": "A 9:16 creative must be at least 540x960.",
+      "source_ref": "T-S4",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_topview.aspect_ratio",
+      "property": "video.display_aspect_ratio",
+      "operator": "eq",
+      "expected": 0.5625,
+      "tolerance": 0.02,
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "TopView creatives are specified at 9:16.",
+      "source_ref": "T-S4",
+      "confidence": "HIGH",
+      "last_verified_date": "2026-08-09"
+    },
+    {
+      "rule_id": "tiktok_topview.audio_present",
+      "property": "audio.present",
+      "operator": "eq",
+      "expected": true,
+      "classification": "RECOMMENDATION",
+      "severity": "WARN",
+      "explanation": "TikTok's creative policy states that ad audio must not be completely silent.",
+      "message_fail": "This is a creative policy about content, not a file-metadata requirement.",
+      "source_ref": "T-S4",
+      "confidence": "MEDIUM",
+      "last_verified_date": "2026-08-09"
+    }
+  ]
+}
