@@ -30,6 +30,8 @@ def _self_check() -> int:
     ``logs/self-check.txt`` is what makes this usable in the clean-machine run-book
     rather than only in a build script that captures output.
     """
+    import importlib
+
     from preflightqc.platform import binaries
     from preflightqc.platform.paths import (
         application_root,
@@ -45,6 +47,69 @@ def _self_check() -> int:
         f"inspector dir    : {bundled_binaries_dir()}",
         f"presets dir      : {shipped_presets_dir()}",
     ]
+
+    # The exact modules the GUI launch imports, in launch order. The first 1.0.0
+    # candidate passed this self-check and then crashed on a clean machine at the
+    # `main_window` import, because the freeze had excluded a stdlib module jsonschema
+    # needs (urllib.request). A self-check that skips the launch closure certifies
+    # nothing about the launch — so it no longer skips it. Import failures here are
+    # reported as problems, which makes this exit non-zero and fails the build gate.
+    launch_closure = (
+        "preflightqc.ui.branding",
+        "preflightqc.ui.theme",
+        "preflightqc.ui.main_window",
+        "preflightqc.profiles.compiler",
+        "preflightqc.rules.loader",
+        "jsonschema",
+    )
+    import_failures: list[str] = []
+    for module_name in launch_closure:
+        try:
+            importlib.import_module(module_name)
+        except Exception as error:  # any failure here is release-blocking
+            import_failures.append(f"{module_name}: {type(error).__name__}: {error}")
+    closure_status = (
+        f"FAILED ({len(import_failures)})"
+        if import_failures
+        else f"OK ({len(launch_closure)} modules)"
+    )
+    lines.append(f"import closure   : {closure_status}")
+    lines.extend(f"    {failure}" for failure in import_failures)
+
+    # The exact data reads the GUI launch performs, not merely the imports. The second
+    # 1.0.0 candidate passed the import-closure check above and then crashed on a clean
+    # machine because the preset *schema file* — data, not a module — never shipped
+    # (Phase 13, 2026-08-14; see packaging/frozen_datas.py). Importing a module proves
+    # nothing about the files it reads lazily, so this check performs the reads:
+    # the shipped catalogue through the real loader (schema + validator), and the HTML
+    # report template through the real renderer environment.
+    data_failures: list[str] = []
+    preset_count = 0
+    try:
+        from preflightqc.rules.loader import load_catalog
+
+        catalog = load_catalog([shipped_presets_dir()])
+        preset_count = len(catalog.presets)
+        if preset_count == 0:
+            data_failures.append(f"no shipped presets loaded from {shipped_presets_dir()}")
+        for path, reason in catalog.rejected:
+            data_failures.append(f"shipped preset rejected: {path}: {reason}")
+    except Exception as error:  # any failure here is release-blocking
+        data_failures.append(f"preset catalogue: {type(error).__name__}: {error}")
+    lines.append(
+        "preset catalogue : "
+        + ("FAILED" if data_failures else f"OK ({preset_count} presets, schema validated)")
+    )
+
+    template_failure: str | None = None
+    try:
+        from preflightqc.reporting import html_renderer
+
+        html_renderer._environment().get_template(html_renderer.TEMPLATE_NAME)
+    except Exception as error:  # any failure here is release-blocking
+        template_failure = f"report template: {type(error).__name__}: {error}"
+        data_failures.append(template_failure)
+    lines.append(f"report template  : {'FAILED' if template_failure else 'OK'}")
 
     report = binaries.check_all()
     for info in report.inspectors:
@@ -63,7 +128,11 @@ def _self_check() -> int:
         if not info.available:
             lines.append(f"  message      : {info.message}")
 
-    problems = report.problems()
+    problems = [
+        *(f"launch import closure broken: {failure}" for failure in import_failures),
+        *(f"launch data resource broken: {failure}" for failure in data_failures),
+        *report.problems(),
+    ]
     if problems:
         lines.append("")
         lines.append("SELF-CHECK FAILED")

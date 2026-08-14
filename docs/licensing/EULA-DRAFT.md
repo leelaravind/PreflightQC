@@ -4,7 +4,7 @@
 | --- | --- |
 | Date | 2026-08-09 |
 | Operative text | **`packaging/EULA.txt`** — that file is the single source, shipped verbatim as `licenses/EULA.txt` and shown on the installer's licence page |
-| Status | **DRAFT. Not reviewed. Not cleared.** |
+| Status | **FINAL for PreflightQC 1.0.0** — draft banner removed at FINAL BUILD (2026-08-10, per `RELEASE-OUTPUTS-V1.md` §4.1); the honesty block moved into the agreement's §9. **Still not attorney-reviewed; no clearance claimed.** |
 | Blocking gate | **G-12 — amended 2026-08-09 to owner risk acceptance (ADR-G12).** Attorney review was never started and is no longer mandatory for V1; it remains recommended. The owner's written risk acceptance is still required before release. |
 
 This file is not a second copy of the agreement. Keeping the operative text in one place

@@ -66,7 +66,11 @@ class TestBrandAssets:
     def test_the_executable_and_installer_reference_the_icon(self) -> None:
         spec = (REPO_ROOT / "packaging" / "preflightqc.spec").read_text(encoding="utf-8")
         assert 'icon=str(REPO_ROOT / "assets" / "logo" / "preflightqc.ico")' in spec
-        assert '"preflightqc/ui/assets"' in spec  # window PNG ships in _internal
+        # The window PNG ships in _internal via the package-data manifest (the spec's
+        # datas are built from it since the 2026-08-14 clean-machine fix).
+        import frozen_datas
+
+        assert "preflightqc/ui/assets/preflightqc.png" in frozen_datas.PACKAGE_DATA
         iss = (REPO_ROOT / "packaging" / "installer.iss").read_text(encoding="utf-8")
         assert "SetupIconFile=..\\assets\\logo\\preflightqc.ico" in iss
 

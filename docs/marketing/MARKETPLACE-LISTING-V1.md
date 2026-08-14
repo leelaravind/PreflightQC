@@ -113,10 +113,10 @@ Each line is a capability that exists in the build.
 
 Written to be verifiable, not reassuring:
 
-> PreflightQC has no network capability. The installed application contains no HTTP
-> client, no socket implementation and no networking library — these were deliberately
-> excluded from the build rather than merely left unused. There is no account, no licence
-> check, no telemetry, no analytics and no update check.
+> PreflightQC has no network capability. The installed application contains no TLS
+> stack, no networking library and no code that opens a connection — the networking
+> layers were deliberately excluded from the build rather than merely left unused. There
+> is no account, no licence check, no telemetry, no analytics and no update check.
 >
 > Your video files are opened read-only. PreflightQC never writes to, moves, renames or
 > re-encodes a source file. Reports are written only where you choose to save them.
@@ -124,9 +124,11 @@ Written to be verifiable, not reassuring:
 > Nothing about your files, your results or your usage leaves your machine, because there
 > is nothing in the product capable of sending it.
 
-Backed by: the packaged application ships no `Qt6Network`, no `_socket`, no `_ssl` and no
-TLS library, and an automated test fails the build if any networking import appears
-anywhere in the application source.
+Backed by: the packaged application ships no `Qt6Network`, no `_ssl` and no TLS library,
+and an automated test fails the build if any networking import appears anywhere in the
+application source. (Python's base `socket` module is present only because the bundled
+JSON-schema validator's import graph requires it; nothing in the product calls it, no
+TLS stack ships, and a full QC cycle is verified with outbound traffic blocked.)
 
 ---
 
@@ -209,7 +211,7 @@ buyer who trusts the rest of the copy.
 
 | # | Item | State |
 | --- | --- | --- |
-| D-1 | **EULA** — must be linked from the listing and shown by the installer | Drafted (`packaging/EULA.txt`); **not attorney reviewed, and none is mandated for V1 under the amended G-12 (ADR-G12). The owner's written residual-risk acceptance for 1.0.0 was executed 2026-08-09; removal of the draft banner remains a final-build step** |
+| D-1 | **EULA** — must be linked from the listing and shown by the installer | **Final for 1.0.0** (`packaging/EULA.txt`, banner removed at FINAL BUILD 2026-08-10); **not attorney reviewed, and none is mandated for V1 under the amended G-12 (ADR-G12); the agreement's §9 states this to the customer.** Owner's residual-risk acceptance executed 2026-08-09 |
 | D-2 | **Refund policy** — the Merchant of Record will require one | **RESOLVED 2026-08-10** (Final Binding): 7 calendar days, normally full purchase price, via the MoR/platform, statutory rights precede, no deductions, no prorating. Canonical text: `COMMERCIAL-TERMS-V1.md`; page: `pages/REFUNDS-PAGE.md` |
 | D-3 | **Corresponding-source page** — LGPL obligation, must serve the archived FFmpeg source for three years | **Not live.** See `docs/licensing/CORRESPONDING-SOURCE-PLAN.md` |
 | D-4 | **Third-party notices** — FFmpeg LGPLv3, MediaInfo BSD-2-Clause, Qt LGPLv3, and the rest | Generated into the package; shown in About |
@@ -255,7 +257,7 @@ reuse:
 | Limitations | **Ready** |
 | Support information | **Content ready** (`pages/SUPPORT-PAGE.md` and the other four page specs) — **hosting still required**, and the support contact must be connected before publication |
 | Refund policy | **Ready** — locked 2026-08-10; `pages/REFUNDS-PAGE.md` |
-| EULA | **Nearly ready** — G-12 owner risk acceptance executed for 1.0.0 (2026-08-09); removing the draft banner is a final-build step |
+| EULA | **Ready** — G-12 owner risk acceptance executed for 1.0.0 (2026-08-09); draft banner removed at FINAL BUILD (2026-08-10). Still not attorney-reviewed; §9 of the agreement says so |
 | Version number | **Ready** — 1.0.0, frozen 2026-08-09 |
 | Certificate | **Blocked** — G-11, **or** released unsigned under Policy U with its disclosure and published hashes (U-1 … U-6 all required) |
 

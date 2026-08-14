@@ -5,8 +5,8 @@
 | Date issued | 2026-08-09 |
 | Package under test | `PreflightQC 0.1.0-dev`, 268 files, 231.8 MB — the pre-freeze verification build. **The release run-book must be executed against a `PreflightQC 1.0.0` build** (version frozen 2026-08-09) |
 | Installer | `PreflightQC-0.1.0-dev-setup.exe`, 68.8 MB — verification artefact; the release installer will be `PreflightQC-1.0.0-setup.exe` |
-| **Execution status** | **NOT EXECUTED.** Requires clean Windows 10 and Windows 11 x64 machines that do not exist in this environment. |
-| Gate | **GATE-6** — this run-book passing on both operating systems **and** G-12 complete |
+| **Execution status** | **EXECUTED by the Product Owner** — three sessions against 1.0.0 candidates: 2026-08-12 FAIL (candidate withdrawn), 2026-08-14 FAIL (candidate withdrawn), 2026-08-14 **PASS** on Windows 11 (observed) and Windows 10 (PRODUCT OWNER ATTESTED). Results and evidence classification: `docs/reports/CLEAN-MACHINE-VALIDATION-V1.md`. The ☐ boxes below are deliberately left unticked in this template — per §0, only the person who ran a step may mark it, and the record of what was run lives in the report. |
+| Gate | **GATE-6** — this run-book passing on both operating systems **and** G-12 complete. **Both conditions met 2026-08-14** (Phase 13 PASS per the report above; G-12 complete, scoped to 1.0.0) |
 
 ---
 
@@ -129,6 +129,11 @@ file*, attach it.
    report it writes:
    `%LOCALAPPDATA%\PreflightQC\logs\self-check.txt`
 3. **Expect** exactly:
+   - `import closure   : OK (6 modules)` — the GUI launch imports, verified frozen
+     (added after the 2026-08-12 clean-machine failure)
+   - `preset catalogue : OK (12 presets, schema validated)` and
+     `report template  : OK` — the launch's package-data reads, verified frozen
+     (added after the 2026-08-14 clean-machine failure)
    - `ffprobe … version : n8.1.2-34-g9b6c8969e0-20260809 … licence : LGPL-3.0-or-later`
    - `mediainfo … version : 26.05 … licence : BSD-2-Clause`
    - `SELF-CHECK PASSED`
@@ -227,7 +232,7 @@ declares.**
 
 | | |
 | --- | --- |
-| **Pre-verified** | **AUTO (structurally)** — the package contains no socket implementation: `Qt6Network.dll`, `_socket`, `_ssl` and `libssl` are all excluded. `libcrypto-3.dll` remains for `hashlib` message digests and provides no transport. Asserted by `test_no_network_capable_library_is_shipped`. |
+| **Pre-verified** | **AUTO (structurally)** — the package contains no network transport: `Qt6Network.dll`, `_ssl` and `libssl` are all excluded, so no TLS stack ships, and no first-party code opens a connection (AST-checked). `_socket.pyd` is present solely because `jsonschema` imports `urllib.request` at module scope (Phase 13 finding; see `packaging/frozen_excludes.py`); `libcrypto-3.dll` remains for `hashlib` message digests and provides no transport. Asserted by `test_no_network_transport_library_is_shipped` and `tests/packaging/test_frozen_import_closure.py`. |
 
 1. Block all outbound traffic for the machine at the firewall.
 2. Run a full cycle: add files → choose preset → inspect → view findings → export both

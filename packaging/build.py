@@ -38,7 +38,9 @@ LOCK_FILE = PACKAGING / "binaries.lock.json"
 ISCC_CANDIDATES: tuple[Path, ...] = (
     Path(os.environ.get("PREFLIGHTQC_ISCC", "")) if os.environ.get("PREFLIGHTQC_ISCC") else Path(),
     Path(os.environ.get("LOCALAPPDATA", "")) / "PreflightQC-build-tools" / "innosetup" / "ISCC.exe",
-    Path(os.environ.get("PROGRAMFILES(X86)", r"C:\Program Files (x86)")) / "Inno Setup 6" / "ISCC.exe",
+    Path(os.environ.get("PROGRAMFILES(X86)", r"C:\Program Files (x86)"))
+    / "Inno Setup 6"
+    / "ISCC.exe",
     Path(os.environ.get("PROGRAMFILES", r"C:\Program Files")) / "Inno Setup 6" / "ISCC.exe",
 )
 
@@ -371,6 +373,23 @@ def verify_frozen_self_check() -> Step:
     output = (result.stdout + result.stderr).strip()
     if result.returncode != 0:
         return Step("packaged application self-check", False, output)
+
+    # The self-check must have actually performed the launch data reads (preset schema
+    # + catalogue, report template) — a self-check that silently stopped reporting them
+    # would certify nothing, which is how both Phase 13 failures reached a clean
+    # machine. Require the affirmative lines, not merely a zero exit.
+    for required_line in (
+        "import closure   : OK",
+        "preset catalogue : OK",
+        "report template  : OK",
+    ):
+        if required_line not in output:
+            return Step(
+                "packaged application self-check",
+                False,
+                f"self-check output lacks '{required_line}' — the packaged app did not "
+                f"verify its launch resources:\n{output}",
+            )
 
     expected = str(PACKAGE / "bin").lower()
     if expected not in output.lower():

@@ -55,8 +55,6 @@ PrivilegesRequiredOverridesAllowed=dialog
 LicenseFile={#PackageDir}\licenses\EULA.txt
 InfoAfterFile={#PackageDir}\licenses\THIRD-PARTY-NOTICES.txt
 
-UninstallDisplayIcon={app}\{#MyAppExeName}
-SetupIconFile=
 MinVersion=10.0
 
 [Languages]

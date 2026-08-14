@@ -193,8 +193,13 @@ class TestEulaCarveOuts:
         assert "three years" in text
 
     def test_it_does_not_claim_legal_clearance(self, text: str) -> None:
-        assert "NOT LEGAL ADVICE" in text
-        assert "has not been reviewed" in text
+        """The honesty statements moved from the draft banner to the §9 block when the
+        banner was removed at FINAL BUILD — the planned, documented change recorded in
+        advance by RELEASE-OUTPUTS-V1.md §4.1, not a weakening. The agreement must
+        keep saying, in its shipped text, that it was never professionally reviewed."""
+        assert "has not been reviewed by a qualified software-IP attorney" in text
+        assert "no legal clearance is claimed" in text
+        assert "nothing in it is legal advice" in text
 
 
 class TestInstallerScript:
@@ -293,18 +298,25 @@ class TestTheBuiltPackage:
         names = {p.name for p in (PACKAGE / "_internal" / "PySide6").glob("Qt6*.dll")}
         assert {"Qt6Core.dll", "Qt6Gui.dll", "Qt6Widgets.dll"} <= names
 
-    def test_no_network_capable_library_is_shipped(self) -> None:
+    def test_no_network_transport_library_is_shipped(self) -> None:
         """Spec §18 and AC-12 claim the product cannot make a network request.
 
-        libcrypto is the one deliberate exception: CPython's hashlib links it for
-        message digests. It provides no socket and no TLS transport — libssl, _ssl and
-        _socket are all excluded from the freeze.
+        Two deliberate exceptions, both documented in packaging/frozen_excludes.py:
+        libcrypto (CPython's hashlib links it for message digests; no transport) and,
+        since the Phase 13 clean-machine failure, `_socket.pyd` — jsonschema imports
+        urllib.request at module scope, whose closure unconditionally needs the socket
+        module. Excluding it did not remove a capability; it crashed the launch.
+
+        What must still never ship: any TLS stack (libssl, _ssl), any Qt network layer
+        (Qt6Network), and libcurl. The application-source AST scan
+        (`test_nothing_in_the_product_fetches_a_url`) separately proves no first-party
+        code opens a connection, and AC-12 verifies a full cycle with outbound blocked.
         """
         offenders = sorted(
             p.name
             for p in PACKAGE.rglob("*")
             if p.is_file()
-            and re.search(r"(network|libssl|_ssl|_socket|curl)", p.name, re.IGNORECASE)
+            and re.search(r"(network|libssl|_ssl|curl)", p.name, re.IGNORECASE)
         )
         assert offenders == []
 

@@ -12,14 +12,24 @@
 #
 #   python packaging/build.py
 
+import sys
 from pathlib import Path
 
 SPEC_DIR = Path(SPECPATH).resolve()
 REPO_ROOT = SPEC_DIR.parent
 
+if str(SPEC_DIR) not in sys.path:
+    sys.path.insert(0, str(SPEC_DIR))
+
 block_cipher = None
 
-# DELIBERATELY EMPTY.
+# PACKAGE-INTERNAL DATA ONLY — the list lives in packaging/frozen_datas.py, one
+# manifest imported here AND by tests/packaging/test_frozen_data_resources.py, which
+# fails if any non-Python file under src/preflightqc is not declared. That test exists
+# because the second 1.0.0 candidate shipped without preflightqc/rules/schema/
+# preset.schema.json — the loader reads it relative to __file__, so the app installed
+# on a clean Windows 11 machine and died on first launch (Phase 13, 2026-08-14). The
+# full root-cause note is in frozen_datas.py itself.
 #
 # presets/, licenses/ and bin/ are staged by packaging/build.py into the package ROOT,
 # not declared here. PyInstaller 6 places declared `datas` under `_internal/`, but
@@ -29,60 +39,19 @@ block_cipher = None
 #
 # Declaring them here as well would ship two copies of the licence folder: two things to
 # keep in step, and an ambiguity about which one the dependency manifest describes.
-#
-# The one declared data file is the application icon: it is package-internal (loaded
-# from inside preflightqc.ui at runtime), not a root-staged folder, so `_internal/` is
-# exactly where it belongs. It is a resize of the Product Owner-approved logo — see
-# assets/logo/PROVENANCE.md.
-datas = [
-    (
-        str(REPO_ROOT / "src" / "preflightqc" / "ui" / "assets" / "preflightqc.png"),
-        "preflightqc/ui/assets",
-    ),
-]
+from frozen_datas import pyinstaller_datas
 
-# Qt modules PreflightQC does not use are excluded deliberately. QtNetwork in particular:
-# the product must be provably incapable of a network request (spec 18), and the cleanest
-# way to make that true is to not ship the module that could make one.
-excludes = [
-    "PySide6.QtNetwork",
-    "PySide6.QtWebEngineCore",
-    "PySide6.QtWebEngineWidgets",
-    "PySide6.QtQml",
-    "PySide6.QtQuick",
-    "PySide6.QtMultimedia",
-    "PySide6.QtBluetooth",
-    "PySide6.QtPositioning",
-    "PySide6.QtSql",
-    "PySide6.QtTest",
-    "tkinter",
-    "unittest",
-    "pydoc",
-    "email",
-    "http",
-    "urllib.request",
-    "xmlrpc",
-    "ftplib",
-    "smtplib",
-    "socketserver",
-    # Spec section 18 promises the product cannot make a network request, and AC-12
-    # requires a full cycle to succeed with outbound traffic blocked. Excluding the Qt
-    # binding was not enough on its own -- PyInstaller still collected Qt6Network.dll
-    # (removed by packaging/build.py) and CPython's own socket and TLS extensions. With
-    # these gone the package ships no socket implementation at all, which is a stronger
-    # statement than "we do not call one".
-    #
-    # If a future dependency genuinely needs sockets, the honest fix is to reinstate
-    # these and weaken the claim in the spec -- not to keep the claim and ship the
-    # modules quietly.
-    "ssl",
-    "socket",
-    "_socket",
-    "_ssl",
-    "asyncio",
-    "multiprocessing",
-    "webbrowser",
-]
+datas = pyinstaller_datas(REPO_ROOT)
+
+# The exclusion policy lives in packaging/frozen_excludes.py — one list, imported here
+# AND by tests/packaging/test_frozen_import_closure.py, which blocks every excluded
+# module in a fresh interpreter and imports the real launch closure. That test exists
+# because the first 1.0.0 candidate excluded urllib.request, which jsonschema imports at
+# module scope: the package built, passed every gate, installed on a clean Windows 11
+# machine, and died on first launch (Phase 13, 2026-08-12). The full root-cause note,
+# and the argument for why the remaining excludes (no ssl/_ssl above all: no TLS stack
+# ships) are safe, is in frozen_excludes.py itself.
+from frozen_excludes import EXCLUDES as excludes
 
 a = Analysis(
     [str(REPO_ROOT / "src" / "preflightqc" / "ui" / "app.py")],

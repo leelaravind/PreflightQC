@@ -101,11 +101,21 @@ removed libraries, so the pruning became iterative.
 Result: **four Qt libraries instead of thirteen**, no `Qt6Network.dll`, and no dangling
 import anywhere in the package.
 
-The same reasoning was applied one level down. CPython's own `_socket`, `_ssl` and
-`libssl` were also being bundled, so they are excluded from the freeze too. What remains
-is `libcrypto-3.dll`, which `hashlib` links for message digests — a hashing library, not a
-transport. The package now contains **no socket implementation at all**, which is a
-materially stronger claim than "we choose not to call one".
+The same reasoning was applied one level down. CPython's `_ssl` and `libssl` are excluded
+from the freeze, so **no TLS stack ships**. What remains is `libcrypto-3.dll`, which
+`hashlib` links for message digests — a hashing library, not a transport.
+
+One retreat from the original posture, recorded honestly: the first 1.0.0 candidate also
+excluded `_socket` and the whole `urllib.request` closure, and that build **crashed on
+first launch on a clean machine** (Phase 13, 2026-08-12) — `jsonschema`, which validates
+the preset schemas, imports `urllib.request` at module scope, and its closure needs
+`socket`. So the base socket *module* ships again, as an import-graph obligation of a
+bundled validator, not as a capability the product uses: no TLS stack, no `Qt6Network`,
+no `libcurl`, no first-party networking import (AST-checked), and AC-12 still verifies a
+full cycle with outbound traffic blocked. The full rationale and the minimum-closure
+derivation live in `packaging/frozen_excludes.py`, and
+`tests/packaging/test_frozen_import_closure.py` fails on any machine if the exclusion
+list ever breaks the launch import closure again.
 
 ---
 

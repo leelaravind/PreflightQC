@@ -38,9 +38,9 @@ checksum. Corresponding source for the LGPL components:
 ## Privacy
 
 PreflightQC has no network capability: no account, no telemetry, no analytics, no
-update checks — the installed application contains no HTTP client and no socket
-implementation. Nothing about you, your files, or your usage is collected or
-transmitted by the product. Purchases are handled by the merchant of record under
+update checks — the installed application contains no TLS stack, no networking
+library, and no code that opens a connection. Nothing about you, your files, or your
+usage is collected or transmitted by the product. Purchases are handled by the merchant of record under
 their privacy terms; this site's hosting has its own standard server logs.
 
 ## Trademarks
